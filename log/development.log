@@ -1,0 +1,47 @@
+
+
+Started GET "/assets/rails.png" for 127.0.0.1 at Sat Apr 21 00:09:39 -0700 2012
+Served asset /rails.png - 200 OK (71ms)
+
+
+Started GET "/" for 127.0.0.1 at Sat Apr 21 00:21:27 -0700 2012
+Processing by HomeController#index as HTML
+  Rendered home/index.html.erb within layouts/application (4.4ms)
+Compiled home.css  (40ms)  (pid 7352)
+Compiled application.css  (300ms)  (pid 7352)
+Compiled jquery.js  (26ms)  (pid 7352)
+Compiled jquery_ujs.js  (0ms)  (pid 7352)
+Compiled home.js  (1320ms)  (pid 7352)
+Compiled application.js  (1592ms)  (pid 7352)
+Completed 200 OK in 2552ms (Views: 2540.0ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at Sat Apr 21 00:21:31 -0700 2012
+Served asset /application.css - 200 OK (28ms)
+
+
+Started GET "/assets/home.js?body=1" for 127.0.0.1 at Sat Apr 21 00:21:31 -0700 2012
+Served asset /home.js - 200 OK (12ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at Sat Apr 21 00:21:31 -0700 2012
+Served asset /jquery_ujs.js - 200 OK (12ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at Sat Apr 21 00:21:31 -0700 2012
+Served asset /jquery.js - 200 OK (45ms)
+
+
+Started GET "/assets/home.css?body=1" for 127.0.0.1 at Sat Apr 21 00:21:31 -0700 2012
+Served asset /home.css - 200 OK (35ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at Sat Apr 21 00:21:31 -0700 2012
+Served asset /application.js - 200 OK (68ms)
+  [1m[36m (13.1ms)[0m  [1mCREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB[0m
+  [1m[35m (44.8ms)[0m  CREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)
+  [1m[36m (0.5ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+Migrating to CreateLists (20120422054946)
+  [1m[35m (0.4ms)[0m  CREATE TABLE `lists` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+Mysql2::Error: Table 'lists' already exists: CREATE TABLE `lists` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
+  [1m[36m (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m

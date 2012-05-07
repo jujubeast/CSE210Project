@@ -8,7 +8,11 @@ development:
   database: mydb
   pool: 5
   username : root
+<<<<<<< HEAD
   password : 
+=======
+  password : pappu
+>>>>>>> a91f16304334a9b1a2f5bf22606a4c57db9321a3
   timeout: 5000
 
 # Warning: The database defined as "test" will be erased and

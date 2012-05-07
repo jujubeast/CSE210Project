@@ -13,14 +13,14 @@
 ActiveRecord::Schema.define(:version => 0) do
 
   create_table "categories", :force => true do |t|
-    t.string   "category",   :limit => 45
+    t.string   "category",   :limit => 64
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "lists", :force => true do |t|
     t.string   "name",       :limit => 45
-    t.boolean  "privacy"
+    t.boolean  "private",     :null => false, :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -39,7 +39,7 @@ ActiveRecord::Schema.define(:version => 0) do
   create_table "lists_users", :force => true do |t|
     t.integer  "user_id",    :null => false
     t.integer  "list_id",    :null => false
-    t.boolean  "owner"
+    t.boolean  "owner",      :null => false, :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(:version => 0) do
   add_index "lists_users", ["user_id"], :name => "fk_table2_user1"
 
   create_table "stores", :force => true do |t|
-    t.string   "name",        :limit => 45
-    t.string   "detail_info", :limit => 45
+    t.string   "name",        :null => false, :limit => 256
+    t.text   "detail_info",    :null => true
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -71,7 +71,7 @@ ActiveRecord::Schema.define(:version => 0) do
   create_table "stores_users", :force => true do |t|
     t.integer  "user_id",    :null => false
     t.integer  "store_id",   :null => false
-    t.integer  "beenThere"
+    t.integer  "visited",    :null => false, :default => 0
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -81,8 +81,8 @@ ActiveRecord::Schema.define(:version => 0) do
   add_index "stores_users", ["user_id"], :name => "fk_user_store_user"
 
   create_table "tags", :force => true do |t|
-    t.string   "name",        :limit => 45, :null => false
-    t.integer  "category_id",               :null => false
+    t.string   "name",        :limit => 64, :null => false
+    t.integer  "category_id", :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -91,10 +91,9 @@ ActiveRecord::Schema.define(:version => 0) do
   add_index "tags", ["category_id"], :name => "tags_category", :unique => true
 
   create_table "users", :force => true do |t|
-    t.string   "fb_id",      :limit => 45
-    t.string   "name",       :limit => 45
+    t.string   "fb_id",      :limit => 64, :null => false
+    t.string   "name",       :limit => 128, :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
 end
