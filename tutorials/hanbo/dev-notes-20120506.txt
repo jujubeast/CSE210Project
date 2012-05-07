@@ -1,0 +1,20 @@
+rails generate model users name:string fb_id:string
+
+rails generate model tags name:string category_id:integer
+
+rails generate model stores name:string detail_info:text
+
+rails generate model lists name:string private:boolean 
+
+rails generate model categories category:string 
+
+rails genetate model stores_users user_id:integer stored_id:integer beenThere:boolean
+
+rails genetate model stores_tags_users user_id:integer stored_id:integer tag_id:integer
+
+rails genetate model lists_users user_id:integer list_id:integer owner:boolean
+
+rails generate model lists_stores store_id:integer list_id:integer
+
+
+rake db:schema:load -> install from schema directly.
