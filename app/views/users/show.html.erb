@@ -1,0 +1,58 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>First Name:</b>
+  <%= @user.first_name %>
+</p>
+
+<p>
+	<b>Last Name</b>
+	<%= @user.last_name %>
+</p>
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+
+<%= link_to 'Create List', createlist_path %><br/>
+<p>
+	<table border="1px">
+		<tr>
+			<td valign="top">
+				<table>		
+						<b>Lists:</b><br/>
+						<% @lists.each do |list| %>
+    					<tr><td>
+    					<%= if list.id.to_i != params[:cur_list].to_i
+    						link_to list.name, "/users/#{session[:user_id]}/#{list.id}"
+    					else
+    						list.name	
+    					end 
+    					%>
+    					</td>
+    					<td>
+    					<%=link_to "Edit", '#'%>
+    					<%=link_to "Delete", "/deletelist/#{list.id}" %>
+    					</td></tr>
+  						<% end %>  
+  				</table>
+  			</td>
+  			<td valign="top">
+  				<table>
+  					<b>List Items:</b><br/>
+  					
+  					<% if @stores 
+  						@stores.each do |store| %>
+  					<tr><td>
+  					<%= store.name %>
+  					</td></tr>
+  					<% end
+  					end %>
+  				</table>
+  			</td>
+  		</tr>
+  	</table>
+ </p>
+<%= link_to 'Sign Out', '/signout' %>  	
+
