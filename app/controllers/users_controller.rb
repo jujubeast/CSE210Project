@@ -25,25 +25,19 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @lists_ids = ListsUser.find(:all,
-                                :conditions => ["user_id = ?", params[:id]],
-                                :select => "list_id").map {|x| x.list_id}
+ 
+    @lists_ids = ListsUser.find_list_ids(params[:id])
 
-    @lists = List.find(:all,
-                        :conditions => ["id IN (?)", @lists_ids],
-                        :select => "name, id")
+    @lists = List.find_lists_by_ids(@lists_ids)
 
     if params[:cur_list]
-    @stores_ids = ListsStore.find(:all,
-                         :conditions => ["list_id = ?", params[:cur_list]],
-                         :select => "store_id").map {|x| x.store_id}
+      @stores_ids = ListsStore.find_store_ids(params[:cur_list])
 
-    @stores = Store.find(:all,
-                         :conditions => ["id IN (?)", @stores_ids],
-                         :select => "name, id")
-  end
+      @stores = Store.find_stores_by_ids(@stores_ids)
+    end
 
     @available_stores = Store.find(:all)
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @user }
