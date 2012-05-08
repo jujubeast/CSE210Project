@@ -24,7 +24,7 @@
 				<table>		
 						<b>Lists:</b><br/>
 						<% @lists.each do |list| %>
-    					<tr><td>
+    					<tr><td width="150px">
     					<%= if list.id.to_i != params[:cur_list].to_i
     						link_to list.name, "/users/#{session[:user_id]}/#{list.id}"
     					else
@@ -45,17 +45,17 @@
   					
   					<% if @stores 
   						@stores.each do |store| %>
-  					<tr><td>
+  					<tr><td width="200px">
   					<%= store.name %>
   					</td>
-            <td>
+            <td vidth="150px">
             <%= link_to 'Remove From Current List', "/removefromlist/#{params[:cur_list]}/#{store.id}" %> 
             </td></tr>
   					<% end
   					end %>
   				</table>
   			</td>
-        <td valign="top">
+        <td valign="top" width="325px">
           <table>
             <b>Available Stores (Simulated Search Results)</b><br/>
 
