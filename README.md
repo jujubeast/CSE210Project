@@ -1,10 +1,7 @@
 == Welcome to Rails
 
-<<<<<<< HEAD
-=======
 This is the sample application for the tutorial http://railstutorial.org/ by Michael Hartl
 
->>>>>>> 5301edcc4bf5f5f5b8de300ee546ecb72348b18a
 Rails is a web-application framework that includes everything needed to create
 database-backed web applications according to the Model-View-Control pattern.
 
