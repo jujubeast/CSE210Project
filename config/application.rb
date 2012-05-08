@@ -1,8 +1,6 @@
 require File.expand_path('../boot', __FILE__)
 
-<<<<<<< HEAD
 require 'rails/all'
-=======
 # Pick the frameworks you want:
 require "active_record/railtie"
 require "action_controller/railtie"
@@ -10,7 +8,7 @@ require "action_mailer/railtie"
 require "active_resource/railtie"
 require "sprockets/railtie"
 # require "rails/test_unit/railtie"
->>>>>>> 5301edcc4bf5f5f5b8de300ee546ecb72348b18a
+
 
 if defined?(Bundler)
   # If you precompile assets before deploying to production, use this line
@@ -19,11 +17,8 @@ if defined?(Bundler)
   # Bundler.require(:default, :assets, Rails.env)
 end
 
-<<<<<<< HEAD
+
 module TestApp
-=======
-module SampleApp
->>>>>>> 5301edcc4bf5f5f5b8de300ee546ecb72348b18a
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
