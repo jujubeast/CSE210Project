@@ -10,4 +10,18 @@ class ListsStoresController < ApplicationController
         	format.json { render :json => @lists_user.errors, :status => :unprocessable_entity }
       	end
     end
+  end
+    def destroy
+      lists_store = ListsStore.find(:all,
+                                    :conditions => { :store_id => params[:store_id], 
+                                                     :list_id => params[:list_id]
+                                                    })
+      
+      lists_store.each { |store| store.delete}
+
+      respond_to do |format|
+        format.html { redirect_to "/users/#{session[:user_id]}/#{params[:list_id]}" }
+        format.json { head :no_content }
+      end
+    end
 end

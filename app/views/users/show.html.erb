@@ -47,7 +47,10 @@
   						@stores.each do |store| %>
   					<tr><td>
   					<%= store.name %>
-  					</td></tr>
+  					</td>
+            <td>
+            <%= link_to 'Remove From Current List', "/removefromlist/#{params[:cur_list]}/#{store.id}" %> 
+            </td></tr>
   					<% end
   					end %>
   				</table>
@@ -64,7 +67,6 @@
                   </td>
                   <td>
                      <%= link_to 'Add to Current List', "/addtolist/#{params[:cur_list]}/#{store.id}" %>
-                     <%= link_to 'Remove From Current List', '#' %> 
                   </td>  
             </tr>
             <% end 

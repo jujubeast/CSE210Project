@@ -33,12 +33,23 @@ class ListsController < ApplicationController
           format.json { render :json => @list, :status => :edited, :location => @list}
         end
     end
+
+    def remove
+        @list = List.find(params[:list_id])
+
+        respond_to do |format|
+          @lists_store = @list.lists_stores.destroy()
+          format.html { redirect_to "/users/#{session[:user_id]}/#{@list.id}", :notice => 'List successfully edited'}
+          format.json { render :json => @list, :status => :edited, :location => @list}
+        end
+    end
+
     def destroy
     @list = List.find(params[:id])
     @list.destroy
 
     respond_to do |format|
-      format.html { redirect_to "/users/#{session[:user_id]}" }
+      format.html { redirect_to "/users/#{session[:user_id]}/#{params[:id]}" }
       format.json { head :no_content }
     end
   end

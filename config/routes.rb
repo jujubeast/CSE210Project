@@ -18,6 +18,7 @@ TestApp::Application.routes.draw do
   match "/deletelist/:id", :to => "lists#destroy"
 
   match "/addtolist/:list_id/:store_id", :to => "lists#add"
+  match "/removefromlist/:list_id/:store_id", :to => "lists_stores#destroy"
 
   match "/addstore", :to => "stores#new"
 
