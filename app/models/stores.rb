@@ -1,3 +1,3 @@
 class Stores < ActiveRecord::Base
-  attr_accessible :detailed_info, :name
+  attr_accessible :detail_info, :name
 end

@@ -18,3 +18,5 @@ rails generate model lists_stores store_id:integer list_id:integer
 
 
 rake db:schema:load -> install from schema directly.
+
+rake test:units -> run all unit tests

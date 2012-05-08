@@ -45,3 +45,375 @@ Migrating to CreateLists (20120422054946)
   [1m[35m (0.4ms)[0m  CREATE TABLE `lists` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
 Mysql2::Error: Table 'lists' already exists: CREATE TABLE `lists` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `created_at` datetime NOT NULL, `updated_at` datetime NOT NULL) ENGINE=InnoDB
   [1m[36m (0.1ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[36m (0.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35m (308.0ms)[0m  DROP DATABASE IF EXISTS `testdb`
+  [1m[36m (2.0ms)[0m  [1mCREATE DATABASE `testdb` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`[0m
+  [1m[35m (131.0ms)[0m  CREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category` varchar(64), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (106.0ms)[0m  [1mCREATE TABLE `lists` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(45), `private` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (97.0ms)[0m  CREATE TABLE `lists_stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `store_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (97.0ms)[0m  [1mCREATE INDEX `fk_table3_list1` ON `lists_stores` (`list_id`)[0m
+  [1m[35m (115.0ms)[0m  CREATE UNIQUE INDEX `idstore_idlist` ON `lists_stores` (`store_id`, `list_id`)
+  [1m[36m (116.0ms)[0m  [1mCREATE INDEX `fk_table3_store1` ON `lists_stores` (`store_id`)[0m
+  [1m[35m (105.0ms)[0m  CREATE TABLE `lists_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `owner` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (108.0ms)[0m  [1mCREATE INDEX `fk_user_list_list1` ON `lists_users` (`list_id`)[0m
+  [1m[35m (104.0ms)[0m  CREATE UNIQUE INDEX `iduser_idlist` ON `lists_users` (`user_id`, `list_id`)
+  [1m[36m (108.0ms)[0m  [1mCREATE INDEX `fk_table2_user1` ON `lists_users` (`user_id`)[0m
+  [1m[35m (64.0ms)[0m  CREATE TABLE `stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(256) NOT NULL, `detail_info` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (106.0ms)[0m  [1mCREATE TABLE `stores_tags_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `tag_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (130.0ms)[0m  CREATE INDEX `fk_user_store_tags_store1` ON `stores_tags_users` (`store_id`)
+  [1m[36m (260.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_tags1` ON `stores_tags_users` (`tag_id`)[0m
+  [1m[35m (167.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore_idtags` ON `stores_tags_users` (`user_id`, `store_id`, `tag_id`)
+  [1m[36m (133.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_user1` ON `stores_tags_users` (`user_id`)[0m
+  [1m[35m (103.0ms)[0m  CREATE TABLE `stores_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `visited` int(11) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (124.0ms)[0m  [1mCREATE INDEX `fk_user_store_store1` ON `stores_users` (`store_id`)[0m
+  [1m[35m (139.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore` ON `stores_users` (`user_id`, `store_id`)
+  [1m[36m (189.0ms)[0m  [1mCREATE INDEX `fk_user_store_user` ON `stores_users` (`user_id`)[0m
+  [1m[35m (107.0ms)[0m  CREATE TABLE `tags` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(64) NOT NULL, `category_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (158.0ms)[0m  [1mCREATE INDEX `fk_tags_Category1` ON `tags` (`category_id`)[0m
+  [1m[35m (172.0ms)[0m  CREATE UNIQUE INDEX `tags_category` ON `tags` (`category_id`)
+  [1m[36m (112.0ms)[0m  [1mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `fb_id` varchar(64) NOT NULL, `name` varchar(128) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (98.0ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36m (115.0ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35m (1.0ms)[0m  SELECT version FROM `schema_migrations`
+  [1m[36m (24.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('0')[0m
+  [1m[36m (1.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35m (372.0ms)[0m  DROP DATABASE IF EXISTS `testdb`
+  [1m[36m (2.0ms)[0m  [1mCREATE DATABASE `testdb` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`[0m
+  [1m[35m (80.0ms)[0m  CREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category` varchar(64), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (64.0ms)[0m  [1mCREATE TABLE `lists` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(45), `private` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (94.0ms)[0m  CREATE TABLE `lists_stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `store_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (111.0ms)[0m  [1mCREATE INDEX `fk_table3_list1` ON `lists_stores` (`list_id`)[0m
+  [1m[35m (140.0ms)[0m  CREATE UNIQUE INDEX `idstore_idlist` ON `lists_stores` (`store_id`, `list_id`)
+  [1m[36m (148.0ms)[0m  [1mCREATE INDEX `fk_table3_store1` ON `lists_stores` (`store_id`)[0m
+  [1m[35m (55.0ms)[0m  CREATE TABLE `lists_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `owner` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (83.0ms)[0m  [1mCREATE INDEX `fk_user_list_list1` ON `lists_users` (`list_id`)[0m
+  [1m[35m (131.0ms)[0m  CREATE UNIQUE INDEX `iduser_idlist` ON `lists_users` (`user_id`, `list_id`)
+  [1m[36m (172.0ms)[0m  [1mCREATE INDEX `fk_table2_user1` ON `lists_users` (`user_id`)[0m
+  [1m[35m (98.0ms)[0m  CREATE TABLE `stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(256) NOT NULL, `detail_info` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (136.0ms)[0m  [1mCREATE TABLE `stores_tags_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `tag_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (192.0ms)[0m  CREATE INDEX `fk_user_store_tags_store1` ON `stores_tags_users` (`store_id`)
+  [1m[36m (147.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_tags1` ON `stores_tags_users` (`tag_id`)[0m
+  [1m[35m (145.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore_idtags` ON `stores_tags_users` (`user_id`, `store_id`, `tag_id`)
+  [1m[36m (159.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_user1` ON `stores_tags_users` (`user_id`)[0m
+  [1m[35m (94.0ms)[0m  CREATE TABLE `stores_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `visited` int(11) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (126.0ms)[0m  [1mCREATE INDEX `fk_user_store_store1` ON `stores_users` (`store_id`)[0m
+  [1m[35m (154.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore` ON `stores_users` (`user_id`, `store_id`)
+  [1m[36m (133.0ms)[0m  [1mCREATE INDEX `fk_user_store_user` ON `stores_users` (`user_id`)[0m
+  [1m[35m (114.0ms)[0m  CREATE TABLE `tags` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(64) NOT NULL, `category_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (154.0ms)[0m  [1mCREATE INDEX `fk_tags_Category1` ON `tags` (`category_id`)[0m
+  [1m[35m (133.0ms)[0m  CREATE UNIQUE INDEX `tags_category` ON `tags` (`category_id`)
+  [1m[36m (121.0ms)[0m  [1mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `fb_id` varchar(64) NOT NULL, `name` varchar(128) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (115.0ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36m (124.0ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35m (0.0ms)[0m  SELECT version FROM `schema_migrations`
+  [1m[36m (28.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('0')[0m
+  [1m[36m (1.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35m (303.0ms)[0m  DROP DATABASE IF EXISTS `testdb`
+  [1m[36m (2.0ms)[0m  [1mCREATE DATABASE `testdb` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`[0m
+  [1m[35m (54.0ms)[0m  CREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category` varchar(64), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (71.0ms)[0m  [1mCREATE TABLE `lists` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(45), `private` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (73.0ms)[0m  CREATE TABLE `lists_stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `store_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (115.0ms)[0m  [1mCREATE INDEX `fk_table3_list1` ON `lists_stores` (`list_id`)[0m
+  [1m[35m (148.0ms)[0m  CREATE UNIQUE INDEX `idstore_idlist` ON `lists_stores` (`store_id`, `list_id`)
+  [1m[36m (197.0ms)[0m  [1mCREATE INDEX `fk_table3_store1` ON `lists_stores` (`store_id`)[0m
+  [1m[35m (80.0ms)[0m  CREATE TABLE `lists_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `owner` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (99.0ms)[0m  [1mCREATE INDEX `fk_user_list_list1` ON `lists_users` (`list_id`)[0m
+  [1m[35m (130.0ms)[0m  CREATE UNIQUE INDEX `iduser_idlist` ON `lists_users` (`user_id`, `list_id`)
+  [1m[36m (123.0ms)[0m  [1mCREATE INDEX `fk_table2_user1` ON `lists_users` (`user_id`)[0m
+  [1m[35m (114.0ms)[0m  CREATE TABLE `stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(256) NOT NULL, `detail_info` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (88.0ms)[0m  [1mCREATE TABLE `stores_tags_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `tag_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (116.0ms)[0m  CREATE INDEX `fk_user_store_tags_store1` ON `stores_tags_users` (`store_id`)
+  [1m[36m (131.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_tags1` ON `stores_tags_users` (`tag_id`)[0m
+  [1m[35m (107.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore_idtags` ON `stores_tags_users` (`user_id`, `store_id`, `tag_id`)
+  [1m[36m (122.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_user1` ON `stores_tags_users` (`user_id`)[0m
+  [1m[35m (119.0ms)[0m  CREATE TABLE `stores_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `visited` int(11) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (135.0ms)[0m  [1mCREATE INDEX `fk_user_store_store1` ON `stores_users` (`store_id`)[0m
+  [1m[35m (139.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore` ON `stores_users` (`user_id`, `store_id`)
+  [1m[36m (139.0ms)[0m  [1mCREATE INDEX `fk_user_store_user` ON `stores_users` (`user_id`)[0m
+  [1m[35m (82.0ms)[0m  CREATE TABLE `tags` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(64) NOT NULL, `category_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (109.0ms)[0m  [1mCREATE INDEX `fk_tags_Category1` ON `tags` (`category_id`)[0m
+  [1m[35m (176.0ms)[0m  CREATE UNIQUE INDEX `tags_category` ON `tags` (`category_id`)
+  [1m[36m (88.0ms)[0m  [1mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `fb_id` varchar(64) NOT NULL, `name` varchar(128) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (120.0ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36m (140.0ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35m (0.0ms)[0m  SELECT version FROM `schema_migrations`
+  [1m[36m (35.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('0')[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35m (338.0ms)[0m  DROP DATABASE IF EXISTS `testdb`
+  [1m[36m (2.0ms)[0m  [1mCREATE DATABASE `testdb` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`[0m
+  [1m[35m (58.0ms)[0m  CREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category` varchar(64), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (73.0ms)[0m  [1mCREATE TABLE `lists` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(45), `private` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (73.0ms)[0m  CREATE TABLE `lists_stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `store_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (81.0ms)[0m  [1mCREATE INDEX `fk_table3_list1` ON `lists_stores` (`list_id`)[0m
+  [1m[35m (99.0ms)[0m  CREATE UNIQUE INDEX `idstore_idlist` ON `lists_stores` (`store_id`, `list_id`)
+  [1m[36m (123.0ms)[0m  [1mCREATE INDEX `fk_table3_store1` ON `lists_stores` (`store_id`)[0m
+  [1m[35m (77.0ms)[0m  CREATE TABLE `lists_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `owner` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (127.0ms)[0m  [1mCREATE INDEX `fk_user_list_list1` ON `lists_users` (`list_id`)[0m
+  [1m[35m (123.0ms)[0m  CREATE UNIQUE INDEX `iduser_idlist` ON `lists_users` (`user_id`, `list_id`)
+  [1m[36m (116.0ms)[0m  [1mCREATE INDEX `fk_table2_user1` ON `lists_users` (`user_id`)[0m
+  [1m[35m (83.0ms)[0m  CREATE TABLE `stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(256) NOT NULL, `detail_info` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (142.0ms)[0m  [1mCREATE TABLE `stores_tags_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `tag_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (127.0ms)[0m  CREATE INDEX `fk_user_store_tags_store1` ON `stores_tags_users` (`store_id`)
+  [1m[36m (140.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_tags1` ON `stores_tags_users` (`tag_id`)[0m
+  [1m[35m (235.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore_idtags` ON `stores_tags_users` (`user_id`, `store_id`, `tag_id`)
+  [1m[36m (151.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_user1` ON `stores_tags_users` (`user_id`)[0m
+  [1m[35m (97.0ms)[0m  CREATE TABLE `stores_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `visited` int(11) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (123.0ms)[0m  [1mCREATE INDEX `fk_user_store_store1` ON `stores_users` (`store_id`)[0m
+  [1m[35m (123.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore` ON `stores_users` (`user_id`, `store_id`)
+  [1m[36m (131.0ms)[0m  [1mCREATE INDEX `fk_user_store_user` ON `stores_users` (`user_id`)[0m
+  [1m[35m (101.0ms)[0m  CREATE TABLE `tags` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(64) NOT NULL, `category_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (119.0ms)[0m  [1mCREATE INDEX `fk_tags_Category1` ON `tags` (`category_id`)[0m
+  [1m[35m (123.0ms)[0m  CREATE UNIQUE INDEX `tags_category` ON `tags` (`category_id`)
+  [1m[36m (118.0ms)[0m  [1mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `fb_id` varchar(64) NOT NULL, `name` varchar(128) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (118.0ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36m (137.0ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35m (0.0ms)[0m  SELECT version FROM `schema_migrations`
+  [1m[36m (26.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('0')[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35m (307.0ms)[0m  DROP DATABASE IF EXISTS `testdb`
+  [1m[36m (2.0ms)[0m  [1mCREATE DATABASE `testdb` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`[0m
+  [1m[35m (81.0ms)[0m  CREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category` varchar(64), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (99.0ms)[0m  [1mCREATE TABLE `lists` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(45), `private` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (52.0ms)[0m  CREATE TABLE `lists_stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `store_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (112.0ms)[0m  [1mCREATE INDEX `fk_table3_list1` ON `lists_stores` (`list_id`)[0m
+  [1m[35m (127.0ms)[0m  CREATE UNIQUE INDEX `idstore_idlist` ON `lists_stores` (`store_id`, `list_id`)
+  [1m[36m (128.0ms)[0m  [1mCREATE INDEX `fk_table3_store1` ON `lists_stores` (`store_id`)[0m
+  [1m[35m (71.0ms)[0m  CREATE TABLE `lists_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `owner` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (87.0ms)[0m  [1mCREATE INDEX `fk_user_list_list1` ON `lists_users` (`list_id`)[0m
+  [1m[35m (104.0ms)[0m  CREATE UNIQUE INDEX `iduser_idlist` ON `lists_users` (`user_id`, `list_id`)
+  [1m[36m (175.0ms)[0m  [1mCREATE INDEX `fk_table2_user1` ON `lists_users` (`user_id`)[0m
+  [1m[35m (154.0ms)[0m  CREATE TABLE `stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(256) NOT NULL, `detail_info` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (112.0ms)[0m  [1mCREATE TABLE `stores_tags_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `tag_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (107.0ms)[0m  CREATE INDEX `fk_user_store_tags_store1` ON `stores_tags_users` (`store_id`)
+  [1m[36m (205.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_tags1` ON `stores_tags_users` (`tag_id`)[0m
+  [1m[35m (108.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore_idtags` ON `stores_tags_users` (`user_id`, `store_id`, `tag_id`)
+  [1m[36m (90.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_user1` ON `stores_tags_users` (`user_id`)[0m
+  [1m[35m (88.0ms)[0m  CREATE TABLE `stores_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `visited` int(11) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (115.0ms)[0m  [1mCREATE INDEX `fk_user_store_store1` ON `stores_users` (`store_id`)[0m
+  [1m[35m (107.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore` ON `stores_users` (`user_id`, `store_id`)
+  [1m[36m (114.0ms)[0m  [1mCREATE INDEX `fk_user_store_user` ON `stores_users` (`user_id`)[0m
+  [1m[35m (88.0ms)[0m  CREATE TABLE `tags` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(64) NOT NULL, `category_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (140.0ms)[0m  [1mCREATE INDEX `fk_tags_Category1` ON `tags` (`category_id`)[0m
+  [1m[35m (132.0ms)[0m  CREATE UNIQUE INDEX `tags_category` ON `tags` (`category_id`)
+  [1m[36m (88.0ms)[0m  [1mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `fb_id` varchar(64) NOT NULL, `name` varchar(128) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (90.0ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36m (140.0ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35m (1.0ms)[0m  SELECT version FROM `schema_migrations`
+  [1m[36m (26.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('0')[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35m (325.0ms)[0m  DROP DATABASE IF EXISTS `testdb`
+  [1m[36m (2.0ms)[0m  [1mCREATE DATABASE `testdb` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`[0m
+  [1m[35m (58.0ms)[0m  CREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category` varchar(64), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (55.0ms)[0m  [1mCREATE TABLE `lists` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(45), `private` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (65.0ms)[0m  CREATE TABLE `lists_stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `store_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (132.0ms)[0m  [1mCREATE INDEX `fk_table3_list1` ON `lists_stores` (`list_id`)[0m
+  [1m[35m (82.0ms)[0m  CREATE UNIQUE INDEX `idstore_idlist` ON `lists_stores` (`store_id`, `list_id`)
+  [1m[36m (193.0ms)[0m  [1mCREATE INDEX `fk_table3_store1` ON `lists_stores` (`store_id`)[0m
+  [1m[35m (58.0ms)[0m  CREATE TABLE `lists_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `owner` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (136.0ms)[0m  [1mCREATE INDEX `fk_user_list_list1` ON `lists_users` (`list_id`)[0m
+  [1m[35m (83.0ms)[0m  CREATE UNIQUE INDEX `iduser_idlist` ON `lists_users` (`user_id`, `list_id`)
+  [1m[36m (98.0ms)[0m  [1mCREATE INDEX `fk_table2_user1` ON `lists_users` (`user_id`)[0m
+  [1m[35m (70.0ms)[0m  CREATE TABLE `stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(256) NOT NULL, `detail_info` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (118.0ms)[0m  [1mCREATE TABLE `stores_tags_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `tag_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (104.0ms)[0m  CREATE INDEX `fk_user_store_tags_store1` ON `stores_tags_users` (`store_id`)
+  [1m[36m (110.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_tags1` ON `stores_tags_users` (`tag_id`)[0m
+  [1m[35m (111.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore_idtags` ON `stores_tags_users` (`user_id`, `store_id`, `tag_id`)
+  [1m[36m (109.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_user1` ON `stores_tags_users` (`user_id`)[0m
+  [1m[35m (63.0ms)[0m  CREATE TABLE `stores_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `visited` int(11) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (107.0ms)[0m  [1mCREATE INDEX `fk_user_store_store1` ON `stores_users` (`store_id`)[0m
+  [1m[35m (119.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore` ON `stores_users` (`user_id`, `store_id`)
+  [1m[36m (131.0ms)[0m  [1mCREATE INDEX `fk_user_store_user` ON `stores_users` (`user_id`)[0m
+  [1m[35m (133.0ms)[0m  CREATE TABLE `tags` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(64) NOT NULL, `category_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (137.0ms)[0m  [1mCREATE INDEX `fk_tags_Category1` ON `tags` (`category_id`)[0m
+  [1m[35m (175.0ms)[0m  CREATE UNIQUE INDEX `tags_category` ON `tags` (`category_id`)
+  [1m[36m (97.0ms)[0m  [1mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `fb_id` varchar(64) NOT NULL, `name` varchar(128) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (111.0ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36m (144.0ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35m (1.0ms)[0m  SELECT version FROM `schema_migrations`
+  [1m[36m (34.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('0')[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35m (330.0ms)[0m  DROP DATABASE IF EXISTS `testdb`
+  [1m[36m (1.0ms)[0m  [1mCREATE DATABASE `testdb` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`[0m
+  [1m[35m (50.0ms)[0m  CREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category` varchar(64), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (98.0ms)[0m  [1mCREATE TABLE `lists` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(45), `private` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (94.0ms)[0m  CREATE TABLE `lists_stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `store_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (115.0ms)[0m  [1mCREATE INDEX `fk_table3_list1` ON `lists_stores` (`list_id`)[0m
+  [1m[35m (139.0ms)[0m  CREATE UNIQUE INDEX `idstore_idlist` ON `lists_stores` (`store_id`, `list_id`)
+  [1m[36m (83.0ms)[0m  [1mCREATE INDEX `fk_table3_store1` ON `lists_stores` (`store_id`)[0m
+  [1m[35m (58.0ms)[0m  CREATE TABLE `lists_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `owner` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (162.0ms)[0m  [1mCREATE INDEX `fk_user_list_list1` ON `lists_users` (`list_id`)[0m
+  [1m[35m (99.0ms)[0m  CREATE UNIQUE INDEX `iduser_idlist` ON `lists_users` (`user_id`, `list_id`)
+  [1m[36m (163.0ms)[0m  [1mCREATE INDEX `fk_table2_user1` ON `lists_users` (`user_id`)[0m
+  [1m[35m (116.0ms)[0m  CREATE TABLE `stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(256) NOT NULL, `detail_info` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (249.0ms)[0m  [1mCREATE TABLE `stores_tags_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `tag_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (240.0ms)[0m  CREATE INDEX `fk_user_store_tags_store1` ON `stores_tags_users` (`store_id`)
+  [1m[36m (156.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_tags1` ON `stores_tags_users` (`tag_id`)[0m
+  [1m[35m (156.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore_idtags` ON `stores_tags_users` (`user_id`, `store_id`, `tag_id`)
+  [1m[36m (114.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_user1` ON `stores_tags_users` (`user_id`)[0m
+  [1m[35m (84.0ms)[0m  CREATE TABLE `stores_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `visited` int(11) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (112.0ms)[0m  [1mCREATE INDEX `fk_user_store_store1` ON `stores_users` (`store_id`)[0m
+  [1m[35m (173.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore` ON `stores_users` (`user_id`, `store_id`)
+  [1m[36m (175.0ms)[0m  [1mCREATE INDEX `fk_user_store_user` ON `stores_users` (`user_id`)[0m
+  [1m[35m (130.0ms)[0m  CREATE TABLE `tags` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(64) NOT NULL, `category_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (170.0ms)[0m  [1mCREATE INDEX `fk_tags_Category1` ON `tags` (`category_id`)[0m
+  [1m[35m (101.0ms)[0m  CREATE UNIQUE INDEX `tags_category` ON `tags` (`category_id`)
+  [1m[36m (72.0ms)[0m  [1mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `fb_id` varchar(64) NOT NULL, `name` varchar(128) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (62.0ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36m (231.0ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35m (0.0ms)[0m  SELECT version FROM `schema_migrations`
+  [1m[36m (43.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('0')[0m
+  [1m[36m (1.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35m (311.0ms)[0m  DROP DATABASE IF EXISTS `testdb`
+  [1m[36m (1.0ms)[0m  [1mCREATE DATABASE `testdb` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`[0m
+  [1m[35m (122.0ms)[0m  CREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category` varchar(64), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (98.0ms)[0m  [1mCREATE TABLE `lists` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(45), `private` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (62.0ms)[0m  CREATE TABLE `lists_stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `store_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (100.0ms)[0m  [1mCREATE INDEX `fk_table3_list1` ON `lists_stores` (`list_id`)[0m
+  [1m[35m (99.0ms)[0m  CREATE UNIQUE INDEX `idstore_idlist` ON `lists_stores` (`store_id`, `list_id`)
+  [1m[36m (106.0ms)[0m  [1mCREATE INDEX `fk_table3_store1` ON `lists_stores` (`store_id`)[0m
+  [1m[35m (131.0ms)[0m  CREATE TABLE `lists_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `owner` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (108.0ms)[0m  [1mCREATE INDEX `fk_user_list_list1` ON `lists_users` (`list_id`)[0m
+  [1m[35m (161.0ms)[0m  CREATE UNIQUE INDEX `iduser_idlist` ON `lists_users` (`user_id`, `list_id`)
+  [1m[36m (200.0ms)[0m  [1mCREATE INDEX `fk_table2_user1` ON `lists_users` (`user_id`)[0m
+  [1m[35m (86.0ms)[0m  CREATE TABLE `stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(256) NOT NULL, `detail_info` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (65.0ms)[0m  [1mCREATE TABLE `stores_tags_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `tag_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (149.0ms)[0m  CREATE INDEX `fk_user_store_tags_store1` ON `stores_tags_users` (`store_id`)
+  [1m[36m (165.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_tags1` ON `stores_tags_users` (`tag_id`)[0m
+  [1m[35m (102.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore_idtags` ON `stores_tags_users` (`user_id`, `store_id`, `tag_id`)
+  [1m[36m (94.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_user1` ON `stores_tags_users` (`user_id`)[0m
+  [1m[35m (72.0ms)[0m  CREATE TABLE `stores_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `visited` int(11) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (169.0ms)[0m  [1mCREATE INDEX `fk_user_store_store1` ON `stores_users` (`store_id`)[0m
+  [1m[35m (151.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore` ON `stores_users` (`user_id`, `store_id`)
+  [1m[36m (103.0ms)[0m  [1mCREATE INDEX `fk_user_store_user` ON `stores_users` (`user_id`)[0m
+  [1m[35m (75.0ms)[0m  CREATE TABLE `tags` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(64) NOT NULL, `category_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (88.0ms)[0m  [1mCREATE INDEX `fk_tags_Category1` ON `tags` (`category_id`)[0m
+  [1m[35m (130.0ms)[0m  CREATE UNIQUE INDEX `tags_category` ON `tags` (`category_id`)
+  [1m[36m (93.0ms)[0m  [1mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `fb_id` varchar(64) NOT NULL, `name` varchar(128) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (100.0ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36m (117.0ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35m (0.0ms)[0m  SELECT version FROM `schema_migrations`
+  [1m[36m (34.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('0')[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35m (299.0ms)[0m  DROP DATABASE IF EXISTS `testdb`
+  [1m[36m (1.0ms)[0m  [1mCREATE DATABASE `testdb` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`[0m
+  [1m[35m (98.0ms)[0m  CREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category` varchar(64), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (65.0ms)[0m  [1mCREATE TABLE `lists` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(45), `private` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (65.0ms)[0m  CREATE TABLE `lists_stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `store_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (104.0ms)[0m  [1mCREATE INDEX `fk_table3_list1` ON `lists_stores` (`list_id`)[0m
+  [1m[35m (142.0ms)[0m  CREATE UNIQUE INDEX `idstore_idlist` ON `lists_stores` (`store_id`, `list_id`)
+  [1m[36m (96.0ms)[0m  [1mCREATE INDEX `fk_table3_store1` ON `lists_stores` (`store_id`)[0m
+  [1m[35m (68.0ms)[0m  CREATE TABLE `lists_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `owner` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (97.0ms)[0m  [1mCREATE INDEX `fk_user_list_list1` ON `lists_users` (`list_id`)[0m
+  [1m[35m (173.0ms)[0m  CREATE UNIQUE INDEX `iduser_idlist` ON `lists_users` (`user_id`, `list_id`)
+  [1m[36m (173.0ms)[0m  [1mCREATE INDEX `fk_table2_user1` ON `lists_users` (`user_id`)[0m
+  [1m[35m (114.0ms)[0m  CREATE TABLE `stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(256) NOT NULL, `detail_info` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (79.0ms)[0m  [1mCREATE TABLE `stores_tags_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `tag_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (116.0ms)[0m  CREATE INDEX `fk_user_store_tags_store1` ON `stores_tags_users` (`store_id`)
+  [1m[36m (91.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_tags1` ON `stores_tags_users` (`tag_id`)[0m
+  [1m[35m (122.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore_idtags` ON `stores_tags_users` (`user_id`, `store_id`, `tag_id`)
+  [1m[36m (156.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_user1` ON `stores_tags_users` (`user_id`)[0m
+  [1m[35m (97.0ms)[0m  CREATE TABLE `stores_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `visited` int(11) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (108.0ms)[0m  [1mCREATE INDEX `fk_user_store_store1` ON `stores_users` (`store_id`)[0m
+  [1m[35m (114.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore` ON `stores_users` (`user_id`, `store_id`)
+  [1m[36m (115.0ms)[0m  [1mCREATE INDEX `fk_user_store_user` ON `stores_users` (`user_id`)[0m
+  [1m[35m (72.0ms)[0m  CREATE TABLE `tags` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(64) NOT NULL, `category_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (207.0ms)[0m  [1mCREATE INDEX `fk_tags_Category1` ON `tags` (`category_id`)[0m
+  [1m[35m (221.0ms)[0m  CREATE UNIQUE INDEX `tags_category` ON `tags` (`category_id`)
+  [1m[36m (82.0ms)[0m  [1mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `fb_id` varchar(64) NOT NULL, `name` varchar(128) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (82.0ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36m (150.0ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35m (0.0ms)[0m  SELECT version FROM `schema_migrations`
+  [1m[36m (36.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('0')[0m
+  [1m[36m (1.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35m (498.0ms)[0m  DROP DATABASE IF EXISTS `testdb`
+  [1m[36m (2.0ms)[0m  [1mCREATE DATABASE `testdb` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`[0m
+  [1m[35m (76.0ms)[0m  CREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category` varchar(64), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (72.0ms)[0m  [1mCREATE TABLE `lists` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(45), `private` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (64.0ms)[0m  CREATE TABLE `lists_stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `store_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (165.0ms)[0m  [1mCREATE INDEX `fk_table3_list1` ON `lists_stores` (`list_id`)[0m
+  [1m[35m (115.0ms)[0m  CREATE UNIQUE INDEX `idstore_idlist` ON `lists_stores` (`store_id`, `list_id`)
+  [1m[36m (114.0ms)[0m  [1mCREATE INDEX `fk_table3_store1` ON `lists_stores` (`store_id`)[0m
+  [1m[35m (72.0ms)[0m  CREATE TABLE `lists_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `owner` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (166.0ms)[0m  [1mCREATE INDEX `fk_user_list_list1` ON `lists_users` (`list_id`)[0m
+  [1m[35m (146.0ms)[0m  CREATE UNIQUE INDEX `iduser_idlist` ON `lists_users` (`user_id`, `list_id`)
+  [1m[36m (123.0ms)[0m  [1mCREATE INDEX `fk_table2_user1` ON `lists_users` (`user_id`)[0m
+  [1m[35m (130.0ms)[0m  CREATE TABLE `stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(256) NOT NULL, `detail_info` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (81.0ms)[0m  [1mCREATE TABLE `stores_tags_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `tag_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (99.0ms)[0m  CREATE INDEX `fk_user_store_tags_store1` ON `stores_tags_users` (`store_id`)
+  [1m[36m (121.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_tags1` ON `stores_tags_users` (`tag_id`)[0m
+  [1m[35m (148.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore_idtags` ON `stores_tags_users` (`user_id`, `store_id`, `tag_id`)
+  [1m[36m (153.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_user1` ON `stores_tags_users` (`user_id`)[0m
+  [1m[35m (67.0ms)[0m  CREATE TABLE `stores_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `visited` int(11) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (150.0ms)[0m  [1mCREATE INDEX `fk_user_store_store1` ON `stores_users` (`store_id`)[0m
+  [1m[35m (82.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore` ON `stores_users` (`user_id`, `store_id`)
+  [1m[36m (106.0ms)[0m  [1mCREATE INDEX `fk_user_store_user` ON `stores_users` (`user_id`)[0m
+  [1m[35m (80.0ms)[0m  CREATE TABLE `tags` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(64) NOT NULL, `category_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (98.0ms)[0m  [1mCREATE INDEX `fk_tags_Category1` ON `tags` (`category_id`)[0m
+  [1m[35m (108.0ms)[0m  CREATE UNIQUE INDEX `tags_category` ON `tags` (`category_id`)
+  [1m[36m (71.0ms)[0m  [1mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `fb_id` varchar(64) NOT NULL, `name` varchar(128) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (112.0ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36m (118.0ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35m (0.0ms)[0m  SELECT version FROM `schema_migrations`
+  [1m[36m (24.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('0')[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35m (416.0ms)[0m  DROP DATABASE IF EXISTS `testdb`
+  [1m[36m (2.0ms)[0m  [1mCREATE DATABASE `testdb` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`[0m
+  [1m[35m (65.0ms)[0m  CREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category` varchar(64), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (64.0ms)[0m  [1mCREATE TABLE `lists` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(45), `private` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (73.0ms)[0m  CREATE TABLE `lists_stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `store_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (165.0ms)[0m  [1mCREATE INDEX `fk_table3_list1` ON `lists_stores` (`list_id`)[0m
+  [1m[35m (107.0ms)[0m  CREATE UNIQUE INDEX `idstore_idlist` ON `lists_stores` (`store_id`, `list_id`)
+  [1m[36m (97.0ms)[0m  [1mCREATE INDEX `fk_table3_store1` ON `lists_stores` (`store_id`)[0m
+  [1m[35m (112.0ms)[0m  CREATE TABLE `lists_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `owner` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (221.0ms)[0m  [1mCREATE INDEX `fk_user_list_list1` ON `lists_users` (`list_id`)[0m
+  [1m[35m (166.0ms)[0m  CREATE UNIQUE INDEX `iduser_idlist` ON `lists_users` (`user_id`, `list_id`)
+  [1m[36m (115.0ms)[0m  [1mCREATE INDEX `fk_table2_user1` ON `lists_users` (`user_id`)[0m
+  [1m[35m (80.0ms)[0m  CREATE TABLE `stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(256) NOT NULL, `detail_info` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (121.0ms)[0m  [1mCREATE TABLE `stores_tags_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `tag_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (100.0ms)[0m  CREATE INDEX `fk_user_store_tags_store1` ON `stores_tags_users` (`store_id`)
+  [1m[36m (115.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_tags1` ON `stores_tags_users` (`tag_id`)[0m
+  [1m[35m (155.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore_idtags` ON `stores_tags_users` (`user_id`, `store_id`, `tag_id`)
+  [1m[36m (107.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_user1` ON `stores_tags_users` (`user_id`)[0m
+  [1m[35m (64.0ms)[0m  CREATE TABLE `stores_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `visited` int(11) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (123.0ms)[0m  [1mCREATE INDEX `fk_user_store_store1` ON `stores_users` (`store_id`)[0m
+  [1m[35m (122.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore` ON `stores_users` (`user_id`, `store_id`)
+  [1m[36m (132.0ms)[0m  [1mCREATE INDEX `fk_user_store_user` ON `stores_users` (`user_id`)[0m
+  [1m[35m (81.0ms)[0m  CREATE TABLE `tags` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(64) NOT NULL, `category_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (115.0ms)[0m  [1mCREATE INDEX `fk_tags_Category1` ON `tags` (`category_id`)[0m
+  [1m[35m (108.0ms)[0m  CREATE UNIQUE INDEX `tags_category` ON `tags` (`category_id`)
+  [1m[36m (113.0ms)[0m  [1mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `fb_id` varchar(64) NOT NULL, `name` varchar(128) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (90.0ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36m (115.0ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35m (0.0ms)[0m  SELECT version FROM `schema_migrations`
+  [1m[36m (31.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('0')[0m
+  [1m[36m (0.0ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+  [1m[35m (521.0ms)[0m  DROP DATABASE IF EXISTS `testdb`
+  [1m[36m (2.0ms)[0m  [1mCREATE DATABASE `testdb` DEFAULT CHARACTER SET `utf8` COLLATE `utf8_unicode_ci`[0m
+  [1m[35m (78.0ms)[0m  CREATE TABLE `categories` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `category` varchar(64), `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (120.0ms)[0m  [1mCREATE TABLE `lists` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(45), `private` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (72.0ms)[0m  CREATE TABLE `lists_stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `store_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (140.0ms)[0m  [1mCREATE INDEX `fk_table3_list1` ON `lists_stores` (`list_id`)[0m
+  [1m[35m (122.0ms)[0m  CREATE UNIQUE INDEX `idstore_idlist` ON `lists_stores` (`store_id`, `list_id`)
+  [1m[36m (147.0ms)[0m  [1mCREATE INDEX `fk_table3_store1` ON `lists_stores` (`store_id`)[0m
+  [1m[35m (71.0ms)[0m  CREATE TABLE `lists_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `list_id` int(11) NOT NULL, `owner` tinyint(1) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (99.0ms)[0m  [1mCREATE INDEX `fk_user_list_list1` ON `lists_users` (`list_id`)[0m
+  [1m[35m (99.0ms)[0m  CREATE UNIQUE INDEX `iduser_idlist` ON `lists_users` (`user_id`, `list_id`)
+  [1m[36m (98.0ms)[0m  [1mCREATE INDEX `fk_table2_user1` ON `lists_users` (`user_id`)[0m
+  [1m[35m (79.0ms)[0m  CREATE TABLE `stores` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(256) NOT NULL, `detail_info` text, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (73.0ms)[0m  [1mCREATE TABLE `stores_tags_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `tag_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (157.0ms)[0m  CREATE INDEX `fk_user_store_tags_store1` ON `stores_tags_users` (`store_id`)
+  [1m[36m (164.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_tags1` ON `stores_tags_users` (`tag_id`)[0m
+  [1m[35m (156.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore_idtags` ON `stores_tags_users` (`user_id`, `store_id`, `tag_id`)
+  [1m[36m (122.0ms)[0m  [1mCREATE INDEX `fk_user_store_tags_user1` ON `stores_tags_users` (`user_id`)[0m
+  [1m[35m (79.0ms)[0m  CREATE TABLE `stores_users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `user_id` int(11) NOT NULL, `store_id` int(11) NOT NULL, `visited` int(11) DEFAULT 0 NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (125.0ms)[0m  [1mCREATE INDEX `fk_user_store_store1` ON `stores_users` (`store_id`)[0m
+  [1m[35m (198.0ms)[0m  CREATE UNIQUE INDEX `iduser_idstore` ON `stores_users` (`user_id`, `store_id`)
+  [1m[36m (114.0ms)[0m  [1mCREATE INDEX `fk_user_store_user` ON `stores_users` (`user_id`)[0m
+  [1m[35m (80.0ms)[0m  CREATE TABLE `tags` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `name` varchar(64) NOT NULL, `category_id` int(11) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB
+  [1m[36m (100.0ms)[0m  [1mCREATE INDEX `fk_tags_Category1` ON `tags` (`category_id`)[0m
+  [1m[35m (147.0ms)[0m  CREATE UNIQUE INDEX `tags_category` ON `tags` (`category_id`)
+  [1m[36m (129.0ms)[0m  [1mCREATE TABLE `users` (`id` int(11) DEFAULT NULL auto_increment PRIMARY KEY, `fb_id` varchar(64) NOT NULL, `name` varchar(128) NOT NULL, `created_at` datetime, `updated_at` datetime) ENGINE=InnoDB[0m
+  [1m[35m (123.0ms)[0m  CREATE TABLE `schema_migrations` (`version` varchar(255) NOT NULL) ENGINE=InnoDB
+  [1m[36m (99.0ms)[0m  [1mCREATE UNIQUE INDEX `unique_schema_migrations` ON `schema_migrations` (`version`)[0m
+  [1m[35m (0.0ms)[0m  SELECT version FROM `schema_migrations`
+  [1m[36m (23.0ms)[0m  [1mINSERT INTO `schema_migrations` (version) VALUES ('0')[0m
