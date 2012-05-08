@@ -24,6 +24,15 @@ class ListsController < ApplicationController
     	end
   	end
 
+    def add
+        @list = List.find(params[:list_id])
+
+        respond_to do |format|
+          @lists_store = @list.lists_stores.create(:store_id => params[:store_id])
+          format.html { redirect_to "/users/#{session[:user_id]}/#{@list.id}", :notice => 'List successfully edited'}
+          format.json { render :json => @list, :status => :edited, :location => @list}
+        end
+    end
     def destroy
     @list = List.find(params[:id])
     @list.destroy

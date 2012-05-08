@@ -42,6 +42,8 @@ class UsersController < ApplicationController
                          :conditions => ["id IN (?)", @stores_ids],
                          :select => "name, id")
   end
+
+    @available_stores = Store.find(:all)
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @user }

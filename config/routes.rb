@@ -1,5 +1,9 @@
 TestApp::Application.routes.draw do
  
+  get "stores/new"
+
+  get "store/new"
+
   match '/', :to => "sessions#new"
 
   post "/users", :to => "users#create"
@@ -12,6 +16,12 @@ TestApp::Application.routes.draw do
   match "/signout", :to => "sessions#destroy"
   match "/createlist", :to => "lists#new"
   match "/deletelist/:id", :to => "lists#destroy"
+
+  match "/addtolist/:list_id/:store_id", :to => "lists#add"
+
+  match "/addstore", :to => "stores#new"
+
+  post "/stores", :to => "stores#create"
 
   resources :sessions, only: [:new, :create, :destroy]
   

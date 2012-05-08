@@ -16,6 +16,7 @@
 
 
 <%= link_to 'Create List', createlist_path %><br/>
+<%= link_to 'Add Store', addstore_path %><br/>
 <p>
 	<table border="1px">
 		<tr>
@@ -51,6 +52,25 @@
   					end %>
   				</table>
   			</td>
+        <td valign="top">
+          <table>
+            <b>Available Stores (Simulated Search Results)</b><br/>
+
+            <% if @available_stores
+              @available_stores.each do |store| %>
+              <tr>
+                  <td>
+                    <%=store.name %>
+                  </td>
+                  <td>
+                     <%= link_to 'Add to Current List', "/addtolist/#{params[:cur_list]}/#{store.id}" %>
+                     <%= link_to 'Remove From Current List', '#' %> 
+                  </td>  
+            </tr>
+            <% end 
+            end%>
+          </table>
+        </td>
   		</tr>
   	</table>
  </p>

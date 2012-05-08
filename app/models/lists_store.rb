@@ -1,3 +1,5 @@
 class ListsStore < ActiveRecord::Base
-  # attr_accessible :title, :body
+	belongs_to :list
+	belongs_to :store
+   attr_accessible :store_id, :list_id
 end
