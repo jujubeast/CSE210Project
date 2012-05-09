@@ -92,9 +92,12 @@ ActiveRecord::Schema.define(:version => 0) do
   add_index "tags", ["category_id"], :name => "tags_category", :unique => true
 
   create_table "users", :force => true do |t|
-    t.integer  "fb_id"
+    t.integer  "fb_id", :null => true
+    t.string   "picture_link", :null => true
+    t.string   "email", :null => false
     t.string   "first_name", :null => false
     t.string   "last_name",  :null => false
+    t.string   "password", :null => false
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
