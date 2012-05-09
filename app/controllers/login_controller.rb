@@ -1,6 +1,6 @@
 class LoginController < ApplicationController
 
   def show
-    print 'hello world'
+    render 'login/index'
   end
 end
