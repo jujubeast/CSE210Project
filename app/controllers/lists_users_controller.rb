@@ -21,9 +21,6 @@ class ListsUsersController < ApplicationController
         	format.json { render :json => @lists_user.errors, :status => :unprocessable_entity }
       	end
     end
-
- 
-
-
-
+  end
+  
 end
