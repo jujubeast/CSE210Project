@@ -11,7 +11,7 @@ class ListUser < ActiveRecord::Base
    end
 
    def self.find_default_list(user_id)
-   		default_list = ListsUser.find(:first, :conditions => {:user_id => user_id})
+   		default_list = ListUser.find(:first, :conditions => {:user_id => user_id})
    		if default_list
 	   		default_list_id = default_list.list_id
 	   	else

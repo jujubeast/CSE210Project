@@ -1,23 +1,23 @@
-class ListsStoresController < ApplicationController
+class ListStoresController < ApplicationController
 	def create
-		@lists_store = ListsStore.new
+		@list_store = ListStore.new
 		respond_to do |format|
-      	if @lists_store.save
+      	if @list_store.save
         	#format.html { redirect_to '/', :notice => 'List was successfully created.' }
         	#format.json { render :json => @lists_user, :status => :created, :location => @lists_user }
       	else
         	format.html { render :action => "new" }
-        	format.json { render :json => @lists_user.errors, :status => :unprocessable_entity }
+        	format.json { render :json => @list_user.errors, :status => :unprocessable_entity }
       	end
     end
   end
     def destroy
-      lists_store = ListsStore.find(:all,
+      list_store = ListStore.find(:all,
                                     :conditions => { :store_id => params[:store_id], 
                                                      :list_id => params[:list_id]
                                                     })
       
-      lists_store.each { |store| store.delete}
+      list_store.each { |store| store.delete}
 
       respond_to do |format|
         format.html { redirect_to default_home_path(session[:user_id], params[:list_id]) }
