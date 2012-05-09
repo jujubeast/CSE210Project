@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
 
 	def create
 		user = User.find_by_email(params[:session][:email])
-		default_list_id = ListsUser.find_default_list(user.id)
+		default_list_id = ListUser.find_default_list(user.id)
 		if user && user.password == params[:session][:password] 
 			session[:user_id] = user.id
 			
