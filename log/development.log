@@ -1596,3 +1596,127 @@ ActiveRecord::StatementInvalid (Mysql2::Error: Column 'first_name' cannot be nul
   Rendered /Users/julia/.rvm/gems/ruby-1.9.2-p318/gems/actionpack-3.2.2/lib/action_dispatch/middleware/templates/rescues/_trace.erb (2.8ms)
   Rendered /Users/julia/.rvm/gems/ruby-1.9.2-p318/gems/actionpack-3.2.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.erb (1.0ms)
   Rendered /Users/julia/.rvm/gems/ruby-1.9.2-p318/gems/actionpack-3.2.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.erb within rescues/layout (9.3ms)
+  [1m[36m (2.5ms)[0m  [1mSELECT `schema_migrations`.`version` FROM `schema_migrations` [0m
+
+
+Started GET "/" for 127.0.0.1 at Wed May 09 16:38:30 -0700 2012
+Processing by SessionsController#new as HTML
+  Rendered sessions/new.html.erb within layouts/application (24.3ms)
+Compiled home.css  (19ms)  (pid 9517)
+Compiled application.css  (64ms)  (pid 9517)
+Compiled jquery.js  (27ms)  (pid 9517)
+Compiled jquery_ujs.js  (0ms)  (pid 9517)
+Compiled home.js  (943ms)  (pid 9517)
+Compiled application.js  (1423ms)  (pid 9517)
+Completed 200 OK in 1772ms (Views: 1768.8ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at Wed May 09 16:38:33 -0700 2012
+Served asset /application.css - 304 Not Modified (35ms)
+
+
+Started GET "/assets/home.css?body=1" for 127.0.0.1 at Wed May 09 16:38:33 -0700 2012
+Served asset /home.css - 304 Not Modified (387ms)
+
+
+Started GET "/assets/login.js?body=1" for 127.0.0.1 at Wed May 09 16:38:34 -0700 2012
+Served asset /login.js - 304 Not Modified (29ms)
+
+
+Started GET "/assets/home.js?body=1" for 127.0.0.1 at Wed May 09 16:38:34 -0700 2012
+Served asset /home.js - 304 Not Modified (16ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at Wed May 09 16:38:34 -0700 2012
+Served asset /jquery.js - 304 Not Modified (43ms)
+
+
+Started GET "/assets/login.css?body=1" for 127.0.0.1 at Wed May 09 16:38:34 -0700 2012
+Served asset /login.css - 304 Not Modified (8ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at Wed May 09 16:38:34 -0700 2012
+Served asset /jquery_ujs.js - 304 Not Modified (12ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at Wed May 09 16:38:34 -0700 2012
+Served asset /application.js - 304 Not Modified (52ms)
+
+
+Started GET "/login" for 127.0.0.1 at Wed May 09 16:38:39 -0700 2012
+
+ActionController::RoutingError (No route matches [GET] "/login"):
+  actionpack (3.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:21:in `call'
+  actionpack (3.2.2) lib/action_dispatch/middleware/show_exceptions.rb:56:in `call'
+  railties (3.2.2) lib/rails/rack/logger.rb:26:in `call_app'
+  railties (3.2.2) lib/rails/rack/logger.rb:16:in `call'
+  actionpack (3.2.2) lib/action_dispatch/middleware/request_id.rb:22:in `call'
+  rack (1.4.1) lib/rack/methodoverride.rb:21:in `call'
+  rack (1.4.1) lib/rack/runtime.rb:17:in `call'
+  activesupport (3.2.2) lib/active_support/cache/strategy/local_cache.rb:72:in `call'
+  rack (1.4.1) lib/rack/lock.rb:15:in `call'
+  actionpack (3.2.2) lib/action_dispatch/middleware/static.rb:61:in `call'
+  railties (3.2.2) lib/rails/engine.rb:479:in `call'
+  railties (3.2.2) lib/rails/application.rb:220:in `call'
+  rack (1.4.1) lib/rack/content_length.rb:14:in `call'
+  railties (3.2.2) lib/rails/rack/log_tailer.rb:14:in `call'
+  rack (1.4.1) lib/rack/handler/webrick.rb:59:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:104:in `service'
+  /usr/lib/ruby/1.8/webrick/httpserver.rb:65:in `run'
+  /usr/lib/ruby/1.8/webrick/server.rb:173:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:162:in `start_thread'
+  /usr/lib/ruby/1.8/webrick/server.rb:95:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `each'
+  /usr/lib/ruby/1.8/webrick/server.rb:92:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:23:in `start'
+  /usr/lib/ruby/1.8/webrick/server.rb:82:in `start'
+  rack (1.4.1) lib/rack/handler/webrick.rb:13:in `run'
+  rack (1.4.1) lib/rack/server.rb:265:in `start'
+  railties (3.2.2) lib/rails/commands/server.rb:70:in `start'
+  railties (3.2.2) lib/rails/commands.rb:55
+  railties (3.2.2) lib/rails/commands.rb:50:in `tap'
+  railties (3.2.2) lib/rails/commands.rb:50
+  script/rails:6:in `require'
+  script/rails:6
+
+
+  Rendered /usr/lib/ruby/gems/1.8/gems/actionpack-3.2.2/lib/action_dispatch/middleware/templates/rescues/routing_error.erb within rescues/layout (0.5ms)
+
+
+Started GET "/login" for 127.0.0.1 at Wed May 09 16:38:55 -0700 2012
+Processing by LoginController#show as HTML
+  Rendered login/index.html.erb within layouts/application (0.4ms)
+Completed 200 OK in 60ms (Views: 56.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at Wed May 09 16:38:56 -0700 2012
+Served asset /application.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/home.css?body=1" for 127.0.0.1 at Wed May 09 16:38:56 -0700 2012
+Served asset /home.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/login.css?body=1" for 127.0.0.1 at Wed May 09 16:38:56 -0700 2012
+Served asset /login.css - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at Wed May 09 16:38:57 -0700 2012
+Served asset /jquery.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at Wed May 09 16:38:57 -0700 2012
+Served asset /jquery_ujs.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/home.js?body=1" for 127.0.0.1 at Wed May 09 16:38:57 -0700 2012
+Served asset /home.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/login.js?body=1" for 127.0.0.1 at Wed May 09 16:38:57 -0700 2012
+Served asset /login.js - 304 Not Modified (0ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at Wed May 09 16:38:57 -0700 2012
+Served asset /application.js - 304 Not Modified (0ms)

@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -14,49 +13,50 @@
 ActiveRecord::Schema.define(:version => 0) do
 
   create_table "categories", :force => true do |t|
-    t.string   "category",   :limit => 64
+    t.string   "category",   :limit => 45
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "lists", :force => true do |t|
     t.string   "name",       :limit => 45
-    t.boolean  "private",                  :default => false, :null => false
+    t.integer  "privacy"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "list_stores", :force => true do |t|
+  create_table "lists_stores", :force => true do |t|
     t.integer  "store_id",   :null => false
     t.integer  "list_id",    :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "list_stores", ["list_id"], :name => "fk_table3_list1"
-  add_index "list_stores", ["store_id", "list_id"], :name => "idstore_idlist", :unique => true
-  add_index "list_stores", ["store_id"], :name => "fk_table3_store1"
+  add_index "lists_stores", ["list_id"], :name => "fk_table3_list1"
+  add_index "lists_stores", ["store_id", "list_id"], :name => "idstore_idlist", :unique => true
+  add_index "lists_stores", ["store_id"], :name => "fk_table3_store1"
 
-  create_table "list_users", :force => true do |t|
-    t.integer  "user_id",                       :null => false
-    t.integer  "list_id",                       :null => false
-    t.boolean  "owner",      :default => false, :null => false
+  create_table "lists_users", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "list_id",    :null => false
+    t.integer  "privilege"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "list_users", ["list_id"], :name => "fk_user_list_list1"
-  add_index "list_users", ["user_id", "list_id"], :name => "iduser_idlist", :unique => true
-  add_index "list_users", ["user_id"], :name => "fk_table2_user1"
+  add_index "lists_users", ["list_id"], :name => "fk_user_list_list1"
+  add_index "lists_users", ["user_id", "list_id"], :name => "iduser_idlist", :unique => true
+  add_index "lists_users", ["user_id"], :name => "fk_table2_user1"
 
   create_table "stores", :force => true do |t|
-    t.string   "name",        :limit => 256, :null => false
-    t.text     "detail_info"
+    t.string   "name",        :limit => 45
+    t.string   "detail_info", :limit => 45
+    t.string   "pic",         :limit => 45
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  create_table "store_tag_users", :force => true do |t|
+  create_table "stores_tags_users", :force => true do |t|
     t.integer  "user_id",    :null => false
     t.integer  "store_id",   :null => false
     t.integer  "tag_id",     :null => false
@@ -64,25 +64,25 @@ ActiveRecord::Schema.define(:version => 0) do
     t.datetime "updated_at"
   end
 
-  add_index "store_tag_users", ["store_id"], :name => "fk_user_store_tag_store1"
-  add_index "store_tag_users", ["tag_id"], :name => "fk_user_store_tag_tags1"
-  add_index "store_tag_users", ["user_id", "store_id", "tag_id"], :name => "iduser_idstore_idtags", :unique => true
-  add_index "store_tag_users", ["user_id"], :name => "fk_user_store_tag_user1"
+  add_index "stores_tags_users", ["store_id"], :name => "fk_user_store_tags_store1"
+  add_index "stores_tags_users", ["tag_id"], :name => "fk_user_store_tags_tags1"
+  add_index "stores_tags_users", ["user_id", "store_id", "tag_id"], :name => "iduser_idstore_idtags", :unique => true
+  add_index "stores_tags_users", ["user_id"], :name => "fk_user_store_tags_user1"
 
-  create_table "store_users", :force => true do |t|
-    t.integer  "user_id",                   :null => false
-    t.integer  "store_id",                  :null => false
-    t.integer  "visited",    :default => 0, :null => false
+  create_table "stores_users", :force => true do |t|
+    t.integer  "user_id",    :null => false
+    t.integer  "store_id",   :null => false
+    t.integer  "beenThere"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "store_users", ["store_id"], :name => "fk_user_store_store1"
-  add_index "store_users", ["user_id", "store_id"], :name => "iduser_idstore", :unique => true
-  add_index "store_users", ["user_id"], :name => "fk_user_store_user"
+  add_index "stores_users", ["store_id"], :name => "fk_user_store_store1"
+  add_index "stores_users", ["user_id", "store_id"], :name => "iduser_idstore", :unique => true
+  add_index "stores_users", ["user_id"], :name => "fk_user_store_user"
 
   create_table "tags", :force => true do |t|
-    t.string   "name",        :limit => 64, :null => false
+    t.string   "name",        :limit => 45, :null => false
     t.integer  "category_id",               :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -92,14 +92,10 @@ ActiveRecord::Schema.define(:version => 0) do
   add_index "tags", ["category_id"], :name => "tags_category", :unique => true
 
   create_table "users", :force => true do |t|
-    t.integer  "fb_id", :null => true
-    t.string   "picture_link", :null => true
-    t.string   "email", :null => false
-    t.string   "first_name", :null => false
-    t.string   "last_name",  :null => false
-    t.string   "password", :null => false
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.string   "fb_id",      :limit => 45
+    t.string   "name",       :limit => 45
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end
