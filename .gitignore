@@ -1,8 +1,8 @@
 # Project Ignore #
 ##################
-Gemfile
-Gemfile.lock
 database.yml
+*.tmp
+tmp/*
 
 # Compiled source #
 ###################
