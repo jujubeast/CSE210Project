@@ -22,10 +22,11 @@ App::Application.routes.draw do
   match "/removefromlist/:list_id/:store_id", :to => "lists_stores#destroy", :as => :remove_from_list
 
   match "/addstore", :to => "stores#new"
-
+  match "", :to => "login#show"
   
 
-  resources :sessions, only: [:new, :create, :destroy]
+  # this line giving error while running the server
+  #resources :sessions, :only [:new, :create, :destroy]
   
   #resources :users
 
