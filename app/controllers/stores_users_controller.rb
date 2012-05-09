@@ -1,0 +1,2 @@
+class StoresUsersController < ApplicationController
+end

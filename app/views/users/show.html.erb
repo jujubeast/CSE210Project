@@ -1,0 +1,83 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>First Name:</b>
+  <%= @user.first_name %>
+</p>
+
+<p>
+	<b>Last Name</b>
+	<%= @user.last_name %>
+</p>
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+
+<%= link_to 'Create List', createlist_path %><br/>
+<%= link_to 'Add Store', addstore_path %><br/>
+<p>
+	<table border="1px">
+		<tr>
+			<td valign="top">
+				<table>		
+						<b>Lists:</b><br/>
+						<% @lists.each do |list| %>
+    					<tr><td width="150px">
+    					<%= if list.id.to_i != params[:cur_list].to_i
+    						link_to list.name, default_home_path(session[:user_id], list.id)
+    					else
+    						list.name	
+    					end 
+    					%>
+    					</td>
+    					<td>
+    					<%=link_to "Edit", '#'%>
+    					<%=link_to "Delete", delete_list_path(list.id) %>
+    					</td></tr>
+  						<% end %>  
+  				</table>
+  			</td>
+  			<td valign="top">
+  				<table>
+  					<b>List Items:</b><br/>
+  					
+  					<% if @stores 
+  						@stores.each do |store| %>
+  					<tr><td width="200px">
+  					<%= store.name %>
+  					</td>
+            <td vidth="150px">
+            <%= link_to 'Remove From Current List', remove_from_list_path(params[:cur_list], store.id) %> 
+            </td></tr>
+  					<% end
+  					end %>
+  				</table>
+  			</td>
+        <td valign="top" width="325px">
+          <table>
+            <b>Available Stores (Simulated Search Results)</b><br/>
+
+            <% if @available_stores
+              @available_stores.each do |store| %>
+              <tr>
+                  <td>
+                    <%=store.name %>
+                  </td>
+                  <td>
+                     <%= 
+                      if params[:cur_list]
+                        link_to 'Add to Current List', add_to_list_path(params[:cur_list], store.id)
+                      end   %>
+                  </td>  
+            </tr>
+            <% end 
+            end%>
+          </table>
+        </td>
+  		</tr>
+  	</table>
+ </p>
+<%= link_to 'Sign Out', signout_path %>  	
+
