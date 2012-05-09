@@ -12273,3 +12273,111 @@ Served asset /users.js - 304 Not Modified (0ms)
 
 Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-08 18:43:33 -0700
 Served asset /application.js - 304 Not Modified (2ms)
+
+
+Started POST "/sessions" for 127.0.0.1 at 2012-05-09 10:36:42 -0700
+Processing by SessionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Voxjk6asmxEso7SCGQ3gMgZNgZPA8zdP0zTTNTNih1Y=", "session"=>{"email"=>"jctanti@gmail.com", "password"=>"[FILTERED]"}, "commit"=>"Sign in"}
+  [1m[36mUser Load (1.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`email` = 'jctanti@gmail.com' LIMIT 1[0m
+  [1m[35mListsUser Load (1.0ms)[0m  SELECT `lists_users`.* FROM `lists_users` WHERE `lists_users`.`user_id` = 6 LIMIT 1
+Redirected to http://localhost:3000/users/6
+Completed 302 Found in 194ms (ActiveRecord: 9.0ms)
+
+
+Started GET "/users/6" for 127.0.0.1 at 2012-05-09 10:36:43 -0700
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"6"}
+  [1m[36mUser Load (1.0ms)[0m  [1mSELECT `users`.* FROM `users` WHERE `users`.`id` = 6 LIMIT 1[0m
+  [1m[35mListsUser Load (0.0ms)[0m  SELECT list_id FROM `lists_users` WHERE `lists_users`.`user_id` = 6
+  [1m[36mList Load (0.0ms)[0m  [1mSELECT name, id FROM `lists` WHERE (id IN (NULL))[0m
+  [1m[35mStore Load (0.0ms)[0m  SELECT `stores`.* FROM `stores` 
+  Rendered users/show.html.erb within layouts/application (22.0ms)
+Completed 200 OK in 349ms (Views: 266.0ms | ActiveRecord: 9.0ms)
+
+
+Started GET "/assets/home.css?body=1" for 127.0.0.1 at 2012-05-09 10:36:44 -0700
+Served asset /home.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/lists_users.css?body=1" for 127.0.0.1 at 2012-05-09 10:36:44 -0700
+Served asset /lists_users.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/application.css?body=1" for 127.0.0.1 at 2012-05-09 10:36:44 -0700
+Served asset /application.css - 304 Not Modified (10ms)
+
+
+Started GET "/assets/lists_stores.css?body=1" for 127.0.0.1 at 2012-05-09 10:36:44 -0700
+Served asset /lists_stores.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/list.css?body=1" for 127.0.0.1 at 2012-05-09 10:36:44 -0700
+Served asset /list.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/sessions.css?body=1" for 127.0.0.1 at 2012-05-09 10:36:44 -0700
+Served asset /sessions.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/static_pages.css?body=1" for 127.0.0.1 at 2012-05-09 10:36:44 -0700
+Served asset /static_pages.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/stores.css?body=1" for 127.0.0.1 at 2012-05-09 10:36:44 -0700
+Served asset /stores.css - 304 Not Modified (2ms)
+
+
+Started GET "/assets/stores_users.css?body=1" for 127.0.0.1 at 2012-05-09 10:36:44 -0700
+Served asset /stores_users.css - 304 Not Modified (4ms)
+
+
+Started GET "/assets/users.css?body=1" for 127.0.0.1 at 2012-05-09 10:36:44 -0700
+Served asset /users.css - 304 Not Modified (3ms)
+
+
+Started GET "/assets/jquery.js?body=1" for 127.0.0.1 at 2012-05-09 10:36:44 -0700
+Served asset /jquery.js - 304 Not Modified (75ms)
+
+
+Started GET "/assets/jquery_ujs.js?body=1" for 127.0.0.1 at 2012-05-09 10:36:44 -0700
+Served asset /jquery_ujs.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/home.js?body=1" for 127.0.0.1 at 2012-05-09 10:36:44 -0700
+Served asset /home.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/list.js?body=1" for 127.0.0.1 at 2012-05-09 10:36:44 -0700
+Served asset /list.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/lists_stores.js?body=1" for 127.0.0.1 at 2012-05-09 10:36:44 -0700
+Served asset /lists_stores.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/lists_users.js?body=1" for 127.0.0.1 at 2012-05-09 10:36:44 -0700
+Served asset /lists_users.js - 304 Not Modified (1ms)
+
+
+Started GET "/assets/sessions.js?body=1" for 127.0.0.1 at 2012-05-09 10:36:45 -0700
+Served asset /sessions.js - 304 Not Modified (20ms)
+
+
+Started GET "/assets/static_pages.js?body=1" for 127.0.0.1 at 2012-05-09 10:36:45 -0700
+Served asset /static_pages.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/stores.js?body=1" for 127.0.0.1 at 2012-05-09 10:36:45 -0700
+Served asset /stores.js - 304 Not Modified (4ms)
+
+
+Started GET "/assets/stores_users.js?body=1" for 127.0.0.1 at 2012-05-09 10:36:45 -0700
+Served asset /stores_users.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/users.js?body=1" for 127.0.0.1 at 2012-05-09 10:36:45 -0700
+Served asset /users.js - 304 Not Modified (2ms)
+
+
+Started GET "/assets/application.js?body=1" for 127.0.0.1 at 2012-05-09 10:36:45 -0700
+Served asset /application.js - 304 Not Modified (84ms)
