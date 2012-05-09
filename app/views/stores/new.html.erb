@@ -1,0 +1,23 @@
+<h1>Create a new store!</h1>
+
+<%= form_for @store, :url => { :action => :create } do |f| %>
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </div>
+  <div class="field">
+    <%= f.label :detail_info %><br />
+    <%= f.text_field :detail_info %>
+  </div>
+  <div class="field">
+    <%= f.label :favorite %><br />
+    <%= f.check_box :favorite %>
+  </div>
+  <div class="field">
+  	<%= f.label :been_to %><br/>
+  	<%= f.check_box :been_to %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
