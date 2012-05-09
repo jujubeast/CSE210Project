@@ -1,4 +1,4 @@
-class ListsUser < ActiveRecord::Base
+class ListUser < ActiveRecord::Base
    attr_accessible :user_id, :list_id, :owner
    belongs_to :user
    belongs_to :list

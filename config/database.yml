@@ -7,9 +7,10 @@ development:
   adapter: mysql2
   database: cse210staging
   pool: 5
-  username : tester01
-  password : test01
+  username : root
+  password : 
   timeout: 5000
+  socket: /tmp/mysql.sock2
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
@@ -21,6 +22,8 @@ test:
   username : tester01
   password : test01
   timeout: 5000
+  socket: /tmp/mysql.sock2
+
 
 production:
   adapter: mysql2
@@ -29,3 +32,5 @@ production:
   username : <Add Later>
   password : <Add Later>
   timeout: 5000
+  socket: /tmp/mysql.sock2
+
