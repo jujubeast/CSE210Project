@@ -4,6 +4,7 @@ App::Application.routes.draw do
   get "store/new"
 
   match '/', :to => "sessions#new"
+  #match '/', :to => "login#show"
 
   post "/users", :to => "users#create"
   post "/lists", :to => "lists#create"
