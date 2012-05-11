@@ -20,7 +20,7 @@ App::Application.routes.draw do
   match "/deletelist/:id", :to => "lists#destroy", :as => :delete_list
 
   match "/addtolist/:list_id/:store_id", :to => "lists#add", :as => :add_to_list
-  match "/removefromlist/:list_id/:store_id", :to => "lists_stores#destroy", :as => :remove_from_list
+  match "/removefromlist/:list_id/:store_id", :to => "list_stores#destroy", :as => :remove_from_list
 
   match "/addstore", :to => "stores#new"
   match "/login", :to => "login#show"
