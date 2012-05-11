@@ -1,0 +1,124 @@
+@import "compass";
+@import "home";
+@import "login";
+
+
+/*--- MIXINS --*/
+@mixin rounded($side, $radius: 10px) {
+  border-#{$side}-radius: $radius;
+  -moz-border-radius-#{$side}: $radius;
+  -webkit-border-#{$side}-radius: $radius;
+
+}
+
+/*--- CSS --*/
+
+html{
+	background-image: url("background.png");
+}
+
+#header{
+	height: 100px;
+	padding: 20px;
+	
+	.title {
+		font-size: 42px;
+		text-align: center;
+	}	
+}
+
+#left_nav {
+	float: left;
+	width: 200px;
+	border: {
+		color: black;
+		style: solid;
+		width: 1px;
+	}
+	
+	.title {
+	  padding: 5px;
+	  background-color: gray;
+	   h2 {
+	     display: inline;
+	     font-color: red;
+	   }
+	}
+	.content {
+	  .list {
+	    padding: {
+	      top: 15px;
+	      bottom: 15px;
+	      left: 5px;
+	      right: 5px;
+	    }
+	  }
+	  .selected {
+      background-color: yellow;
+    }
+	}
+}
+
+#main_nav {
+	margin: {
+		left: 10px;
+	}
+	float:left;
+	min-width: 700px;
+	min-height: 250px;
+	border: {
+		color:black;
+		width: 1px;
+		style: solid;
+	}
+	.title {
+    padding: 5px;
+    background-color: gray;
+     h2 {
+       display: inline;
+       font-color: red;
+     }
+  }
+}
+
+#user_info{
+	
+}
+
+.item_thumbnail{
+	$width: 200px;
+	$height: 250px;
+	$margin: 20px;
+	
+	width: $width;
+	height: $height;
+	float: left;
+	margin: 10px;
+	
+	border: {
+		color:black;
+		width: 1px;
+		style: solid;
+	}
+	text-align: center;
+	.img{
+		width: $width - $margin;
+		height: $width - $margin;
+		margin: ($margin)/2;
+		border: solid 1px black;
+	}
+}
+
+
+#test{
+	float: left;
+	border: {
+		color:black;
+		width: 1px;
+		style: solid;
+	}
+}
+
+.right_button{
+  float: right;
+}

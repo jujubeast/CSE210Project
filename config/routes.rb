@@ -4,6 +4,7 @@ App::Application.routes.draw do
   get "store/new"
 
   match '/', :to => "sessions#new"
+  #match '/', :to => "login#show"
 
   post "/users", :to => "users#create"
   post "/lists", :to => "lists#create"
@@ -22,7 +23,7 @@ App::Application.routes.draw do
   match "/removefromlist/:list_id/:store_id", :to => "lists_stores#destroy", :as => :remove_from_list
 
   match "/addstore", :to => "stores#new"
-  match "", :to => "login#show"
+  match "/login", :to => "login#show"
   
 
 <<<<<<< HEAD

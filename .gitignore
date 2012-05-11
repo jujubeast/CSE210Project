@@ -1,8 +1,9 @@
 # Project Ignore #
 ##################
-Gemfile
-Gemfile.lock
-database.yml
+config/database.yml
+*.tmp
+tmp/*
+*.log
 
 # Compiled source #
 ###################
