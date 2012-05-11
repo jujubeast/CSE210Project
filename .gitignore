@@ -1,9 +1,7 @@
 # Project Ignore #
 ##################
-config/database.yml
 *.tmp
 tmp/*
-*.log
 
 # Compiled source #
 ###################

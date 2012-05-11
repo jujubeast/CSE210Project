@@ -93,7 +93,11 @@ ActiveRecord::Schema.define(:version => 0) do
 
   create_table "users", :force => true do |t|
     t.string   "fb_id",      :limit => 45
-    t.string   "name",       :limit => 45
+    t.string   "email",       :limit => 128
+    t.string   "first_name"  
+    t.string   "last_name"
+    t.string   "picture_link"
+    t.string   "password",     :limit => 64 
     t.datetime "created_at"
     t.datetime "updated_at"
   end
