@@ -28,15 +28,13 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
- 
     @list_ids = ListUser.find_list_ids(params[:id])
-
     @lists = List.find_lists_by_ids(@list_ids)
 
     if params[:cur_list]
       @stores_ids = ListStore.find_store_ids(params[:cur_list])
-
       @stores = Store.find_stores_by_ids(@stores_ids)
+      @current_list = List.find(params[:cur_list])
     end
 
     @available_stores = Store.find(:all)

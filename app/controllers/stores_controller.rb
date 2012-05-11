@@ -1,7 +1,6 @@
 class StoresController < ApplicationController
   def new
   	@store = Store.new
-
   	respond_to do |format|
   		format.html
   		format.json {render :json => @store}
