@@ -3,8 +3,11 @@ App::Application.routes.draw do
   get "stores/new"
   get "store/new"
   
+  #test pages
   get "test/setup"
-
+  get "test/simple_search_test_input"
+  post "test/test_simple_search"
+  
   match '/', :to => "sessions#new"
   #match '/', :to => "login#show"
 
