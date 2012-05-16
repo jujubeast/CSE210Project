@@ -8,8 +8,10 @@
 </head>
 <body>
     <%= render :partial => "layouts/header"%>
-    <%= render :partial => "simple_search/search"%>
-    <%= render :partial => "layouts/nav_bar"%>
+    <div class='center'>
+        <%= render :partial => "simple_search/search"%>
+        <%= render :partial => "layouts/nav_bar"%>
+    </div>
     <%= yield %>
     <%= render :partial => "layouts/footer"%>
 </body>
