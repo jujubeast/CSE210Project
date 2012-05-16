@@ -1,16 +1,108 @@
-<h1>Create a new store!</h1>
-<p>previous list: <%= @current_list_id %></p>
+<div align="right">
+	<%= link_to "Login with Facebook" , ""%>
+</div>
+<div align="center">
+	<h1>my hangouts</h1>
+	<br>
+	<%= text_field_tag(:searchKeyword) %>
+	<%= submit_tag("Search") %>
+</div>
+<br>
+<table align="center">
+	<tr>
+		<td width="20%"><%= button_tag("myPages") %></td>
+		<td width="20%"><%= button_tag("addRestaurant") %></td>
+		<td width="20%"><%= button_tag("everything") %></td>
+	</tr>
+</table>
+<br>
+<br>
+<%= form_for @store, :url => { :action => :create }  do |f|%>
+<table width="100%">
+	<tr>
+		<th width="30%" align="left">Photos</th>
+		<th width="70%" align="left">basic Information</>
+	</tr>
+	<tr>
+		<td>
+			<table border="1" width="100%"></table>
+		</td>
+		<td>
+			<table border="1" width="100%"></table>
+		</td>
+	</tr>
 
-<%= form_for @store, :url => { :action => :create } do |f| %>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :detail_info %><br />
-    <%= f.text_field :detail_info %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+	<tr>
+		<td>
+			<table>
+				<tr>
+					<td width="100%" height="100px">
+						<%= image_tag("rails.png")
+# => <img alt="Rails" src="http://www.google.com/imgres?imgurl=http://www.takepart.com/sites/default/files/styles/tp_promo_feature_thumbnail/public/seaweed.jpg&imgrefurl=http://www.takepart.com/foodinc&h=222&w=298&sz=20&tbnid=ahU7p7l4smVbrM:&tbnh=92&tbnw=124&zoom=1&docid=71to5XWNETbiBM&itg=1&hl=en&sa=X&ei=ldKlT6bxD8raiQLVicnVAg&ved=0CHgQ9QEwAw&dur=123" />
+			%>
+						</td>
+				</tr>
+				<tr>
+					<td>
+						<%= button_tag("myPages") %>
+						</td>
+				</tr>
+				</table>
+			
+			</td>
+		<td>
+			<table>
+				<tr>
+					<td><%= f.label :name, "Restaurant Name:" %></td>
+					<td><%= f.text_field :name %></td>
+
+				</tr>
+				<tr>
+					<td><%= f.label :hours, "Opening Time:" %></td>
+					<td><%= f.text_field :hours %></td>
+
+				</tr>
+				<tr>
+					<td><%= f.label(:street_1, "Restaurant Street 1:") %></td>
+					<td><%= f.text_field(:street_1) %></td>
+
+				</tr>
+				<tr>
+					<td><%= f.label(:street_2, "Restaurant Street 2:") %></td>
+					<td><%= f.text_field(:street_2) %></td>
+
+				</tr>
+				<tr>
+					<td><%= f.label(:city, "Restaurant City:") %></td>
+					<td><%= f.text_field(:city) %></td>
+
+				</tr>
+				<tr>
+					<td><%= f.label(:state, "Restaurant State:") %></td>
+					<td><%= f.text_field(:state) %></td>
+				</tr>
+				<tr>
+					<td><%= f.label(:zipcode, "Zip Code:") %></td>
+					<td><%= f.text_field(:zipcode) %></td>
+				</tr>
+				<tr>
+					<td><%= f.label(:telephone, "Phone Number:") %></td>
+					<td><%= f.text_field(:telephone) %></td>
+				</tr>
+				<tr>
+					<td><%= f.label(:website, "Website:") %></td>
+					<td><%= f.text_field(:website) %></td>
+				</tr>
+				<tr>
+
+					<td></td>
+
+					<td><%= f.submit("Submit") %></td>
+				</tr>
+				</tr>
+			</table>
+		</td>
+	</tr>
+</table>
 <% end %>
+
