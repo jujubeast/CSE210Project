@@ -26,7 +26,7 @@ App::Application.routes.draw do
 
   match "/addstore", :to => "stores#new"
   match "/login", :to => "login#show"
-  
+  match "/search/", :to => "simple_search#search", 
 
   # this line giving error while running the server
   #resources :sessions, :only [:new, :create, :destroy]

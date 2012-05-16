@@ -122,3 +122,34 @@ html{
 .right_button{
   float: right;
 }
+
+.center {
+  width: 100%;
+  border: {
+    color: black;
+    width: 1px;
+    style: solid;
+  }
+}
+
+#search_bar{
+  margin: 0px auto;
+  width: 50%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+
+#nav_bar{
+  margin: 0px auto;
+  width: 50%;
+  text-align: center;
+  ul {
+    list-style-type: none;
+    margin: 0;
+  }  
+  li {
+      display: inline;
+      padding: 0px 40px;
+  }
+}
