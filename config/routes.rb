@@ -7,7 +7,8 @@ App::Application.routes.draw do
 
   match '/', :to => "sessions#new"
   #match '/', :to => "login#show"
-
+  match '/addreview', :to => "tags#new"
+  match '/addtag', :to => "tags#create"
   post "/users", :to => "users#create"
   post "/lists", :to => "lists#create"
   post "/sessions", :to => "sessions#create"
@@ -26,7 +27,7 @@ App::Application.routes.draw do
 
   match "/addstore", :to => "stores#new"
   match "/login", :to => "login#show"
-  match "/search/", :to => "simple_search#search", 
+  match "/search/", :to => "simple_search#search"
 
   # this line giving error while running the server
   #resources :sessions, :only [:new, :create, :destroy]
