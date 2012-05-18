@@ -100,7 +100,15 @@ ActiveRecord::Schema.define(:version => 20120511022350) do
   create_table "stores", :force => true do |t|
     t.string   "name",        :limit => 45
     t.string   "detail_info", :limit => 45
-    t.string   "pic",         :limit => 45
+    t.string   "pic",        :limit => 45
+    t.string   "street_1",   :limit => 45
+    t.string   "street_2",   :limit => 45
+    t.string   "city",       :limit => 45
+    t.string   "state",      :limit => 45
+    t.string   "zipcode",    :limit => 45
+    t.string   "telephone",  :limit => 45
+    t.string   "website",    :limit => 45
+    t.string   "hours",      :limit => 45
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -138,7 +146,6 @@ ActiveRecord::Schema.define(:version => 20120511022350) do
   end
 
   add_index "tags", ["category_id"], :name => "fk_tags_Category1"
-  add_index "tags", ["category_id"], :name => "tags_category", :unique => true
 
   create_table "users", :force => true do |t|
     t.string   "fb_id",        :limit => 45
