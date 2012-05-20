@@ -7,8 +7,8 @@ App::Application.routes.draw do
 
   match '/', :to => "sessions#new"
   #match '/', :to => "login#show"
-  match '/addreview', :to => "tags#new"
-  match '/addtag', :to => "tags#create"
+  match "/stores/:id", :to => "stores#show", :as => :show_store
+  match "/reviews", :to => "stores#addreview"
   post "/users", :to => "users#create"
   post "/lists", :to => "lists#create"
   post "/sessions", :to => "sessions#create"
