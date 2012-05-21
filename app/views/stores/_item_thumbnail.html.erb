@@ -4,9 +4,10 @@
 	<br />
 	<% if stores %>
 	<% if stores.include? item_thumbnail %>
-	<%= link_to 'Remove From Current List', remove_from_list_path(params[:cur_list], item_thumbnail.id) %>
+	<%= link_to 'Remove From Current List', remove_from_list_path(current_list.id, item_thumbnail.id) %>
 	<% else %>
-	<%= link_to 'Add to Current List', add_to_list_path(params[:cur_list], item_thumbnail.id) %>
+	<%= link_to 'Add to Current List', add_to_list_path(current_list.id, item_thumbnail.id) %>
 	<% end %>
 	<% end %>
 </div>
+.

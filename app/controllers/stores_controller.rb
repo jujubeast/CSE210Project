@@ -1,7 +1,7 @@
 class StoresController < ApplicationController
   def new
   	@store = Store.new
-  	@user = User.find(params[:id])
+  	@user = User.find(session[:user_id])
   	respond_to do |format|
   		format.html
   		format.json {render :json => @store}
