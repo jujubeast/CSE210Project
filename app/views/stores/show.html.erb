@@ -1,0 +1,251 @@
+<div>
+	<%= link_to 'Sign Out', signout_path %> 
+</div>
+<table width="100%">
+	<tr>
+		<th width="30%" align="left">Photos</th>
+		<th width="70%" align="left">basic Information</>
+	</tr>
+	<tr>
+		<td>
+			<table border="1" width="100%"></table>
+		</td>
+		<td>
+			<table border="1" width="100%"></table>
+		</td>
+	</tr>
+
+	<tr>
+		<td>
+			<table>
+				<tr>
+					<td width="100%" height="100px">
+						<%= image_tag("rails.png")
+# => <img alt="Rails" src="http://www.google.com/imgres?imgurl=http://www.takepart.com/sites/default/files/styles/tp_promo_feature_thumbnail/public/seaweed.jpg&imgrefurl=http://www.takepart.com/foodinc&h=222&w=298&sz=20&tbnid=ahU7p7l4smVbrM:&tbnh=92&tbnw=124&zoom=1&docid=71to5XWNETbiBM&itg=1&hl=en&sa=X&ei=ldKlT6bxD8raiQLVicnVAg&ved=0CHgQ9QEwAw&dur=123" />
+			%>
+						</td>
+				</tr>
+				<tr>
+					<td>
+						<p><label for="upload_file">Select File</label> : 
+<%= file_field 'upload', 'datafile' %></p>
+						</td>
+				</tr>
+				</table>
+			
+			</td>
+		<td>
+			<table>
+				<tr>
+					<td>Restaurant Name:</td>
+					<td><%= @store.name %></td>
+
+				</tr>
+				<tr>
+					<td>Opening Time:</td>
+					<td><%= @store.hours %></td>
+
+				</tr>
+				<tr>
+					<td>Restaurant Street 1:</td>
+					<td><%= @store.street_1 %></td>
+
+				</tr>
+				<tr>
+					<td>Restaurant Street 2:</td>
+					<td><%= @store.street_2%></td>
+
+				</tr>
+				<tr>
+					<td>Restaurant City:</td>
+					<td><%= @store.city%></td>
+
+				</tr>
+				<tr>
+					<td>Restaurant State:</td>
+					<td><%= @store.state %></td>
+				</tr>
+				<tr>
+					<td>Zip Code:</td>
+					<td><%= @store.zipcode %></td>
+				</tr>
+				<tr>
+					<td>Phone Number:</td>
+					<td><%= @store.telephone %></td>
+				</tr>
+				<tr>
+					<td>Website:</td>
+					<td><%= @store.website %></td>
+				</tr>
+				<tr>
+
+					<td></td>
+				</tr>
+				</tr>
+			</table>
+		
+		</td>
+	</tr>
+	<tr>
+		<td></td><td></td>
+	</tr>
+	<tr>
+		<th></th>
+		<th  align="left">High Light Tags</th>
+		</tr>
+	<tr>
+		<td>
+			
+
+		</td>
+		<td>
+			<table border="1" width="100%"></table>
+		</td>
+		</tr>
+		<tr>
+			<td></td>
+<td>
+	<table>
+		<%  @highlights.each do |category_name, tags|%>
+		<tr>
+			<td><%= category_name %> :</td>
+			<td>
+				<% tags.each do |t| %>  
+				<%= t %>
+<% end 
+   end %>
+			</td>
+		</tr>
+
+	</table>
+</td>
+			</tr>
+			<tr>
+		<th></th>
+		<th  align="left">Add Reviews</th>
+		</tr>
+	<tr>
+		<td>
+			
+
+		</td>
+		<td>
+			<table border="1" width="100%"></table>
+		</td>
+		</tr>
+		<tr>
+			<td></td>
+<td>
+	<%
+#@reviews = {}
+
+#@reviews[:user_id] = 1
+#@reviews[:store_id] = 5
+#@highlights = {}
+#@highlights["like"] = ["kitty","pho"]
+#@highlights["dislike"] = ["chinese", "hamburger"]
+@counter1 = 3
+@counter2 = 3
+@counter3 = 3
+@counter4 = 3
+@counter5 = 3
+@counter6 = 3
+#@reviews[:highlights] = highlights 
+%>
+<script type="text/javascript">
+    /* delete row */
+    $(document).ready(function () {
+        $('#table2 td img.add1').click(function () {
+            $("table#table2 #1 td:last").before('<td><input type="text" /></td>');
+            return false;
+        });
+        $('#table2 td img.add2').click(function () {
+            $("table#table2 #2 td:last").before('<td><input type="text" /></td>');
+            return false;
+        });
+        $('#table2 td img.add3').click(function () {
+            $("table#table2 #3 td:last").before('<td><input type="text" /></td>');
+            return false;
+        });
+        $('#table2 td img.add4').click(function () {
+            $("table#table2 #4 td:last").before('<td><input type="text" /></td>');
+            return false;
+        });
+        $('#table2 td img.add5').click(function () {
+            $("table#table2 #5 td:last").before('<td><input type="text" /></td>');
+            return false;
+        });
+        $('#table2 td img.add6').click(function () {
+            $("table#table2 #6 td:last").before('<td><input type="text" /></td>');
+            return false;
+        });
+        
+    });
+
+</script>
+
+
+<%= form_tag("/reviews", :method => "post") do %>
+<table id="table2"><tr id="1">
+	<td>What we like:</td>
+	<td><%= text_field_tag(:like1) %></td>
+	<td><%= text_field_tag(:like2) %></td>
+	<td><%= text_field_tag(:like3) %></td>
+	<td><img class="add1" width="20" height="20" src="../assets/plus.png" /></td>
+	<td><%= hidden_field_tag :like , value = @counter1 %></td>
+	<td><%= hidden_field_tag :store_id , value = @store.id %></td>						
+	</tr>
+<tr id="2">
+	<td>What we dislike:</td>
+	<td><%= text_field_tag(:dislike1) %></td>
+	<td><%= text_field_tag(:dislike2) %></td>
+	<td><%= text_field_tag(:dislike3) %></td>
+	<td><img class="add2" width="20" height="20" alt="add" src="../assets/plus.png" /></td>	
+	<td><%= hidden_field_tag :dislike , value = @counter2 %></td>	
+		</tr>
+		<tr id="3">
+			<td>Environment:</td>
+			<td><%= text_field_tag(:env1) %></td>
+	<td><%= text_field_tag(:env2) %></td>
+	<td><%= text_field_tag(:env3) %></td>
+	<td><img class="add3" width="20" height="20" alt="add" src="../assets/plus.png" /></td>	
+	<td><%= hidden_field_tag :env, value = @counter3 %></td>	
+		</tr>
+		<tr id="4">
+			<td>Restaurant Type:</td>
+			<td><%= text_field_tag(:type1) %></td>
+	<td><%= text_field_tag(:type2) %></td>
+	<td><%= text_field_tag(:type3) %></td>
+	<td><img class="add4" width="20" height="20" alt="add" src="../assets/plus.png" /></td>	
+	<td><%= hidden_field_tag :type , value = @counter4 %></td>
+		</tr>
+		<tr id="5">
+			<td>Restaurant Has:</td>
+			<td><%= text_field_tag(:has1) %></td>
+	<td><%= text_field_tag(:has2) %></td>
+	<td><%= text_field_tag(:has3) %></td>
+	<td><img class="add5" width="20" height="20" alt="add" src="../assets/plus.png" /></td>	
+	<td><%= hidden_field_tag :has , value = @counter5 %></td>
+		</tr>
+
+		<tr id="6">
+			<td>Good for:</td>
+			<td><%= text_field_tag(:good1) %></td>
+	<td><%= text_field_tag(:good2) %></td>
+	<td><%= text_field_tag(:good3) %></td>
+	<td><img class="add6" width="20" height="20" alt="add" src="../assets/plus.png" /></td>
+	<td><%= hidden_field_tag :good , value = @counter6 %></td>		
+		</tr>
+
+				<tr>
+				
+				
+					<td><%= submit_tag("Submit") %></td>
+				
+				</tr>
+			</table>
+	
+<% end %>
+
+<%= #button_to "Submit", :method => :post, :controller => "stores", :action => "addreview", :highlights => @highlights, :store_id => 31, :user_id => 1
+%>
