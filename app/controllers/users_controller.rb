@@ -31,7 +31,7 @@ class UsersController < ApplicationController
     @lists = List.find_users_lists(params[:id])
 
     if params[:cur_list]
-      @stores = Store.find_stores_by_ids(params[:cur_list])
+      @stores = Store.find_lists_stores(params[:cur_list])
       @current_list = List.find(params[:cur_list])
     end
 
