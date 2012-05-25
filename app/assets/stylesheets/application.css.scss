@@ -3,18 +3,36 @@
 @import "login";
 
 
-/*--- MIXINS --*/
-@mixin rounded($side, $radius: 10px) {
-  border-#{$side}-radius: $radius;
-  -moz-border-radius-#{$side}: $radius;
-  -webkit-border-#{$side}-radius: $radius;
+/*--- Vars --*/
 
+$border_color:  #686561;
+$block_background_color: #c1bebc;
+$title_underline_color: #686561;
+$font-size: 14px;
+
+/*--- MIXINS --*/
+@mixin rounded($radius: 10px) {
+  border-radius: $radius;
+  -moz-border-radius: $radius;
+  -webkit-border-radius: $radius;
 }
 
 /*--- CSS --*/
 
 html{
 	background-image: url("background.png");
+  font-family:"Helvetica", serif;
+  font-size: $font-size;
+}
+
+body{
+  margin: auto;
+  min-width: 1020px;
+  width:80%;
+}
+
+div{
+  overflow: auto;
 }
 
 #header{
@@ -27,63 +45,107 @@ html{
 	}	
 }
 
-#left_nav {
-	float: left;
-	width: 200px;
-	border: {
-		color: black;
-		style: solid;
-		width: 1px;
-	}
-	
-	.title {
-	  padding: 5px;
-	  background-color: gray;
-	   h2 {
-	     display: inline;
-	     font-color: red;
-	   }
-	}
-	.content {
-	  .list {
-	    padding: {
-	      top: 15px;
-	      bottom: 15px;
-	      left: 5px;
-	      right: 5px;
-	    }
-	  }
-	  .selected {
-      background-color: yellow;
-    }
-	}
-}
-
-#main_nav {
-	margin: {
-		left: 10px;
-	}
-	float:left;
-	min-width: 700px;
-	min-height: 250px;
-	border: {
-		color:black;
-		width: 1px;
-		style: solid;
-	}
-	.title {
-    padding: 5px;
-    background-color: gray;
-     h2 {
-       display: inline;
-       font-color: red;
-     }
+#nav_bar{
+  margin: 0px auto;
+  text-align: center;
+  font-size: $font-size+1;
+  ul {
+    list-style-type: none;
+    margin: 0;
+  }  
+  li {
+      display: inline;
+      padding: 0px 100px;
   }
 }
 
-#user_info{
-	
+#top_nav{
+  margin: 20px 0px;
+  height: 202px;
+  
+  #advertisement{
+    @include rounded(10px);
+    border: 1px solid $border_color;
+    height: 200px;
+    float: right;
+    width: 58%;
+    min-width: 550px;
+  }
+  
+  #user_block{
+    @include rounded(10px);
+    min-width: 390px;
+    height: 200px;
+    width: 40%;
+    border: 1px solid $border_color;
+    float:left;
+    display: table;
+    
+    #user_photo{
+      width: 150px;
+      height: 150px;
+      border: 1px solid black;
+      float:left;
+      margin: 24px;
+    }
+    
+    #user_info{
+      vertical-align: middle;
+      display: table-cell;
+    }
+  }
 }
+
+#body_wrapper {
+  clear: both;
+  width: 100%;
+  min-height:250px;
+  overflow: auto;
+  
+  
+  
+  #left_nav {
+    float: left;
+    width: 230px;
+    background-color: $block_background_color;
+    border: {
+      color: $border_color;
+      style: solid;
+      width: 1px;
+    }
+    .content {
+      .list {
+        padding: {
+          top: 15px;
+          bottom: 15px;
+          left: 10px;
+          right: 10px;
+        }
+      }
+      .selected {
+        background-color: yellow;
+      }
+    }
+  }
+
+  #main_nav {
+    margin: {
+      left: 250px;
+    }
+    min-width: 700px;
+    min-height: 250px;
+  }
+  
+  .title {
+    height: 25px;
+    padding: 10px;
+    h2 {
+      display: inline;
+    }
+    border-bottom: 1px solid $title_underline_color;
+  }
+}
+
 
 .item_thumbnail{
 	$width: 200px;
@@ -96,7 +158,7 @@ html{
 	margin: 10px;
 	
 	border: {
-		color:black;
+		color:$border_color;
 		width: 1px;
 		style: solid;
 	}
@@ -105,7 +167,15 @@ html{
 		width: $width - $margin;
 		height: $width - $margin;
 		margin: ($margin)/2;
-		border: solid 1px black;
+		border: solid 1px $border_color;
+	}
+	
+	.been_to{
+	  
+	}
+	
+	.favorite{
+	  
 	}
 }
 
@@ -125,11 +195,6 @@ html{
 
 .center {
   width: 100%;
-  border: {
-    color: black;
-    width: 1px;
-    style: solid;
-  }
 }
 
 #search_bar{
@@ -139,17 +204,3 @@ html{
   margin-bottom: 20px;
 }
 
-
-#nav_bar{
-  margin: 0px auto;
-  width: 50%;
-  text-align: center;
-  ul {
-    list-style-type: none;
-    margin: 0;
-  }  
-  li {
-      display: inline;
-      padding: 0px 40px;
-  }
-}

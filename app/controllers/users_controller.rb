@@ -35,6 +35,11 @@ class UsersController < ApplicationController
       @stores_ids = ListStore.find_store_ids(params[:cur_list])
       @stores = Store.find_stores_by_ids(@stores_ids)
       @current_list = List.find(params[:cur_list])
+    else
+      #need to set the default list! Clean up too..lol
+      @current_list = @lists[0]
+      @stores_ids = ListStore.find_store_ids(@current_list.id)
+      @stores = Store.find_stores_by_ids(@stores_ids)
     end
 
     @available_stores = Store.find(:all)
