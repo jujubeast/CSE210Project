@@ -6,10 +6,11 @@ class List < ActiveRecord::Base
 	attr_accessible :can_delete, :name
 
 	#finds lists to display in views given ARRAY of list ids
-	def self.find_lists_by_ids(list_ids)
+	def self.find_users_lists(user_id)
 		lists = List.find(:all,
-                        :conditions => ["id IN (?)", list_ids],
-                        :select => "name, id")
+                        :conditions => ["list_users.user_id = ?", user_id],
+                        :joins => [:list_users],
+                        :select => "lists.name, lists.id")
 	end
 
 end
