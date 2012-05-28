@@ -75,7 +75,7 @@
 				</tr>
 				<tr>
 					<td>Website:</td>
-					<td><%= @store.website %></td>
+					<td><a href="../../<%= @store.website %>"> <%= @store.website %> </a></td>
 				</tr>
 				<tr>
 
@@ -154,92 +154,93 @@
 %>
 <script type="text/javascript">
     /* delete row */
-    $(document).ready(function () {
-        $('#table2 td img.add1').click(function () {
-            $("table#table2 #1 td:last").before('<td><input type="text" /></td>');
-            return false;
-        });
-        $('#table2 td img.add2').click(function () {
-            $("table#table2 #2 td:last").before('<td><input type="text" /></td>');
-            return false;
-        });
-        $('#table2 td img.add3').click(function () {
-            $("table#table2 #3 td:last").before('<td><input type="text" /></td>');
-            return false;
-        });
-        $('#table2 td img.add4').click(function () {
-            $("table#table2 #4 td:last").before('<td><input type="text" /></td>');
-            return false;
-        });
-        $('#table2 td img.add5').click(function () {
-            $("table#table2 #5 td:last").before('<td><input type="text" /></td>');
-            return false;
-        });
-        $('#table2 td img.add6').click(function () {
-            $("table#table2 #6 td:last").before('<td><input type="text" /></td>');
-            return false;
-        });
-        
-    });
+    function addRow(categoryID) {
+    	alert(categoryID);
+    		var hideID = "hide"+categoryID;
+    		var temp = document.getElementById(hideID).value;
+    		temp++;
+    		document.getElementById(hideID).value = temp;
+    		var firstRow=document.getElementById("table2").rows[categoryID-1];
+			var x=firstRow.insertCell(temp);
+			var insertString = "aaa";
+			switch(categoryID){
+				case 1:insertString = "<td><input type='text' name='like" + temp +"' ></td>";break;
+				case 2:insertString = "<td><input type='text' name='dislike" + temp +"' ></td>";break;
+				case 3:insertString = "<td><input type='text' name='env" + temp +"' ></td>";break;
+				case 4:insertString = "<td><input type='text' name='type" + temp +"' ></td>";break;
+				case 5:insertString = "<td><input type='text' name='has" + temp +"' ></td>";break;
+				case 6:insertString = "<td><input type='text' name='good" + temp +"' ></td>";break;
+				default: break;
+			}
+			
+			alert(insertString);
+x.innerHTML=insertString;
+    		
+           
+        }
+    	
 
 </script>
 
 
-<%= form_tag("/reviews", :method => "post") do %>
-<table id="table2"><tr id="1">
+<%= form_tag("/reviews", :method => "get") do %>
+
+<table id="table2"><tr>
+	
 	<td>What we like:</td>
-	<td><%= text_field_tag(:like1) %></td>
+	<td><input type='text' name="like1"></td>
+	
 	<td><%= text_field_tag(:like2) %></td>
 	<td><%= text_field_tag(:like3) %></td>
-	<td><img class="add1" width="20" height="20" src="../assets/plus.png" /></td>
-	<td><%= hidden_field_tag :like , value = @counter1 %></td>
-	<td><%= hidden_field_tag :store_id , value = @store.id %></td>						
+	<td><img onclick="addRow(1)" width="20" height="20" src="../assets/plus.png"  /></td>
+    <td><%= hidden_field_tag :hide1 , value = @counter1 %></td>
+	<td><%= hidden_field_tag :store_id , value = @store.id %></td>	
 	</tr>
-<tr id="2">
+<tr>
+	
 	<td>What we dislike:</td>
 	<td><%= text_field_tag(:dislike1) %></td>
 	<td><%= text_field_tag(:dislike2) %></td>
 	<td><%= text_field_tag(:dislike3) %></td>
-	<td><img class="add2" width="20" height="20" alt="add" src="../assets/plus.png" /></td>	
-	<td><%= hidden_field_tag :dislike , value = @counter2 %></td>	
+	<td><img onclick="addRow(2)" width="20" height="20" alt="add" src="../assets/plus.png" /></td>	
+	<td><%= hidden_field_tag :hide2 , value = @counter2 %></td>	
 		</tr>
-		<tr id="3">
+		<tr >
+			
 			<td>Environment:</td>
-			<td><%= text_field_tag(:env1) %></td>
+			<td><%= text_field_tag(:env1) %></td>		
 	<td><%= text_field_tag(:env2) %></td>
 	<td><%= text_field_tag(:env3) %></td>
-	<td><img class="add3" width="20" height="20" alt="add" src="../assets/plus.png" /></td>	
-	<td><%= hidden_field_tag :env, value = @counter3 %></td>	
+	<td><img onclick="addRow(3)" width="20" height="20" alt="add" src="../assets/plus.png" /></td>	
+	<td><%= hidden_field_tag :hide3, value = @counter3 %></td>	
 		</tr>
-		<tr id="4">
+		<tr >
 			<td>Restaurant Type:</td>
 			<td><%= text_field_tag(:type1) %></td>
 	<td><%= text_field_tag(:type2) %></td>
 	<td><%= text_field_tag(:type3) %></td>
-	<td><img class="add4" width="20" height="20" alt="add" src="../assets/plus.png" /></td>	
-	<td><%= hidden_field_tag :type , value = @counter4 %></td>
+	<td><img onclick="addRow(4)" width="20" height="20" alt="add" src="../assets/plus.png" /></td>	
+	<td><%= hidden_field_tag :hide4 , value = @counter4 %></td>
 		</tr>
-		<tr id="5">
+		<tr >
 			<td>Restaurant Has:</td>
 			<td><%= text_field_tag(:has1) %></td>
 	<td><%= text_field_tag(:has2) %></td>
 	<td><%= text_field_tag(:has3) %></td>
-	<td><img class="add5" width="20" height="20" alt="add" src="../assets/plus.png" /></td>	
-	<td><%= hidden_field_tag :has , value = @counter5 %></td>
+	<td><img onclick="addRow(5)" width="20" height="20" alt="add" src="../assets/plus.png" /></td>	
+	<td><%= hidden_field_tag :hide5 , value = @counter5 %></td>
 		</tr>
 
-		<tr id="6">
+		<tr >
 			<td>Good for:</td>
 			<td><%= text_field_tag(:good1) %></td>
 	<td><%= text_field_tag(:good2) %></td>
 	<td><%= text_field_tag(:good3) %></td>
-	<td><img class="add6" width="20" height="20" alt="add" src="../assets/plus.png" /></td>
-	<td><%= hidden_field_tag :good , value = @counter6 %></td>		
+	<td><img onclick="addRow(6)" width="20" height="20" alt="add" src="../assets/plus.png" /></td>
+	<td><%= hidden_field_tag :hide6 , value = @counter6 %></td>		
 		</tr>
 
-				<tr>
-				
-				
+				<tr>	
 					<td><%= submit_tag("Submit") %></td>
 				
 				</tr>

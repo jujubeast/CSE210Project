@@ -1,50 +1,89 @@
-<p id="notice"><%= notice %></p>
-<%= link_to 'Sign Out', signout_path %> 
+<p id="notice">
+	<%= notice %>
+</p>
+
+<%= link_to 'Sign Out', signout_path %>
 
 <%= render :partial => "users/basic_information", :locals => { :user => @user }%>
 
+<%= link_to 'Add Store', addstore_path, :current_list_id => params[:cur_list] %>
+<br/>
 
-<%= link_to 'Add Store', addstore_path, :current_list_id => params[:cur_list] %><br/>
+<div id="left_nav">
 
+	<div class="title">
 
-<div id="left_nav">		
-    <div class="title">
-        <h2>My Lists</h2>
-        <span class='right_button'><%= link_to image_tag("plus.png", :border=>0, :size => "20x20", :alt => "Add List"), createlist_path %><br/></span>
-    </div>
-    <div class="content">
-        <% @lists.each do |list| %>
-    		<% if list.id.to_i != params[:cur_list].to_i %>
-    			<div class='list'>
-    			    <b><%= link_to list.name, default_home_path(session[:user_id], list.id) %></b>
-    			    <%=link_to "Edit", '#'%>
-                    <span class='right_button'><%=link_to image_tag("closev2.png", :border=>0, :size => "15x15", :alt => "Delete"), delete_list_path(list.id) %></span>
-    			</div>
-    		<% else %>
-                <div class='list selected'> 
-                    <b><%= list.name %></b>
-                    <%=link_to "Edit", '#'%>
-                    <span class='right_button'><%=link_to image_tag("closev2.png", :border=>0, :size => "15x15", :alt => "Delete"), delete_list_path(list.id) %></span>
-                </div>
-            <% end %>
-        <% end %>
-    </div>
+		<h2>My Lists</h2>
+		<span class='right_button'><%= link_to image_tag("plus.png", :border=>0, :size => "20x20", :alt => "Add List"), createlist_path %>
+			<br/>
+		</span>
+
+	</div>
+
+	<div class="content">
+
+		<% @lists.each do |list| %>
+
+		<% if list.id.to_i != params[:cur_list].to_i %>
+
+		<div class='list'>
+
+			<b><%= link_to list.name, default_home_path(session[:user_id], list.id) %></b>
+
+			<%= link_to "Edit", '#'%>
+
+			<span class='right_button'><%= link_to image_tag("closev2.png", :border=>0, :size => "15x15", :alt => "Delete"), delete_list_path(list.id) %></span>
+
+		</div>
+
+		<% else %>
+
+		<div class='list selected'>
+
+			<b><%= list.name %></b>
+
+			<%= link_to "Edit", '#'%>
+
+			<span class='right_button'><%= link_to image_tag("closev2.png", :border=>0, :size => "15x15", :alt => "Delete"), delete_list_path(list.id) %></span>
+
+		</div>
+
+		<% end %>
+
+		<% end %>
+
+	</div>
+
 </div>
 
 <div id ="main_nav">
-    <% if @current_list %>
-        <div class='title'>
-            <h2><%= @current_list.name %></h2>
-        </div>
-        <%= render :partial => "stores/item_thumbnail", :collection => @stores, :locals => { :stores => @stores } || 'No stores in this list' %>
-    <% end %>
+
+	<% if @current_list %>
+
+	<div class='title'>
+
+		<h2><%= @current_list.name %></h2>
+
+	</div>
+
+	<%= render :partial => "stores/item_thumbnail", :collection => @stores, :locals => { :stores => @stores } || 'No stores in this list' %>
+
+	<% end %>
+
 </div>
-    
+
 <div id='test'>
-    <h2>Available Stores (Simulated Search Results)</h2>
-    <% if @available_stores %>
-        <%= render :partial => "stores/item_thumbnail", :collection => @available_stores, :locals => { :stores => @stores } || 'No stores Available.' %>
-    <% end %>
+
+	<h2>Available Stores (Simulated Search Results)</h2>
+
+	<% if @available_stores %>
+	<%= render :partial => "stores/item_thumbnail", :collection => @available_stores, :locals => { :stores => @stores } || 'No stores Available.' %>
+
 </div>
- 	
+
+<% end %>
+
+</div>
+
+</div>
 
