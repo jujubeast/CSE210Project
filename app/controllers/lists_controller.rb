@@ -11,18 +11,22 @@ class ListsController < ApplicationController
 	end
 
 	def create
-    	@list = List.new(params[:list])
-
+      @list = List.new(params[:list])
       respond_to do |format|
-     	if @list.save
-          @list_user = @list.list_users.create(:user_id => session[:user_id])
-        	format.html { redirect_to default_home_path(session[:user_id], @list.id), :notice => 'List was successfully created.' }
+        if @list.save
+          # get curent user
+          user_id = session[:user_id]
+          user_entity = UsersHelper::UserEntity.new
+          user_entity.find_by_id(user_id)
+          user_entity.add_new_list(@list)
+
+          format.html { redirect_to default_home_path(session[:user_id], @list.id), :notice => 'List was successfully created.' }
           format.json { render :json => @list, :status => :created, :location => @list }
-      	else
-        	#format.html { render :action => "new" }
-        	format.json { render :json => @list.errors, :status => :unprocessable_entity }
-      	end
-    	end
+        else
+          #format.html { render :action => "new" }
+          format.json { render :json => @list.errors, :status => :unprocessable_entity }
+        end
+      end
   	end
 
     def add
