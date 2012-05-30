@@ -2,8 +2,6 @@
 	<%= notice %>
 </p>
 
-<%= link_to 'Sign Out', signout_path %>
-
 <%= render :partial => "users/basic_information", :locals => { :user => @user }%>
 
 <%= link_to 'Add Store', addstore_path, :current_list_id => params[:cur_list] %>
