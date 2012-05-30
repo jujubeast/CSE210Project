@@ -27,7 +27,6 @@ class UsersController < ApplicationController
   end
 
   def show
-    puts "####yYOYOYO####"
     # XXX need to verify user_id is valid
     # XXX raise exception and catch, then display error page.
     
@@ -36,13 +35,17 @@ class UsersController < ApplicationController
     @lists = user_entity.users_store_lists
 
     if params[:cur_list]
-      puts params[:cur_list]
       list_entity = ListsHelper::ListsEntity.new(params[:cur_list])
       @current_list = list_entity.current_list
       @stores = list_entity.associated_stores
       puts @stores
+    else 
+      list_entity = ListsHelper::ListsEntity.new(@lists[0].id)
+      @current_list = list_entity.current_list
+      puts @current_list.name
+      @stores = list_entity.associated_stores
     end
-    puts "DONE"
+    
     @available_stores = StoresHelper::StoreEntity.find_all
     respond_to do |format|
       format.html # show.html.erb

@@ -1,4 +1,4 @@
-<div id='search_bar'>
+<div id='search_wrapper'>
 	<%= form_tag("/search", :method => "search") do %>
 	   <%= text_field_tag :searchfor, nil, :class => 'search_bar' %>
 	   <%= image_submit_tag("search_icon.png") %>

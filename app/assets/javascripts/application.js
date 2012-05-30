@@ -31,7 +31,6 @@ $(document).ready(function() {
 	$("#friends_search input[type=checkbox]").live('click', function() {
 		var friend_id = $(this).attr('id');
 		if ($(this).attr('checked')) {
-			alert(friend_id);
 			$.ajax({
 				url : "/search/get_list",
 				data : {

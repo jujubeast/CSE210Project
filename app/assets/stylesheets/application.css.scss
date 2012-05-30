@@ -39,10 +39,32 @@ div{
   overflow: auto;
 }
 
-.search_bar {
-  width: 300px;
-  height: 20px;
-  @include rounded();
+#search_wrapper{
+  margin: 0px auto;
+  width: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+
+  .search_bar {
+    width: 300px;
+    height: 20px;
+    @include rounded();
+  }
+  .search_box {
+    margin-top: 10px;
+    text-align: left;
+    width: 33%;
+    float:left;
+    height: 200px;
+    border: 1px solid black;
+    vertical-align: middle;
+    
+    label {
+      padding-left: 20px;
+      border:1px solid red;
+      margin-right: 30px;
+    }
+  }
 }
 
 #header{
@@ -207,10 +229,4 @@ div{
   width: 100%;
 }
 
-#search_bar{
-  margin: 0px auto;
-  width: 50%;
-  text-align: center;
-  margin-bottom: 20px;
-}
 

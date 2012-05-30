@@ -88,11 +88,11 @@
 				<% if stores.include? item_thumbnail %>
 
 				<li>
-					<%= link_to 'Remove From List', remove_from_list_path(params[:cur_list], item_thumbnail.id) %>
+					<%= link_to 'Remove From List', remove_from_list_path(current_list.id, item_thumbnail.id) %>
 				</li>
 				<% else %>
 				<li>
-					<%= link_to 'Add to List', add_to_list_path(params[:cur_list], item_thumbnail.id) %>
+					<%= link_to 'Add to List', add_to_list_path(current_list.id, item_thumbnail.id) %>
 				</li>
 				<% end %>
 				<% end %>
