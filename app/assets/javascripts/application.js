@@ -15,13 +15,28 @@
 //= require_tree .
 
 $(document).ready(function() {
-	$('#advanced_search').click(function(event){
+	$('#advanced_search').click(function(event) {
 		event.preventDefault(); // Prevent link from following its href
 		$.ajax({
-			url: "/search/advanced"
-		}).done(function(html){
-			$("#advanced_search_bar").html(html);
+			url : "/search/advanced",
+			success: function(html) {
+				$("#advanced_search_bar").html(html);
+			}
 		});
-		alert('yo');
 	});
+
+ $("#friends_search input[type=checkbox]").live('click', function() {
+	 if ($(this).attr('checked')){
+		 alert('heyhey');
+		 $.ajax({
+			 url: "/search/get_list",
+			 success: function(html){
+				 $("#list_search").append(html);
+			 }
+		 })
+	 }else{
+		 alert('heyho');
+	 }
+ });
+
 });

@@ -19,6 +19,9 @@ class SimpleSearchController < ApplicationController
     #    for friend in @friends do
     #       @friends_list[friend.id] = List.find_users_lists(friend.id)
     #    end
-    render :partial=>"simple_search/advanced_search_bar", :locals=>{:friends=>@friends }  
+    render :partial=>"simple_search/advanced_search_bar", :locals=>{ :friends=>@friends }  
+  end
+  
+  def get_search
   end
 end
