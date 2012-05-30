@@ -7,7 +7,7 @@
 	<% if friends %>
 	   <% friends.each do |friend| %>
     	   <%= label_tag friend.first_name+' '+friend.last_name %>
-	       <%= check_box_tag friend.id %>
+	       <%= check_box_tag 'friend.'+friend.id.to_s %>
 	   <% end %>
 	<% end %>
 </div>

@@ -17,27 +17,39 @@
 $(document).ready(function() {
 	$('#advanced_search').click(function(event) {
 		event.preventDefault(); // Prevent link from following its href
-		$.ajax({
-			url : "/search/advanced",
-			success: function(html) {
-				$("#advanced_search_bar").html(html);
-			}
-		});
+		if ($("#advanced_search_bar").is(":visible")) {
+			$("#advanced_search_bar").slideUp();
+		} else {
+			$.ajax({
+				url : "/search/advanced",
+				success : function(html) {
+					$("#advanced_search_bar").html(html);
+					$("#advanced_search_bar").slideDown();
+				}
+			});
+		}
 	});
 
- $("#friends_search input[type=checkbox]").live('click', function() {
-	 if ($(this).attr('checked')){
-		 alert($(this).val());
-		 $.ajax({
-			 url: "/search/get_list",
-			 data: {'friend_id': $(this).val()},
-			 success: function(html){
-				 $("#list_search").append(html);
-			 }
-		 })
-	 }else{
-		 alert('heyho');
-	 }
- });
+	$("#friends_search input[type=checkbox]").live('click', function() {
+		var friend_id = $(this).attr('id');
+		if ($(this).attr('checked')) {
+			alert(friend_id);
+			$.ajax({
+				url : "/search/get_list",
+				data : {
+					'friend_id' : friend_id
+				},
+				success : function(html) {
+					$("#list_search").append(html);
+				}
+			})
+		} else {
+			remove_lists(friend_id);
+		}
+	});
+
+	var remove_lists = function(friend_id) {
+		$(".list_selection\\." + friend_id).remove();
+	}
 
 });

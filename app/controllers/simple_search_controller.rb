@@ -23,9 +23,8 @@ class SimpleSearchController < ApplicationController
   end
   
   def get_list
-    puts "IN GET_LIST ######"
-    @friend = User.find(params[:friend_id])
-    @list = List.find_users_lists(params[:friend_id])
+    @friend = User.find(params[:friend_id].split(".")[1])
+    @list = List.find_users_lists(@friend.id)
     render :partial=>"simple_search/list_selection", :collection => @list, :locals => { :friend => @friend }
   end
 end
