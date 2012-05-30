@@ -27,9 +27,10 @@ $(document).ready(function() {
 
  $("#friends_search input[type=checkbox]").live('click', function() {
 	 if ($(this).attr('checked')){
-		 alert('heyhey');
+		 alert($(this).val());
 		 $.ajax({
 			 url: "/search/get_list",
+			 data: {'friend_id': $(this).val()},
 			 success: function(html){
 				 $("#list_search").append(html);
 			 }

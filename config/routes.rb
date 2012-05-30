@@ -15,6 +15,7 @@ App::Application.routes.draw do
   post "/stores", :to => "stores#create"
   
   match "/search/advanced", :to => "simple_search#search_advanced", :as => :search_advanced
+  match "/search/get_list", :to => "simple_search#get_list"
   
   match "/users/:id/:cur_list", :to => "users#show", :as => :default_home
   match "/users/:id", :to => "users#show", :as => :home
