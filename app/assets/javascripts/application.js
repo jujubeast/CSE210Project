@@ -17,17 +17,15 @@
 $(document).ready(function() {
 	$('#advanced_search').click(function(event) {
 		event.preventDefault(); // Prevent link from following its href
-		if ($("#advanced_search_bar").is(":visible")) {
-			$("#advanced_search_bar").slideUp();
-		} else {
-			$.ajax({
-				url : "/search/advanced",
-				success : function(html) {
-					$("#advanced_search_bar").html(html);
-					$("#advanced_search_bar").slideDown();
-				}
-			});
-		}
+		$.ajax({
+			url : "/search/advanced",
+			success : function(html) {
+				$("#advanced_search_bar").html(html);
+				$("#advanced_search_bar").slideDown();
+				$('#hide_advanced_search_bar').show();
+				$('#advanced_search').html('reset');
+			}
+		});
 	});
 
 	$("#friends_search input[type=checkbox]").live('click', function() {
@@ -47,9 +45,18 @@ $(document).ready(function() {
 			remove_lists(friend_id);
 		}
 	});
-
+	
+	$("#hide_advanced_search_bar").click(function(event){
+		$('#advanced_search_bar').slideUp();
+		$(this).hide();
+		$("#advanced_search").html('advanced search');
+	});
+	
 	var remove_lists = function(friend_id) {
-		$(".list_selection\\." + friend_id).remove();
-	}
+		var friend = friend_id.split('.');
+		$(".list_selection\\." + friend[0] + '\\.' + friend[1]).remove();
+	};
+	
+	
 
 });

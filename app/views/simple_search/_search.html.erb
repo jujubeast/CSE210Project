@@ -2,7 +2,9 @@
 	<%= form_tag("/search", :method => "search") do %>
 	   <%= text_field_tag :searchfor, nil, :class => 'search_bar' %>
 	   <%= image_submit_tag("search_icon.png") %>
+	   <br />
 	   <div id='advanced_search_bar' class='hidden'></div>
 	   <%= link_to 'advanced search', '/search/advanced', :id => 'advanced_search'%>
+	   <span id='hide_advanced_search_bar' class='hidden'>hide</span>
 	<% end %>
 </div>
