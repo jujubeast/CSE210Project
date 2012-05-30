@@ -30,6 +30,28 @@ module UsersHelper
       #puts " ***************** add_new_list -- end\n"
     end
 
+    def find_user_default_list
+      default_list_id =  @user.list_users[0].list.id
+      puts "default list id: " + default_list_id.to_s + "\n"  
+      return default_list_id    
+    end
+
+    def delete_user_list(list_id)
+      #puts " ***************** delete_list: " + list_id.to_s + "\n"
+      @user.list_users.each do
+        |list_user|
+        #puts " ***************** id: " + list_user.list.id.to_s + "\n"
+        if Integer(list_user.list.id) == Integer(list_id)
+          #puts " ***************** found\n "
+          list_user.list.delete
+          list_user.delete
+          #puts " ***************** break\n "
+          break
+        end
+      end
+      #puts " ***************** done\n "
+    end
+    
     def users_store_lists
       #puts " ***************** users_store_lists\n"
       store_list = Array.new
@@ -37,11 +59,13 @@ module UsersHelper
       
       @user.list_users.each do
         |user_list|
-        #puts " ***************** test list iteration\n"
+        #puts " ***************** test list iteration: " + user_list.list.name + "\n"
         store_list.push(user_list.list)
       end
       #puts " ***************** users_store_lists -- end\n"
       store_list
     end
+    
+    
   end
 end
