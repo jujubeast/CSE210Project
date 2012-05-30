@@ -1,12 +1,98 @@
-<div class='item_thumbnail'>
-	<div class='img'></div>
-	<%= item_thumbnail.name %>
-	<br />
-	<% if stores %>
+<style type="text/css">
+ul{
+	margin:0;padding:0;}
+ul li{
+	list-style:none;}
+#div{
+	height:270px;
+	width:200px;
+}
+
+#div div label{
+	
+}
+#div ul li{
+	float:center;
+	position:relative;
+	padding:0px 30px;
+	height:36px;
+	line-height:36px;
+	font-weight:bold;}
+#div ul li ul{
+	position:absolute;
+	top:0px;
+	left:40px;
+	display:none;
+	width:120px;
+	background:#CC0000;
+	z-index: 900;
+	}
+#div ul li ul li{
+	display:block;
+	height:26px;
+	line-height:26px;
+	background-color:#dddddd;
+	padding:0px 12px;
+	border-bottom:1px #ffffff solid;
+	font-weight:normal;}
+#div ul li a{
+	color:#000000;
+	text-decoration:none;
+	font-size:12px;}
+#div ul li a:hover{
+	color:#cc0000;}
+	#img1{
+	float:right;
+	position:relative;
+	width:20px;
+	 height:20px; 
+}
+#img2{
+	float:center;
+	position:relative;
+	margin-left:-20px;
+	width:180px;
+	 height:180px; 
+}
+#img3{
+	float:left;
+	margin-left:-20px;
+	width:20px;
+	 height:20px;  
+}
+</style>
+<script type="text/javascript">
+  $(function(){
+    $("#div ul li").hover(
+      function(){$(this).children("ul").slideDown()},
+      function(){$(this).children("ul").slideUp()}
+    )
+  })
+</script>
+
+<div id="div"  class='item_thumbnail' onmouseover="show(<%=  item_thumbnail.id %>)" onmouseout="hide(<%=  item_thumbnail.id %>)" >
+<img id="img1"  src="../../assets/plus.png" />
+	<ul>
+  <li><a href="#">aaaaaa</a>
+    <ul>
+    	<% if stores %>
 	<% if stores.include? item_thumbnail %>
-	<%= link_to 'Remove From Current List', remove_from_list_path(params[:cur_list], item_thumbnail.id) %>
-	<% else %>
-	<%= link_to 'Add to Current List', add_to_list_path(params[:cur_list], item_thumbnail.id) %>
+      <li><%= link_to 'Remove From List', remove_from_list_path(params[:cur_list], item_thumbnail.id) %></li>
+      <% else %>
+	<li><%= link_to 'Add to List', add_to_list_path(params[:cur_list], item_thumbnail.id) %></li>
 	<% end %>
 	<% end %>
+      <li><a href="#">View Reviews</a></li>
+      <li><a href="#">Add to favoriate list</a></li>
+      <li><a href="#">BookMark</a></li
+      
+    </ul>
+  </li>
+</ul>
+<div>
+	<img id="img2" src="../../assets/plus.png" />
+	<img id="img3" src="../../assets/plus.png" />
+<%= item_thumbnail.name %>
+</div>
+	
 </div>

@@ -1,6 +1,7 @@
 class StoreTagUser < ActiveRecord::Base
   attr_accessible :store_id, :tag_id, :user_id
-  
+  belongs_to :tag
+  belongs_to :store
   def self.find_store_ids_by_ids(tag_ids, excluded_store_ids)
     if tag_ids == nil or tag_ids.size <= 0
       return Array.new
