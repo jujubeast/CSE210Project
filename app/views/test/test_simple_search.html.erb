@@ -1,0 +1,22 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN"
+   "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+  <head>
+	  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	  <title>test_simple_search.html</title>
+  </head>
+  <body>
+     <table border="1px">
+     	<tr>
+     	  <th>Name</th>
+     	  <th>Id</th>
+     	</tr>
+     	<% @view_data.each do |store| %>
+     	<tr>
+     	  <td><%= store.name %></td>
+     	  <td><%= store.id %></td>
+     	</tr>
+        <% end %>
+     </table>
+  </body>
+</html>

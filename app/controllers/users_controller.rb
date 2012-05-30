@@ -27,21 +27,23 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @lists = List.find_users_lists(params[:id])
-    @friend_list = User.find(:all)
+    puts "####yYOYOYO####"
+    # XXX need to verify user_id is valid
+    # XXX raise exception and catch, then display error page.
+    
+    user_entity = UsersHelper::UserEntity.new(params[:id])
+    @user = user_entity.user
+    @lists = user_entity.users_store_lists
 
     if params[:cur_list]
-      @stores = Store.find_lists_stores(params[:cur_list])
-      @current_list = List.find(params[:cur_list])
-    else
-      #need to set the default list! Clean up too..lol
-      @current_list = @lists[0]
-      @stores_ids = ListStore.find_store_ids(@current_list.id)
-      @stores = Store.find_stores_by_ids(@stores_ids)
+      puts params[:cur_list]
+      list_entity = ListsHelper::ListsEntity.new(params[:cur_list])
+      @current_list = list_entity.current_list
+      @stores = list_entity.associated_stores
+      puts @stores
     end
-
-    @available_stores = Store.find(:all)
+    puts "DONE"
+    @available_stores = StoresHelper::StoreEntity.find_all
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @user }

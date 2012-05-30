@@ -11,5 +11,4 @@ class ListUser < ActiveRecord::Base
 	   		default_list_id = nil
 	   	end
    end
-
 end

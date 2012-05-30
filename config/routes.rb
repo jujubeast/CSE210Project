@@ -3,10 +3,13 @@ App::Application.routes.draw do
   get "stores/new"
   get "store/new"
   
+  #test pages
   get "test/setup"
-
-  match '/', :to => "sessions#new"
-  #match '/', :to => "login#show"
+  get "test/simple_search_test_input"
+  post "test/test_simple_search"
+  
+  #match '/', :to => "sessions#new"
+  match '/', :to => "login#show"
   match "/stores/:id", :to => "stores#show", :as => :show_store
   match "/reviews", :to => "stores#addreview"
   post "/users", :to => "users#create"
@@ -29,8 +32,10 @@ App::Application.routes.draw do
   match "/removefromlist/:list_id/:store_id", :to => "list_stores#destroy", :as => :remove_from_list
 
   match "/addstore", :to => "stores#new"
-  match "/login", :to => "login#show"
   match "/search/", :to => "simple_search#search"
+  
+  match "/login", :to => "login#show"
+  match "/homepage/:access_token", :to => "login#login"
 
   # this line giving error while running the server
   #resources :sessions, :only [:new, :create, :destroy]

@@ -3,4 +3,3 @@ class ListStore < ActiveRecord::Base
 	belongs_to :store
    attr_accessible :store_id, :list_id
 end
-

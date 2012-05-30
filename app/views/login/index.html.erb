@@ -1,54 +1,89 @@
+<html>
+	<head>
+		<title>My Facebook Login Page</title>
+	</head>
+	<body>
+		<div align="center">
 
- <html>
-    <head>
-      <title>My Facebook Login Page</title>
-    </head>
-    <body>
-        <div align="center">
+			<h1>my hangouts</h1>
+			<br>
 
-        <h1>my hangouts</h1><br>
+			<div id="fb-root"></div>
+			<div class="fb-login-button" scope="email">
+				Login with Facebook
+			</div>
+			<script>
+				window.fbAsyncInit = function() {
+					FB.init({
+						appId : '119110981558914',
+						status : true,
+						cookie : true,
+						xfbml : true,
+						oauth : true,
+					});
 
-        <div id="fb-root"></div>
-              <div class="fb-login-button" scope="email,user_checkins">Login with Facebook</div>
-              <script>
-                window.fbAsyncInit = function() {
-                  FB.init({
-                    appId      : '355372034521927',
-                    status     : true, 
-                    cookie     : true,
-                    xfbml      : true,
-                    oauth      : true,
-                  });
-                };
-                (function(d){
-                   var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
-                   js = d.createElement('script'); js.id = id; js.async = true;
-                   js.src = "//connect.facebook.net/en_US/all.js";
-                   d.getElementsByTagName('head')[0].appendChild(js);
-                 }(document));
-              </script>
-        </div>
-        
-           <br><br>
-          <table border="1" width="100%">	</table>
+					FB.Event.subscribe("auth.logout", function(response) {
+						window.location = '/signout';
+					}); ( function(d) {
+							var js, id = 'facebook-jssdk';
+							if(d.getElementById(id)) {
+								return;
+							}
+							js = d.createElement('script');
+							js.id = id;
+							js.async = true;
+							js.src = "//connect.facebook.net/en_US/all.js";
+							d.getElementsByTagName('head')[0].appendChild(js);
+						}(document));
 
-          <div align="left">
+					FB.getLoginStatus(function(response) {
+						if(response.status === 'connected') {
+							var access_token = FB.getAuthResponse()['accessToken'];
+							window.location = 'homepage/' + access_token;
+						}
+					});
 
-          <h1>Welcome to myHangouts!</h1>
+					//FB.login(function(response) {
+					// if (response.authResponse) {
+					//   var access_token =   FB.getAuthResponse()['accessToken'];
+					//   window.location = 'homepage/' + access_token;
+					//});
+				}; ( function(d) {
+						var js, id = 'facebook-jssdk';
+						if(d.getElementById(id)) {
+							return;
+						}
+						js = d.createElement('script');
+						js.id = id;
+						js.async = true;
+						js.src = "//connect.facebook.net/en_US/all.js";
+						d.getElementsByTagName('head')[0].appendChild(js);
+					}(document));
 
-          </div>
+			</script>
+		</div>
 
-          <div align="center">
+		<br>
+		<br>
+		<table border="1" width="100%"></table>
 
-          <h2>Create lists of your favoriate places</h2>
+		<div align="left">
 
-          </div>
+			<h1>Welcome to myHangouts!</h1>
 
-          <div align="right">
+		</div>
 
-          <h2>Share your lists with friends</h2>
+		<div align="center">
 
-          </div>
+			<h2>Create lists of your favoriate places</h2>
 
-    </body>
- </html>
+		</div>
+
+		<div align="right">
+
+			<h2>Share your lists with friends</h2>
+
+		</div>
+
+	</body>
+</html>

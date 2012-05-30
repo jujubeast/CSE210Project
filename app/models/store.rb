@@ -19,8 +19,6 @@ class Store < ActiveRecord::Base
   	end
       	
     def self.find_store_ids_by_fuzzy_match(search_string)
-      stores = Store.where(
-        "name like ?  or detail_info like ?", search_string, search_string, 
-      ).select("id").all
+      stores = Store.where("name like ?  or detail_info like ?", search_string, search_string).select("id").all
     end
 end
