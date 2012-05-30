@@ -1,9 +1,14 @@
 class User < ActiveRecord::Base
-	has_many :list_users
-	has_many :lists, :through => :list_users
-  attr_accessible :email, :first_name, :last_name, :picture_link, :password, :fb_id
-  # attr_accessor :first_name, :last_name, :email, :password, :picture_link, :fb_id
+  attr_accessible :fb_id, :email, :first_name, :last_name, :picture_link, :password
   
-  validate :fb_id, :allow_blank => true
-
+  # map user and store association through user_stores
+  has_many :store_users
+  has_many :stores, :through => :store_users
+  
+  # map user and list through list_user
+  has_many :list_users
+  has_many :lists, :through => :list_users
+  
+  # map tag, user, and store relationship
+  has_many :tags
 end

@@ -1,12 +1,10 @@
 class Tag < ActiveRecord::Base
-  has_many :store_tag_users
-  belongs_to :category
-  attr_accessible :category_id, :name
-  
-  def self.find_id_by_fuzzy_match(search_string)
-    stores = Tag.where(
-      "name like ?", search_string
-    ).select("id").all
-  end
+  attr_accessible :name, :user_id
 
+  # map the category and tag relationship, many to many  
+  has_and_belongs_to_many :categories
+  
+  # map tag, user, and store relationship
+  belongs_to :user
+  has_and_belongs_to_many :stores
 end

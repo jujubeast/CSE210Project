@@ -1,4 +1,6 @@
 class Category < ActiveRecord::Base
-  has_many :tags
   attr_accessible :category
+
+  # map the category and tag relationship, many to many  
+  has_and_belongs_to_many :tags
 end

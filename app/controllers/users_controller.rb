@@ -27,15 +27,20 @@ class UsersController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:id])
-    @lists = List.find_users_lists(params[:id])
+    # XXX need to verify user_id is valid
+    # XXX raise exception and catch, then display error page.
+    
+    user_entity = UsersHelper::UserEntity.new(params[:id])
+    @user = user_entity.user
+    @lists = user_entity.users_store_lists
 
     if params[:cur_list]
-      @stores = Store.find_lists_stores(params[:cur_list])
-      @current_list = List.find(params[:cur_list])
+      list_entity = ListsHelper::ListsEntity.new(params[:cur_list])
+      @current_list = list_entity.current_list
+      @stores = list_entity.associated_stores
     end
 
-    @available_stores = Store.find(:all)
+    @available_stores = StoresHelper::StoreEntity.find_all
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @user }
