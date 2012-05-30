@@ -13,3 +13,15 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+
+$(document).ready(function() {
+	$('#advanced_search').click(function(event){
+		event.preventDefault(); // Prevent link from following its href
+		$.ajax({
+			url: "/search/advanced"
+		}).done(function(html){
+			$("#advanced_search_bar").html(html);
+		});
+		alert('yo');
+	});
+});

@@ -29,6 +29,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @lists = List.find_users_lists(params[:id])
+    @friend_list = User.find(:all)
 
     if params[:cur_list]
       @stores = Store.find_lists_stores(params[:cur_list])
