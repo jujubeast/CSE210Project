@@ -1,0 +1,23 @@
+<%= form_tag update_advanced_search_path, :method => "get", :remote => true do %>
+    <div id='tags_search'>
+        <h3>Search Tags</h3>
+    </div> 
+
+    <div id='friends_search'>
+        <h3>Select Friends to Search</h3>
+        <% if friends %>
+            <% friends.each do |friend| %>
+                <%= label_tag friend.first_name+' '+friend.last_name %>
+                <%= check_box_tag friend.id %>
+            <% end %>
+        <% end %>
+    </div>
+
+    <div id='list_search'>
+        <h3>Select Lists</h3>
+    </div>
+    
+    <%= submit_tag "update"%>
+<% end %>
+
+

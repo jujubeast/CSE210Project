@@ -1,4 +1,5 @@
 class ListsController < ApplicationController
+  respond_to :js
 
 	def new
 		@list = List.new
@@ -60,5 +61,18 @@ class ListsController < ApplicationController
       end
 
     end
+  end
+
+  #display lists on store drop down menu
+  def display_lists
+
+      @curr_list_names = List.find_lists_by_curr_store(params[:store_id], session[:user_id])
+
+      @not_on_lists = List.find_all_other_lists(@curr_list_names, session[:user_id])
+
+      respond_to do |format|
+        format.html {redirect_to home_path(session[:user_id])}
+        format.js
+      end
   end
 end

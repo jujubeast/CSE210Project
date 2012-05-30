@@ -4,10 +4,18 @@ class Store < ActiveRecord::Base
 	has_many :lists, :through => :list_stores
   	attr_accessible :been_to, :can_delete, :detail_info, :favorite, :image, :name, :pic,:street_1,:street_2,:city,:state,:zipcode,:telephone,:hours,:website
   	#finds stores given ARRAY of store ids
-  	def self.find_stores_by_ids(store_ids)
+
+    def self.find_stores_by_ids(store_ids)
+        stores = Store.find(:all,
+                            :conditions => ["id IN (?)", store_ids],
+                            :select => "name, id")
+    end
+
+  	def self.find_lists_stores(list_id)
   		stores = Store.find(:all,
-                         :conditions => ["id IN (?)", store_ids],
-                         :select => "name, id")
+                         :conditions => ["list_stores.list_id = ?", list_id],
+                         :joins => [:list_stores],
+                         :select => "stores.name, stores.id")
   	end
       	
     def self.find_store_ids_by_fuzzy_match(search_string)

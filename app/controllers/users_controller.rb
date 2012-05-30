@@ -28,12 +28,10 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    @list_ids = ListUser.find_list_ids(params[:id])
-    @lists = List.find_lists_by_ids(@list_ids)
+    @lists = List.find_users_lists(params[:id])
 
     if params[:cur_list]
-      @stores_ids = ListStore.find_store_ids(params[:cur_list])
-      @stores = Store.find_stores_by_ids(@stores_ids)
+      @stores = Store.find_lists_stores(params[:cur_list])
       @current_list = List.find(params[:cur_list])
     else
       #need to set the default list! Clean up too..lol
@@ -43,7 +41,6 @@ class UsersController < ApplicationController
     end
 
     @available_stores = Store.find(:all)
-
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @user }

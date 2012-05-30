@@ -1,22 +1,8 @@
-<div align="right">
-	<%= link_to "Login with Facebook" , ""%>
+<div>
+	<%= link_to 'Sign Out', signout_path %> 
 </div>
-<div align="center">
-	<h1>my hangouts</h1>
-	<br>
-	<%= text_field_tag(:searchKeyword) %>
-	<%= submit_tag("Search") %>
-</div>
-<br>
-<table align="center">
-	<tr>
-		<td width="20%"><%= button_tag("myPages") %></td>
-		<td width="20%"><%= button_tag("addRestaurant") %></td>
-		<td width="20%"><%= button_tag("everything") %></td>
-	</tr>
-</table>
-<br>
-<br>
+
+
 <%= form_for @store, :url => { :action => :create }  do |f|%>
 <table width="100%">
 	<tr>
@@ -44,7 +30,8 @@
 				</tr>
 				<tr>
 					<td>
-						<%= button_tag("myPages") %>
+						<p><label for="upload_file">Select File</label> : 
+<%= file_field 'upload', 'datafile' %></p>
 						</td>
 				</tr>
 				</table>

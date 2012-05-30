@@ -35,6 +35,12 @@ div{
   overflow: auto;
 }
 
+.search_bar {
+  width: 300px;
+  height: 20px;
+  @include rounded();
+}
+
 #header{
 	height: 100px;
 	padding: 20px;

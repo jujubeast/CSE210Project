@@ -1,7 +1,13 @@
 <div id='search_bar'>
 <%= form_tag("/search", :method => "search") do %>
-  <%= label_tag(:searchfor, "Search for:") %>
-  <%= text_field_tag(:searchfor) %>
-  <%= submit_tag("Search") %>
-<% end %>
+  <%= text_field_tag :searchfor, nil, :class => 'search_bar' %>
+  <%= image_submit_tag("search_icon.png") %>
+  <%= link_to 'advanced search',
+        '/search/advanced',
+        :id => 'advanced_search', 
+        :onclick => 'alert("hey")'%>
+    <div id='advanced_search_bar'></div>
+      <%# render :partial => "simple_search/advanced_search_bar", :locals => { :friends => @friends } %>
+    
+<% end %> 
 </div>
