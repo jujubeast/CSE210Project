@@ -43,6 +43,10 @@ module UsersHelper
         #puts " ***************** id: " + list_user.list.id.to_s + "\n"
         if Integer(list_user.list.id) == Integer(list_id)
           #puts " ***************** found\n "
+          list_user.list.list_stores.each do
+            |list_store|
+            list_store.delete
+          end
           list_user.list.delete
           list_user.delete
           #puts " ***************** break\n "
@@ -65,7 +69,5 @@ module UsersHelper
       #puts " ***************** users_store_lists -- end\n"
       store_list
     end
-    
-    
   end
 end

@@ -1,41 +1,44 @@
 class StoresController < ApplicationController
   def new
-  	@store = Store.new
-    @user = User.find(session[:user_id])
-  	respond_to do |format|
-  		format.html
-  		format.json {render :json => @store}
-  	end
+    @store = Store.new
+    
+    user_entity = UsersHelper::UserEntity.new
+    @user = user_entity.find_by_id(session[:user_id])
+    respond_to do |format|
+      format.html
+      format.json {render :json => @store}
+    end
   end
 
   def create
   	@store = Store.new(params[:store])
-#  	@user = User.find(session[:user_id])
-
   	respond_to do |format|
   		if @store.save
   		  format.html {redirect_to show_store_path(@store), :notice => "Store successfully created"}
- #   		format.html {redirect_to home_path(session[:user_id]), :notice => "Store successfully created"}
- # 	 	  format.json { render :json => @list, :status => :created, :location => @list }
-      	else
-  #      	format.html { render :action => "new" }
-  #      	format.json { render :json => @list.errors, :status => :unprocessable_entity }
   		end
   	end
   end
+
   def show
-    @store = Store.find(params[:id])
-    @user = User.find(session[:user_id])
+    store_entity = StoresHelper::StoreEntity.new
+    @store = store_entity.find_by_id(params[:id])
+    
+    user_entity = UsersHelper::UserEntity.new
+    @user = user_entity.find_by_id(session[:user_id])
     @highlights = {}
-    Category.all.each do |c|
-      tags = Array.new
-      storetagusers = StoreTagUser.joins(:tag => :category).select("name, count(*) as tag_num").where("category = ? and store_id = ?",c.category, params[:id]).group("tag_id,name").order("tag_num DESC")
-      storetagusers.each do |s|
-        tags.append(s.name)
-      end 
-      @highlights[c.category] = tags
-    end
+    #@store = Store.find(params[:id])
+    #@user = User.find(session[:user_id])
+    #@highlights = {}
+    #Category.all.each do |c|
+    #  tags = Array.new
+    #  storetagusers = StoreTagUser.joins(:tag => :category).select("name, count(*) as tag_num").where("category = ? and store_id = ?",c.category, params[:id]).group("tag_id,name").order("tag_num DESC")
+    #  storetagusers.each do |s|
+    #    tags.append(s.name)
+    #  end 
+    #  @highlights[c.category] = tags
+    #end
   end
+  
   def addreview
     success = true
     user_id = session[:user_id]

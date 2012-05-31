@@ -10,9 +10,9 @@ module ListsHelper
     
     def associated_stores
       associated_stores = Array.new
-      @list.list_stores do
+      @list.list_stores.each do
         |list_store|
-        ret_stores.push(list_store.store)
+        associated_stores.push(list_store.store)
       end
       associated_stores
     end

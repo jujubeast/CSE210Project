@@ -1,6 +1,10 @@
 module StoresHelper
   class StoreEntity
-    def initialize(store_id)
+    def initialize
+      @store = nil
+    end
+    
+    def find_by_id(store_id)
       @store = Store.find(store_id)
     end
     

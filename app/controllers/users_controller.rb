@@ -11,10 +11,10 @@ class UsersController < ApplicationController
     # XXX Validation???
     
     @user = User.new(params[:user])
-    puts @user.first_name()
-    puts @user.email()
-    puts @user.password()
-    puts "true" if @user.valid?
+    #puts @user.first_name()
+    #puts @user.email()
+    #puts @user.password()
+    #puts "true" if @user.valid?
     
     respond_to do |format|
       if @user.save
@@ -32,26 +32,26 @@ class UsersController < ApplicationController
     # XXX need to verify user_id is valid
     # XXX raise exception and catch, then display error page.
     
-    puts "*************** User show\n"
+    #puts "*************** User show\n"
 
     user_entity = UsersHelper::UserEntity.new
     user_entity.find_by_id(params[:id])
     @user = user_entity.user
     @lists = user_entity.users_store_lists
 
-    puts "*************** User show step #1\n"
+    #puts "*************** User show step #1\n"
 
     if params[:cur_list]
-    puts "*************** User show step #2\n"
+    #puts "*************** User show step #2\n"
 
       list_entity = ListsHelper::ListsEntity.new(params[:cur_list])
       @current_list = list_entity.current_list
       @stores = list_entity.associated_stores
       
-       puts "*************** User show step #2 -- end\n"
+       #puts "*************** User show step #2 -- end\n"
     end
 
-       puts "*************** User show step #3\n"
+       #puts "*************** User show step #3\n"
     @available_stores = StoresHelper::StoreEntity.find_all
     respond_to do |format|
       format.html # show.html.erb
