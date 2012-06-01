@@ -10,5 +10,5 @@ class Store < ActiveRecord::Base
   has_many :lists, :through => :list_stores
   
   # map tag, user, and store relationship
-  has_and_belongs_to_many :tags
+  has_many :store_tag_users
 end

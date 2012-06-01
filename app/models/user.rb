@@ -10,5 +10,5 @@ class User < ActiveRecord::Base
   has_many :lists, :through => :list_users
   
   # map tag, user, and store relationship
-  has_many :tags
+  has_many :store_tag_users
 end
