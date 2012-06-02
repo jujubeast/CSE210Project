@@ -1,6 +1,7 @@
 class ListStore < ActiveRecord::Base
-	belongs_to :list
-	belongs_to :store
-   attr_accessible :store_id, :list_id
+  attr_accessible :store_id, :list_id
+  
+  # used for associating lists and stores
+  belongs_to :list
+  belongs_to :store
 end
-

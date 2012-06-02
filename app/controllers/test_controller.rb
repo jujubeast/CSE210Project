@@ -62,4 +62,18 @@ class TestController < ApplicationController
     
     @setup_status = "Setup completed and successful"
   end
+
+  def simple_search_test_input
+  end
+  
+  def test_simple_search
+    search_query = params[:search_query]
+    puts "Query: " + search_query + "\n"
+    search_op = SimpleSearchOperation.new(search_query)
+    search_op.do_search
+    @view_data = search_op.view_data
+    
+    puts "return size " + @view_data.size.to_s + "\n"
+  end
+  
 end

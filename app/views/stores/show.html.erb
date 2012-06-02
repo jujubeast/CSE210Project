@@ -106,12 +106,12 @@
 			<td></td>
 <td>
 	<table>
-		<%  @highlights.each do |category_name, tags|%>
+		<%  @store_review.all_categories.each do |category_name|%>
 		<tr>
 			<td><%= category_name %> :</td>
 			<td>
-				<% tags.each do |t| %>  
-				<%= t %>
+				<% @store_review.find_tags(category_name).each do |t| %>  
+				<%= [t]&nbsp; %>
 <% end 
    end %>
 			</td>
@@ -188,8 +188,7 @@ x.innerHTML=insertString;
 <table id="table2"><tr>
 	
 	<td>What we like:</td>
-	<td><input type='text' name="like1"></td>
-	
+	<td><%= text_field_tag(:like1) %></td>
 	<td><%= text_field_tag(:like2) %></td>
 	<td><%= text_field_tag(:like3) %></td>
 	<td><img onclick="addRow(1)" width="20" height="20" src="../assets/plus.png"  /></td>
