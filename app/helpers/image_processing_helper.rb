@@ -19,7 +19,7 @@ module ImageProcessingHelper
     
     def rescale_image_size
       ratio = 0.0
-      if  @img_width > @img_height
+      if  @img_width < @img_height
         ratio = Float(@img_height) / Float(@img_width)
         puts ratio.to_s + "\n"
         @img_height = @base_length

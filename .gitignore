@@ -41,3 +41,9 @@ Thumbs.db
 # ECLIPSE FILE #
 ################
 .project
+config/database.yml
+config/database.yml
+app/views/stores/new.html.erb.back
+config/database.yml
+config/database.yml
+config/database.yml

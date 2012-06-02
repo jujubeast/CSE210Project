@@ -3,7 +3,7 @@
 </div>
 
 
-<%= form_for @store, :url => { :action => :create }  do |f|%>
+<%= form_for @store, :url => { :action => :create },:html => {:multipart => true}  do |f|%>
 <table width="100%">
 	<tr>
 		<th width="30%" align="left">Photos</th>
@@ -31,8 +31,8 @@
 				<tr>
 					<td>
 						<p><label for="upload_file">Select File</label> : 
-<%= file_field 'upload', 'datafile' %></p>
-						</td>
+						<%= file_field_tag(:upload, :accept => 'image/png,image/gif,image/jpeg') %></p>
+					</td>
 				</tr>
 				</table>
 			

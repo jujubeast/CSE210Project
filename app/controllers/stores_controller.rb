@@ -12,6 +12,15 @@ class StoresController < ApplicationController
 
   def create
   	@store = Store.new(params[:store])
+    file_upload = params[:upload]
+    fileuploader = FileUploadHelper::ImageFileUploadHandler.new(file_upload)
+    fileuploader.save_to_disk
+    @disk_path = fileuploader.file_absolute_path
+    @tmp_disk_path = fileuploader.tmp_file_absolute_path
+    img_processing = ImageProcessingHelper::ImageProcessing.new(@tmp_disk_path, @disk_path)
+    img_processing.rescale_image_size
+    img_processing.save_back_image
+    @store.pic = fileuploader.file_web_path
   	respond_to do |format|
   		if @store.save
   		  format.html {redirect_to show_store_path(@store), :notice => "Store successfully created"}

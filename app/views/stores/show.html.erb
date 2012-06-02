@@ -20,18 +20,10 @@
 			<table>
 				<tr>
 					<td width="100%" height="100px">
-						<%= image_tag("rails.png")
-# => <img alt="Rails" src="http://www.google.com/imgres?imgurl=http://www.takepart.com/sites/default/files/styles/tp_promo_feature_thumbnail/public/seaweed.jpg&imgrefurl=http://www.takepart.com/foodinc&h=222&w=298&sz=20&tbnid=ahU7p7l4smVbrM:&tbnh=92&tbnw=124&zoom=1&docid=71to5XWNETbiBM&itg=1&hl=en&sa=X&ei=ldKlT6bxD8raiQLVicnVAg&ved=0CHgQ9QEwAw&dur=123" />
-			%>
+					<img src="<%= @store.pic%>"/>
 						</td>
 				</tr>
-				<tr>
-					<td>
-						<p><label for="upload_file">Select File</label> : 
-<%= file_field 'upload', 'datafile' %></p>
-						</td>
-				</tr>
-				</table>
+			</table>
 			
 			</td>
 		<td>
@@ -111,7 +103,7 @@
 			<td><%= category_name %> :</td>
 			<td>
 				<% @store_review.find_tags(category_name).each do |t| %>  
-				<%= [t]&nbsp; %>
+				<%= t %>
 <% end 
    end %>
 			</td>
@@ -155,7 +147,6 @@
 <script type="text/javascript">
     /* delete row */
     function addRow(categoryID) {
-    	alert(categoryID);
     		var hideID = "hide"+categoryID;
     		var temp = document.getElementById(hideID).value;
     		temp++;
@@ -172,9 +163,7 @@
 				case 6:insertString = "<td><input type='text' name='good" + temp +"' ></td>";break;
 				default: break;
 			}
-			
-			alert(insertString);
-x.innerHTML=insertString;
+			x.innerHTML=insertString;
     		
            
         }
