@@ -1,18 +1,23 @@
-<div id='tags_search' class='search_box'>
+<div id='tags_search'>
 	<h3>Search Tags</h3>
+	<div class='search_box'></div>
 </div>
 
-<div id='friends_search' class='search_box'>
+<div id='friends_search'>
 	<h3>Select Friends to Search</h3>
-	<% if friends %>
-	   <% friends.each do |friend| %>
-    	   <%= label_tag friend.first_name+' '+friend.last_name %>
-	       <%= check_box_tag 'friend.'+friend.id.to_s %>
-	   <% end %>
-	<% end %>
+	<div class='search_box'>
+		<% if friends %>
+		<% friends.each do |friend| %>
+		<div class='friend_selection'>
+			<%= label_tag friend.first_name+' '+friend.last_name %>
+			<%= check_box_tag 'friend.'+friend.id.to_s %>
+		</div>
+		<% end %>
+		<% end %>
+	</div>
 </div>
 
-<div id='list_search' class='search_box'>
+<div id='list_search'>
 	<h3>Select Lists</h3>
+	<div class='search_box'></div>
 </div>
-

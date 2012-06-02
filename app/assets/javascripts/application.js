@@ -14,21 +14,35 @@
 //= require jquery_ujs
 //= require_tree .
 
+//The click toggle for requesting advanced search partial
+var display_advanced_search_bar = '#advanced_search_icon';
+
+//The div which contains the advanced search section
+var advanced_search_div = '#advanced_search_bar';
+
+
 $(document).ready(function() {
-	$('#advanced_search').click(function(event) {
+	$(display_advanced_search_bar).click(function(event) {
 		event.preventDefault(); // Prevent link from following its href
-		$.ajax({
-			url : "/search/advanced",
-			success : function(html) {
-				$("#advanced_search_bar").html(html);
-				$("#advanced_search_bar").slideDown();
-				$('#hide_advanced_search_bar').show();
-				$('#advanced_search').html('reset');
-			}
-		});
+		
+		if ($(advanced_search_div).hasClass('hidden')){
+			$.ajax({
+				url : "/search/advanced",
+				success : function(html) {
+					$(advanced_search_div).html(html);
+					$(advanced_search_div).slideDown();
+					$(advanced_search_div).removeClass('hidden');
+					$(display_advanced_search_bar+ " img").attr('src', '/assets/navigate_up.png');
+				}
+			});
+		}else{
+			hide_div($(advanced_search_div));
+			$(display_advanced_search_bar+ " img").attr('src', '/assets/navigate_down.png');
+		}
+		
 	});
 
-	$("#friends_search input[type=checkbox]").live('click', function() {
+	$("#friends_search .search_box input[type=checkbox]").live('click', function() {
 		var friend_id = $(this).attr('id');
 		if ($(this).attr('checked')) {
 			$.ajax({
@@ -37,7 +51,7 @@ $(document).ready(function() {
 					'friend_id' : friend_id
 				},
 				success : function(html) {
-					$("#list_search").append(html);
+					$("#list_search .search_box").append(html);
 				}
 			})
 		} else {
@@ -45,11 +59,9 @@ $(document).ready(function() {
 		}
 	});
 	
-	$("#hide_advanced_search_bar").click(function(event){
-		$('#advanced_search_bar').slideUp();
-		$(this).hide();
-		$("#advanced_search").html('advanced search');
-	});
+	var hide_div = function(div){
+		div.slideUp().addClass('hidden');
+	};
 	
 	var remove_lists = function(friend_id) {
 		var friend = friend_id.split('.');
