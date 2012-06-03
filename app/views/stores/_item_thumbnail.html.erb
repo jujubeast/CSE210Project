@@ -46,6 +46,7 @@ ul li{
 	position:relative;
 	width:20px;
 	 height:20px; 
+	 z-index: 1000;
 }
 #img2{
 	float:center;
@@ -59,6 +60,7 @@ ul li{
 	margin-left:-20px;
 	width:20px;
 	 height:20px;  
+	 z-index: 1000;
 }
 </style>
 <script type="text/javascript">
@@ -68,10 +70,26 @@ ul li{
       function(){$(this).children("ul").slideUp()}
     )
   })
+  function changeImage1(){
+  	var image1 = document.getElementById("img1");
+  	//alert(image1.src);
+  	if(image1.src=="http://localhost:3000/assets/lock.png"){
+  		image1.src = "../../assets/plus.png";
+  	}else{
+  	image1.src = "../../assets/lock.png";}
+  }
+  function changeImage2(){
+  	var image1 = document.getElementById("img3");
+  	//alert(image1.src);
+  	if(image1.src=="http://localhost:3000/assets/lock.png"){
+  		image1.src = "../../assets/plus.png";
+  	}else{
+  	image1.src = "../../assets/lock.png";}
+  }
 </script>
 
 <div id="div"  class='item_thumbnail' onmouseover="show(<%=  item_thumbnail.id %>)" onmouseout="hide(<%=  item_thumbnail.id %>)" >
-<img id="img1"  src="../../assets/plus.png" />
+<img id="img1"  src="../../assets/plus.png" onclick="changeImage1()" />
 	<ul>
   <li><a href="#">aaaaaa</a>
     <ul>
@@ -91,7 +109,7 @@ ul li{
 </ul>
 <div>
 	<img id="img2" src="../../assets/plus.png" />
-	<img id="img3" src="../../assets/plus.png" />
+	<img id="img3" onclick="changeImage2()" src="../../assets/plus.png" />
 <%= item_thumbnail.name %>
 </div>
 	

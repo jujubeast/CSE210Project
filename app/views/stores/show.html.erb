@@ -184,14 +184,26 @@ x.innerHTML=insertString;
 
 
 <%= form_tag("/reviews", :method => "get") do %>
+<!--table id="table2">
+		<%  @highlights.each do |category_name, tags|%>
+		<tr>
+			<td><%= category_name %> :</td>
+			<td>
+				<% tags.each do |t| %>  
+				<input type><%= t %>
+<% end 
+   end %>
+			</td>
+		</tr>
+
+	</table-->
 
 <table id="table2"><tr>
 	
 	<td>What we like:</td>
 	<td><input type='text' name="like1"></td>
-	
-	<td><%= text_field_tag(:like2) %></td>
-	<td><%= text_field_tag(:like3) %></td>
+	<td><input type='text' name="like2"></td>
+	<td><input type='text' name="like3"></td>
 	<td><img onclick="addRow(1)" width="20" height="20" src="../assets/plus.png"  /></td>
     <td><%= hidden_field_tag :hide1 , value = @counter1 %></td>
 	<td><%= hidden_field_tag :store_id , value = @store.id %></td>	
@@ -199,43 +211,44 @@ x.innerHTML=insertString;
 <tr>
 	
 	<td>What we dislike:</td>
-	<td><%= text_field_tag(:dislike1) %></td>
-	<td><%= text_field_tag(:dislike2) %></td>
-	<td><%= text_field_tag(:dislike3) %></td>
+		<td><input type='text' name="dislike1"></td>
+		<td><input type='text' name="dislike2"></td>
+		<td><input type='text' name="dislike3"></td>
 	<td><img onclick="addRow(2)" width="20" height="20" alt="add" src="../assets/plus.png" /></td>	
 	<td><%= hidden_field_tag :hide2 , value = @counter2 %></td>	
 		</tr>
 		<tr >
 			
 			<td>Environment:</td>
-			<td><%= text_field_tag(:env1) %></td>		
-	<td><%= text_field_tag(:env2) %></td>
-	<td><%= text_field_tag(:env3) %></td>
+			<td><input type='text' name="env1"></td>	
+			<td><input type='text' name="env2"></td>	
+			<td><input type='text' name="env3"></td>		
 	<td><img onclick="addRow(3)" width="20" height="20" alt="add" src="../assets/plus.png" /></td>	
 	<td><%= hidden_field_tag :hide3, value = @counter3 %></td>	
 		</tr>
 		<tr >
 			<td>Restaurant Type:</td>
-			<td><%= text_field_tag(:type1) %></td>
-	<td><%= text_field_tag(:type2) %></td>
-	<td><%= text_field_tag(:type3) %></td>
+			<td><input type='text' name="type1"></td>	
+				<td><input type='text' name="type2"></td>	
+					<td><input type='text' name="type3"></td>	
+
 	<td><img onclick="addRow(4)" width="20" height="20" alt="add" src="../assets/plus.png" /></td>	
 	<td><%= hidden_field_tag :hide4 , value = @counter4 %></td>
 		</tr>
 		<tr >
 			<td>Restaurant Has:</td>
-			<td><%= text_field_tag(:has1) %></td>
-	<td><%= text_field_tag(:has2) %></td>
-	<td><%= text_field_tag(:has3) %></td>
+			<td><input type='text' name="has1"></td>	
+			<td><input type='text' name="has2"></td>	
+			<td><input type='text' name="has3"></td>	
 	<td><img onclick="addRow(5)" width="20" height="20" alt="add" src="../assets/plus.png" /></td>	
 	<td><%= hidden_field_tag :hide5 , value = @counter5 %></td>
 		</tr>
 
 		<tr >
 			<td>Good for:</td>
-			<td><%= text_field_tag(:good1) %></td>
-	<td><%= text_field_tag(:good2) %></td>
-	<td><%= text_field_tag(:good3) %></td>
+			<td><input type='text' name="good1"></td>	
+			<td><input type='text' name="good2"></td>	
+			<td><input type='text' name="good3"></td>	
 	<td><img onclick="addRow(6)" width="20" height="20" alt="add" src="../assets/plus.png" /></td>
 	<td><%= hidden_field_tag :hide6 , value = @counter6 %></td>		
 		</tr>
