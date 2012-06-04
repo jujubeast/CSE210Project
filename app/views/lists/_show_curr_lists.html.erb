@@ -1,0 +1,3 @@
+<% @curr_lists.each do |list| %>
+	<%= link_to list.name, remove_from_list_path(list.id, @store_id) %><br/>
+<% end %>

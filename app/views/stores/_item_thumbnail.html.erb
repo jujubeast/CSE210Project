@@ -80,6 +80,53 @@ $(document).ready(function() {
 			var id = $(this).attr("id")
 			$("#123" + id + "_menu").slideUp();
 		});
+
+		$("#add_to_lists_<%=item_thumbnail.id%>").live('click', function(e) {
+
+			if($(this).hasClass("hidden_lists"))
+			{
+				$(this).removeClass("hidden_lists");
+				$.ajax( {
+					url: "/showpossiblelists",
+					data: {
+						store_id : <%= item_thumbnail.id %>
+					},
+					success: function(html) {
+						$("#add_to_lists_<%= item_thumbnail.id %>_menu").html(html);
+					}
+				});
+			}
+			else
+			{
+				$(this).addClass("hidden_lists");
+				$("#add_to_lists_<%= item_thumbnail.id %>_menu").html('');
+			}
+
+			return false;
+		});
+
+		$("#remove_from_lists_<%=item_thumbnail.id%>").live('click', function(e) {
+
+			if($(this).hasClass("hidden_lists"))
+			{
+				$(this).removeClass("hidden_lists");
+				$.ajax( {
+					url: "/showcurrlists",
+					data: {
+						store_id : <%= item_thumbnail.id %>
+					},
+					success: function(html) {
+						$("#remove_from_lists_<%= item_thumbnail.id %>_menu").html(html);
+					}
+				});
+			}
+			else
+			{
+				$(this).addClass("hidden_lists");
+				$("#remove_from_lists_<%= item_thumbnail.id %>_menu").html('');
+			}
+			return false;
+		});
 });
 
 </script>
@@ -91,13 +138,13 @@ $(document).ready(function() {
 			<a href="#">aaaaaa</a>
 			<ul id="store_<%= item_thumbnail.id %>_menu" class="storemenu">
 				<li>
-					<%= link_to "Add to List", {:controller => "lists", :action => "show_curr_lists", :store_id => item_thumbnail.id}, :remote => true,  :id => "show_menu", :store_id => item_thumbnail.id %>
+					<div id="add_to_lists_<%= item_thumbnail.id %>" class="hidden_lists">Add To List</div>
 				</li>
-				<div id="add_lists_<%= item_thumbnail.id %>"></div>
+				<div id="add_to_lists_<%= item_thumbnail.id %>_menu" ></div>
 				<li>
-					<%= link_to "Remove From List", {:controller => "lists", :action => "show_possible_lists", :store_id => item_thumbnail.id}, :remote => true,  :id => "show_menu", :store_id => item_thumbnail.id %>
+					<div id="remove_from_lists_<%= item_thumbnail.id %>" class="hidden_lists">Remove From list</div>
 				</li>
-				<div id="remove_lists_<%= item_thumbnail.id %>"></div>
+				<div id="remove_from_lists_<%= item_thumbnail.id %>_menu" ></div>
 				<li>
 					<a href="#">View Reviews</a>
 				</li>

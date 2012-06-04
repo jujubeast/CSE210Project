@@ -64,7 +64,7 @@ class ListsController < ApplicationController
   end
 
   #display lists on store drop down menu
-  def show_curr_lists
+  def show_possible_lists
       @curr_lists = List.find_lists_by_curr_store(params[:store_id], session[:user_id])
 
       if(@curr_lists.empty?)
@@ -79,21 +79,23 @@ class ListsController < ApplicationController
 
       @store_id = params[:store_id]
 
-      respond_to do |format|
-        format.html {redirect_to home_path(session[:user_id])}
-        format.js
-      end
+      render :partial => "lists/show_possible_lists"
+      #respond_to do |format|
+       # format.html {redirect_to home_path(session[:user_id])}
+        #format.js
+      #end
   end
 
-  def show_possible_lists
+  def show_curr_lists
       @curr_lists = List.find_lists_by_curr_store(params[:store_id], session[:user_id])
 
       @store_id = params[:store_id]
 
-      respond_to do |format|
-        format.html {redirect_to home_path(session[:user_id])}
-        format.js
-      end 
+      render :partial => "lists/show_curr_lists" 
+      #respond_to do |format|
+       # format.html {redirect_to home_path(session[:user_id])}
+        #format.js
+      #end 
   end
 
 end
