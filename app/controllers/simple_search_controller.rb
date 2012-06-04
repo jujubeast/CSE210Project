@@ -27,4 +27,14 @@ class SimpleSearchController < ApplicationController
     @list = List.find_users_lists(@friend.id)
     render :partial=>"simple_search/list_selection", :collection => @list, :locals => { :friend => @friend }
   end
+  
+  def approve_tag
+    #check to see if params[:tag_value] matches any tag that is in the database
+    #if matches, return tag object. 
+    @tag = Tag.new()
+    @tag.name = "test"
+    @tag.id = 1
+    #if tag does not exist, don't return a tag. 
+    render :partial=>'simple_search/approved_tag', :locals => { :tag => @tag }
+  end 
 end

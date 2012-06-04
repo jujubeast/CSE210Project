@@ -46,15 +46,18 @@ div{
   margin-bottom: 20px;
 
    /*---SIMPLE SEARCH INPUT BAR---*/
-  .search_bar {
+  #search_bar {
     width: 300px;
     height: 20px;
     @include rounded();
     margin-bottom: 10px;
   }
+  #search_icon{
+    position: absolute;
+  }
   
   #advanced_search_icon{
-    background-color: lightGray;
+    background-color: $block_background_color;
     margin: 0px auto;
     width: 200px;
     padding: 5px;
@@ -64,6 +67,10 @@ div{
   /*---DROP DOWN ADVANCED SEARCH BAR ---*/
   #advanced_search_bar{
     border: 1px solid $border_color;
+    background-image: url("background.png");
+    position: absolute;
+    width: 80%;
+    min-width: 1024px;
     @include rounded();
     
     /*--- EACH INDIVIDUAL SEARCH BOX (TAGS/FRIENDS/LISTS) ---*/
@@ -87,9 +94,12 @@ div{
       .search_box {
         border: 1px solid $border_color;
         @include rounded();
-        height: 200px;
-  
-        .friend_selection,.list_selection {
+        height: 185px;
+      }
+    }
+    
+    #friends_search, #list_search {
+        .friend_selection, .list_selection {
           display: block;
           border: 1px solid $border_color;
         }
@@ -104,12 +114,40 @@ div{
           margin: 12px 25px;
         } 
       }
+    
+    #tags_search .search_box{
+      #tag_input {
+        height: 30px;
+        border: 1px solid $border_color;
+        padding-top: 10px;
+        label {
+          float: left;
+          width: 30%;
+          text-align: center;
+           // padding-right: 5%;
+        }
+        input {
+          width: 65%;
+        }
+     } 
+      .approved_tag {
+        display: block;
+        float: left;
+        background-color: $block_background_color;
+        @include rounded(5px);
+        margin: 5px;
+        
+        label {
+          float: left;
+          padding: 2px 10px;
+        }
+      }
     }
   }
 }
 
 #header{
-	height: 100px;
+  clear: both;
 	padding: 20px;
 	
 	.title {
@@ -119,16 +157,33 @@ div{
 }
 
 #nav_bar{
-  margin: 0px auto;
-  text-align: center;
-  font-size: $font-size+1;
+  //margin: 0px auto;
+  //text-align: center;
+  //font-size: $font-size+1;
+  float: right;
+  color: white;
   ul {
     list-style-type: none;
-    margin: 0;
+    display: block;
   }  
   li {
-      display: inline;
-      padding: 0px 100px;
+      float: right;
+      width: 100px;
+      text-align: center;
+      padding: 5px 10px;
+      margin: 0px 5px;
+      background-color: $title_underline_color;
+      
+      a:active {
+        color: yellow;
+      }
+      a:link, a:visited{
+        color: white;
+        text-decoration: none;
+      }
+      a:hover{
+        
+      }
   }
 }
 

@@ -7,11 +7,11 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+    <%= render :partial => "layouts/nav_bar"%>
     <%= render :partial => "layouts/header"%>
     <% if @user %>
         <div class='center'>
             <%= render :partial => "simple_search/search"%>
-            <%= render :partial => "layouts/nav_bar"%>
         </div>
     <% end %>
     <%= yield %>
