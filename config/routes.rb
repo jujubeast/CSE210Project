@@ -37,6 +37,9 @@ App::Application.routes.draw do
   match "/login", :to => "login#show"
   match "/homepage/:access_token", :to => "login#login"
 
+   match "/showcurrlists", :to => "lists#show_curr_lists", :as => :show_curr_lists
+   match "/showpossiblelists", :to => "lists#show_possible_lists", :as => :show_possible_lists
+
   # this line giving error while running the server
   #resources :sessions, :only [:new, :create, :destroy]
   
