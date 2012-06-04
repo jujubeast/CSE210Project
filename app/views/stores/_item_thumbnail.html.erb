@@ -93,16 +93,34 @@
 		cursor: pointer;
 	}
 
+	.hidden_menu:hover {
+		background-color: #0000cc;
+		cursor: pointer;
+	}
+
+	.revealed_menu {
+		background-color: #0000cc;
+		cursor: pointer;
+	}
+
 
 </style>
 <script type="text/javascript">
 $(document).ready(function() {	
-		$("div[id^='store_']").hover(function() {
-			var id = $(this).attr("id");
-			$("#" + id + "_menu").slideDown();
-		}, function() {
-			var id = $(this).attr("id")
-			$("#123" + id + "_menu").slideUp();
+		$("#store_<%=item_thumbnail.id%>").live('click', function() {
+			var id = $(this).attr("id");	
+			if($(this).hasClass("hidden_menu"))
+			{
+				$(this).removeClass("hidden_menu");
+				$(this).addClass("revealed_menu");
+				$("#" + id + "_menu").slideDown();
+			}
+			else
+			{
+				$(this).removeClass("revealed_menu");
+				$(this).addClass("hidden_menu");
+				$("#" + id + "_menu").slideUp();
+			}
 		});
 
 		$("#add_to_lists_<%=item_thumbnail.id%>").live('click', function(e) {
@@ -160,7 +178,7 @@ $(document).ready(function() {
 </script>
 
 <div id="div" class='item_thumbnail'>
-	<%= div_for item_thumbnail do %><img id="img1" src="../../assets/plus.png" /><% end %>
+	<div id="store_<%= item_thumbnail.id %>" class="hidden_menu"><img id="img1" src="../../assets/plus.png" /></div>
 	<ul>
 		<li>
 			<a href="#">aaaaaa</a>
