@@ -64,15 +64,36 @@ class ListsController < ApplicationController
   end
 
   #display lists on store drop down menu
-  def display_lists
+  def show_curr_lists
+      @curr_lists = List.find_lists_by_curr_store(params[:store_id], session[:user_id])
 
-      @curr_list_names = List.find_lists_by_curr_store(params[:store_id], session[:user_id])
+      if(@curr_lists.empty?)
+          @not_on_lists = List.find_users_lists(session[:user_id])
+      else
+          list_names = Array.new
+          @curr_lists.each do |list|
+            list_names.push(list.name)
+          end
+          @not_on_lists = List.find_all_other_lists(list_names, session[:user_id])
+      end
 
-      @not_on_lists = List.find_all_other_lists(@curr_list_names, session[:user_id])
+      @store_id = params[:store_id]
 
       respond_to do |format|
         format.html {redirect_to home_path(session[:user_id])}
         format.js
       end
   end
+
+  def show_possible_lists
+      @curr_lists = List.find_lists_by_curr_store(params[:store_id], session[:user_id])
+
+      @store_id = params[:store_id]
+
+      respond_to do |format|
+        format.html {redirect_to home_path(session[:user_id])}
+        format.js
+      end 
+  end
+
 end

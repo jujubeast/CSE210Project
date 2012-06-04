@@ -33,7 +33,7 @@ class SimpleSearchController < ApplicationController
     simpleSearch = false
       
     #store simple search result on search_string
-    simpleSearchResult = Store.where("name like ?  or detail_info like ?", search_string, search_string).select("id").all
+    simpleSearchResult = Store.where("name like ?  or detail_info like ?", "%" + search_string + "%", "%" + search_string + "%").select("id").all
     
     #print "Printing simpleSearchResult \n"    
     #simpleSearchResult.each do |store|
@@ -123,6 +123,7 @@ class SimpleSearchController < ApplicationController
     render 'simple_search/search'
   end
 
+  #renders Advanced Search bar with user's friends lists in container
   def search_advanced
     puts 'IN SEARCH_ADVANCED #####'
     @friends = getFriendsList(session[:access_token]) #mock friends (actually just users in the database)
@@ -130,12 +131,14 @@ class SimpleSearchController < ApplicationController
     render :partial=>"simple_search/advanced_search_bar", :locals=>{ :friends=>@friends }  
   end
   
+  #Retrieves friend's lists when selected
   def get_list
     @friend = User.find(params[:friend_id].split(".")[1])
     @list = List.find_users_lists(@friend.id)
     render :partial=>"simple_search/list_selection", :collection => @list, :locals => { :friend => @friend }
   end
   
+  #Uses FB API to retrieve friends list
   def getFriendsList(access_token)
     user = FbGraph::User.me(access_token)
     user = user.fetch

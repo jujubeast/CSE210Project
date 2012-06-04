@@ -1,7 +1,7 @@
 <div id ="search_results">
     <% if @view_data %>
         <div class='title'>
-            <h2>search results</h2>
+            <h2>Search Results</h2>
         </div>
         <%= render :partial => "stores/item_thumbnail", :collection => @view_data,  :locals => { :stores => @stores } || 'No stores in this list' %>
     <% end %>

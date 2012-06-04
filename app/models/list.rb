@@ -10,7 +10,7 @@ class List < ActiveRecord::Base
 		 curr_list_names = List.find(:all, 
                                   :conditions => ["list_users.user_id = ? and list_stores.store_id=?", user_id, store_id],
                                   :joins => [:list_users, :list_stores],
-                                  :select => "lists.name").map {|x| x.name}
+                                  :select => "lists.name, lists.id")
 	end
 
 
@@ -19,7 +19,7 @@ class List < ActiveRecord::Base
 		list_names = List.find(:all,
                                :conditions => ["lists.name NOT IN (?) and list_users.user_id = ?", curr_lists, user_id], 
                                :joins => [:list_users],
-                               :select => "lists.name").map {|x| x.name}
+                               :select => "lists.name, lists.id")
 	end
 
 	#finds lists to display in views given ARRAY of list ids

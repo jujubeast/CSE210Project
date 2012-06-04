@@ -14,6 +14,10 @@
 	#div div label {
 
 	}
+
+	.storemenu {
+
+	}
 	#div ul li {
 		float: center;
 		position: relative;
@@ -33,7 +37,6 @@
 	}
 	#div ul li ul li {
 		display: block;
-		height: 26px;
 		line-height: 26px;
 		background-color: #dddddd;
 		padding: 0px 12px;
@@ -69,38 +72,37 @@
 	}
 </style>
 <script type="text/javascript">
-	$(function() {
-		$("#div ul li").hover(function() {
-			$(this).children("ul").slideDown()
+$(document).ready(function() {	
+		$("div[id^='store_']").hover(function() {
+			var id = $(this).attr("id");
+			$("#" + id + "_menu").slideDown();
 		}, function() {
-			$(this).children("ul").slideUp()
-		})
-	})
+			var id = $(this).attr("id")
+			$("#123" + id + "_menu").slideUp();
+		});
+});
+
 </script>
 
-<div id="div"  class='item_thumbnail' onmouseover="show(<%= item_thumbnail.id %>)" onmouseout="hide(<%= item_thumbnail.id %>)" >
-	<img id="img1"  src="../../assets/plus.png" />
+<div id="div" class='item_thumbnail'>
+	<%= div_for item_thumbnail do %><img id="img1" src="../../assets/plus.png" /><% end %>
 	<ul>
 		<li>
 			<a href="#">aaaaaa</a>
-			<ul>
-				<% if stores %>
-				<% if stores.include? item_thumbnail %>
-
+			<ul id="store_<%= item_thumbnail.id %>_menu" class="storemenu">
 				<li>
-					<%= link_to 'Remove From List', remove_from_list_path(current_list.id, item_thumbnail.id) %>
+					<%= link_to "Add to List", {:controller => "lists", :action => "show_curr_lists", :store_id => item_thumbnail.id}, :remote => true,  :id => "show_menu", :store_id => item_thumbnail.id %>
 				</li>
-				<% else %>
+				<div id="add_lists_<%= item_thumbnail.id %>"></div>
 				<li>
-					<%= link_to 'Add to List', add_to_list_path(current_list.id, item_thumbnail.id) %>
+					<%= link_to "Remove From List", {:controller => "lists", :action => "show_possible_lists", :store_id => item_thumbnail.id}, :remote => true,  :id => "show_menu", :store_id => item_thumbnail.id %>
 				</li>
-				<% end %>
-				<% end %>
+				<div id="remove_lists_<%= item_thumbnail.id %>"></div>
 				<li>
 					<a href="#">View Reviews</a>
 				</li>
 				<li>
-					<a href="#">Add to favoriate list</a>
+					<a href="#">Add to Favorites</a>
 				</li>
 				<li>
 					<a href="#">BookMark</a></li
