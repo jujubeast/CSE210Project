@@ -1,5 +1,13 @@
-<ul id='nav_bar'>
-    <li><%= link_to "my page",  :action => "show", :controller => 'users', :id => @user.id %></li>
-    <li><%= link_to "add restaurants", :action => 'new', :controller => 'stores', :id => @user.id%></li>
-    <li>everything</li>
-</ul>
+<div id='nav_bar'>
+	<ul>
+		<li>
+			<%= link_to "my page",  :action => "show", :controller => 'users', :id => @user.id %>
+		</li>
+		<li>
+			<%= link_to "add restaurants", :action => 'new', :controller => 'stores', :id => @user.id%>
+		</li>
+		<li>
+			everything
+		</li>
+	</ul>
+</div>

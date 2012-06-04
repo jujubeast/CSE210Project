@@ -22,6 +22,19 @@ var advanced_search_div = '#advanced_search_bar';
 
 
 $(document).ready(function() {
+	
+	$('#tag_value').live('keypress', function(event){
+		event.preventDefault();
+		if(event.which == 13){
+			$.ajax({
+				url : "/search/approve_tag",
+				success : function(html) {
+					$('#approved_tags').append(html);
+				}
+			});
+		}
+	});
+	
 	$(display_advanced_search_bar).click(function(event) {
 		event.preventDefault(); // Prevent link from following its href
 		

@@ -1,6 +1,12 @@
 <div id='tags_search'>
 	<h3>Search Tags</h3>
-	<div class='search_box'></div>
+	<div class='search_box'>
+        <div id ='tag_input'>
+            <%=label_tag 'Tag'%>
+            <%= text_field_tag 'tag_value', 'Enter search tag here...', :size => 30%>
+        </div>
+        <div id='approved_tags'></div>
+	</div>
 </div>
 
 <div id='friends_search'>

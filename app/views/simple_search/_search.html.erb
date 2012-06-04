@@ -1,7 +1,7 @@
 <div id='search_wrapper'>
 	<%= form_tag("/search", :method => "search") do %>
-	   <%= text_field_tag :searchfor, nil, :class => 'search_bar' %>
-	   <%= image_submit_tag("search_icon.png") %>
+	   <%= text_field_tag :searchfor, nil, :id => 'search_bar' %>
+	   <%= image_submit_tag "search_icon.png", :id=>'search_icon' %>
 	   <br />
 	   <div id='advanced_search_icon'>advanced search <%= image_tag "navigate_down.png", :height => '12', :width => '15' %></div>
 	   <div id='advanced_search_bar' class='hidden'></div>

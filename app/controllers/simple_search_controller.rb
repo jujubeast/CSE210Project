@@ -154,6 +154,18 @@ class SimpleSearchController < ApplicationController
   end
   
   #Uses FB API to retrieve friends list
+  def approve_tag
+    #check to see if params[:tag_value] matches any tag that is in the database
+    #if matches, return tag object.
+    if Tag.exists?(:name => params[:tag_value])
+      @tag = Tag.where(:name => params[:tag_value]).first
+    else
+      @tag = nil
+    end
+    #if tag does not exist, don't return a tag. 
+    render :partial=>'simple_search/approved_tag', :locals => { :tag => @tag }
+  end 
+
   def getFriendsList(access_token)
     user = FbGraph::User.me(access_token)
     user = user.fetch
