@@ -98,4 +98,22 @@ class ListsController < ApplicationController
       #end 
   end
 
+  #return list of lists that this store belongs to, and owner of those lists
+  def show_curr_listers
+
+    lists = params[:lists]
+
+    lists.each do |list|
+      print list
+    end
+
+    @curr_lists = List.find(:all, 
+                            :conditions => ["lists.id in (?) and list_stores.store_id=?", params[:lists], params[:store_id]],
+                            :joins => [:list_users, :list_stores],
+                            :select => "lists.name, lists.id")
+
+    render :partial => "lists/show_curr_listers"
+
+  end
+
 end

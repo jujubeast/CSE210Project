@@ -19,7 +19,7 @@
 		<div class='title'>
 			<h2><%= @current_list.name %></h2>
 		</div>
-		<%= render :partial => "stores/item_thumbnail", :collection => @stores, :locals => { :stores => @stores, :current_list => @current_list } || "No stores in this list" %>
+		<%= render :partial => "stores/item_thumbnail", :collection => @stores, :locals => { :stores => @stores, :current_list => @current_list, :lists => nil} || "No stores in this list" %>
 		<% end %>
 	</div>
 </div>
@@ -27,7 +27,7 @@
 <div id='test'>
 	<h2>Available Stores (Simulated Search Results)</h2>
 	<% if @available_stores %>
-	<%= render :partial => "stores/item_thumbnail", :collection => @available_stores, :locals => { :stores => @stores, :current_list => @current_list } || 'No stores Available.' %>
+	<%= render :partial => "stores/item_thumbnail", :collection => @available_stores, :locals => { :stores => @stores, :current_list => @current_list, :lists => nil } || 'No stores Available.' %>
 	<% end %>
 </div>
 

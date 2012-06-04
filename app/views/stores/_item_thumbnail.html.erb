@@ -32,7 +32,7 @@
 		left: 40px;
 		display: none;
 		width: 120px;
-		background: #CC0000;
+		background: #808080;
 		z-index: 900;
 	}
 	#div ul li ul li {
@@ -94,12 +94,12 @@
 	}
 
 	.hidden_menu:hover {
-		background-color: #0000cc;
+		background-color: yellow;
 		cursor: pointer;
 	}
 
 	.revealed_menu {
-		background-color: #0000cc;
+		background-color: yellow;
 		cursor: pointer;
 	}
 
@@ -173,6 +173,41 @@ $(document).ready(function() {
 			}
 			return false;
 		});
+
+		$("#see_listers_<%=item_thumbnail.id%>").live('click', function(e) {
+
+			if($(this).hasClass("hidden_lists"))
+			{
+				$(this).removeClass("hidden_lists");
+				$(this).addClass("revealed_lists");
+
+				var list_data = new Array;
+
+				<% if lists %>
+					<% lists.each do |list| %>
+						list_data.push(<%= list %>)
+					<% end %>
+				<% end %>
+
+				$.ajax( {
+					url: "/showcurrlisters",
+					data: {
+						lists : list_data,
+						store_id: <%= item_thumbnail.id %>
+					},
+					success : function(html) {
+						$("#see_listers_<%= item_thumbnail.id %>_list").html(html);		
+					}
+				});
+			}
+			else
+			{
+				$(this).removeClass("revealed_lists");
+				$(this).addClass("hidden_lists");
+				$("#see_listers_<%= item_thumbnail.id %>_list").html('');
+			}
+			return false;
+		});
 });
 
 </script>
@@ -198,7 +233,12 @@ $(document).ready(function() {
 					<a href="#">Add to Favorites</a>
 				</li>
 				<li>
-					<a href="#">BookMark</a></li
+					<a href="#">BookMark</a>
+				</li>
+				<li>
+					<div id="see_listers_<%=item_thumbnail.id %>" class="hidden_lists">See Listers</div>
+				</li>
+					<div id="see_listers_<%=item_thumbnail.id %>_list"></div>
 			</ul>
 		</li>
 	</ul>

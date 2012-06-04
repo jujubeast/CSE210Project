@@ -39,6 +39,7 @@ App::Application.routes.draw do
 
    match "/showcurrlists", :to => "lists#show_curr_lists", :as => :show_curr_lists
    match "/showpossiblelists", :to => "lists#show_possible_lists", :as => :show_possible_lists
+   match "/showcurrlisters", :to => "lists#show_curr_listers", :as => :show_curr_listers
 
   # this line giving error while running the server
   #resources :sessions, :only [:new, :create, :destroy]

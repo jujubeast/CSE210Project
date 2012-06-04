@@ -16,15 +16,29 @@ class SimpleSearchController < ApplicationController
     search_string = params[:searchfor]
     search_lists = Array.new
     tag_lists = Array.new
+
     params.each do |parameter|
-       param_str = parameter.to_s
-       if param_str[0,5] == "list."
-         search_lists.push(param_str[0..-2].split(".")[1])
+       #param_str = parameter.to_s
+       #seems that parameter[0] contains the key, in this case "list.id", where id is some number
+       #so we can just parse that
+       print parameter[0]
+       print "\n"
+       if parameter[0][0,5] == "list."
+         search_lists.push(parameter[0].split(".")[1].to_s)
        end
-       if param_str[0,4] == "tag."
-         tag_lists.push(param_str[0..-2].split(".")[1])
+       if parameter[0][0,4] == "tag."
+         tag_lists.push(parameter[0].split(".")[1].to_s)
        end
     end
+
+
+
+    search_lists.each do |list|
+      print "Looking at lists"
+      print "\n"
+      print list
+    end
+
     #search list now contains list of list ids and tag_ids to search over and search_string contains the search text
     
     #initialize searchResult = null
@@ -120,6 +134,7 @@ class SimpleSearchController < ApplicationController
 
     #return searchResults
     @view_data = actualSearchResult
+    @lists = search_lists
     render 'simple_search/search'
   end
 
