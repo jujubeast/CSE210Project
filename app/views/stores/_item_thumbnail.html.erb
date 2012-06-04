@@ -70,6 +70,30 @@
 		width: 20px;
 		height: 20px;
 	}
+
+	.hidden_lists {
+		color: #000000;
+		text-decoration: none;
+		font-size: 12px;
+	}
+
+	.hidden_lists:hover {
+		color: #cc0000;
+		cursor: pointer;
+	}
+
+	.revealed_lists {
+		color: #0000cc;
+		text-decoration: none;
+		font-size: 12px;
+	}
+
+	.revealed_lists:hover {
+		color: #cc0000;
+		cursor: pointer;
+	}
+
+
 </style>
 <script type="text/javascript">
 $(document).ready(function() {	
@@ -86,6 +110,7 @@ $(document).ready(function() {
 			if($(this).hasClass("hidden_lists"))
 			{
 				$(this).removeClass("hidden_lists");
+				$(this).addClass("revealed_lists");
 				$.ajax( {
 					url: "/showpossiblelists",
 					data: {
@@ -98,6 +123,7 @@ $(document).ready(function() {
 			}
 			else
 			{
+				$(this).removeClass("revealed_lists");
 				$(this).addClass("hidden_lists");
 				$("#add_to_lists_<%= item_thumbnail.id %>_menu").html('');
 			}
@@ -110,6 +136,7 @@ $(document).ready(function() {
 			if($(this).hasClass("hidden_lists"))
 			{
 				$(this).removeClass("hidden_lists");
+				$(this).addClass("revealed_lists");
 				$.ajax( {
 					url: "/showcurrlists",
 					data: {
@@ -122,6 +149,7 @@ $(document).ready(function() {
 			}
 			else
 			{
+				$(this).removeClass("revealed_lists");
 				$(this).addClass("hidden_lists");
 				$("#remove_from_lists_<%= item_thumbnail.id %>_menu").html('');
 			}
