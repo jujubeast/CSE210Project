@@ -31,6 +31,7 @@ class LoginController < ApplicationController
     id = user.id
     
     session[:user_id] = id
+    session[:access_token] = params[:access_token]
     
     redirect_to('/users/' + id.to_s, :session => session)
   end
