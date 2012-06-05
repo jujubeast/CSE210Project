@@ -21,9 +21,9 @@ ul li{
 #div ul li ul{
 	position:absolute;
 	top:0px;
-	left:40px;
+	left:20px;
 	display:none;
-	width:120px;
+	width:160px;
 	background:#CC0000;
 	z-index: 900;
 	}
@@ -42,11 +42,7 @@ ul li{
 #div ul li a:hover{
 	color:#cc0000;}
 	#img1{
-	float:right;
-	position:relative;
-	width:20px;
-	 height:20px; 
-	 z-index: 1000;
+	
 }
 #img2{
 	float:center;
@@ -56,13 +52,10 @@ ul li{
 	 height:180px; 
 }
 #img3{
-	float:left;
-	margin-left:-20px;
-	width:20px;
-	 height:20px;  
-	 z-index: 1000;
+	
 }
 </style>
+<%= stylesheet_link_tag "default.css" %>
 <script type="text/javascript">
   $(function(){
     $("#div ul li").hover(
@@ -70,46 +63,97 @@ ul li{
       function(){$(this).children("ul").slideUp()}
     )
   })
-  function changeImage1(){
-  	var image1 = document.getElementById("img1");
-  	//alert(image1.src);
+  function changeImage1(id){
+  	var image1 = document.getElementById("img1"+id);
+  //	alert(id);
   	if(image1.src=="http://localhost:3000/assets/lock.png"){
   		image1.src = "../../assets/plus.png";
   	}else{
   	image1.src = "../../assets/lock.png";}
+  	$.prompt("Use Ajax to get favor?",{
+	callback: mycallbackform,
+	buttons: { OK:true, Cancel:false}
+});
   }
-  function changeImage2(){
-  	var image1 = document.getElementById("img3");
+  function changeImage2(id){
+  	var image1 = document.getElementById("img3"+id);
   	//alert(image1.src);
   	if(image1.src=="http://localhost:3000/assets/lock.png"){
   		image1.src = "../../assets/plus.png";
   	}else{
   	image1.src = "../../assets/lock.png";}
+  	$.prompt("Use Ajax to send bookmark info?",{
+	callback: mycallbackform,
+	buttons: { OK:true, Cancel:false}
+});
   }
 </script>
+<script LANGUAGE="Javascript">
+function openwin()
+{
+	// $.getJSON('demoajax.js',function(json){
+// 					
+					// var str = 'Test with a select populated by json data:<br /><select name="myfield" id="myfield">';
+					// $.each(json,function(i,obj){
+						// str += '<option value="'+ obj.value +'">'+ obj.name +'</option>';
+					// });
+					// str += '</select>';
+// 					
+					// $.prompt(str,{
+						// callback: function(e,v,m,f){ //just print out the selection
+							// $.prompt('You chose value '+ f.myfield);
+						// }
+					// });
+// 					
+				// });
 
+// How could I get a list of object here through back end?	
+var txt = " <select name='alertName' id='alertName' > ";
+for(var i= 0;i< 10;i++)
+{
+	txt += " <option value="+i+" >"+i+"</option> ";
+}
+txt +=" </select> ";
+	//alert(txt);
+$.prompt(txt,{
+	callback: mycallbackform,
+	buttons: { OK:true, Cancel:false}
+});
+	//window.open("new.html.erb", "newwindow", "height=100, width=400, toolbar=no , menubar=no, scrollbars=no, resizable=no, location=no, status=no");
+}
+function mycallbackform(e,v,m,f){
+	//$.prompt('You chose value '+ f.myfield[0]);
+	alert(f.alertName);
+	// invode controller to pass list id here
+}
+</script>
+ <!-->
+ 	Is there any book mark or favoriate things relavant with stores?
+ 	</-->
 <div id="div"  class='item_thumbnail' onmouseover="show(<%=  item_thumbnail.id %>)" onmouseout="hide(<%=  item_thumbnail.id %>)" >
-<img id="img1"  src="../../assets/plus.png" onclick="changeImage1()" />
+<img id="img1<%=  item_thumbnail.id %>" style="float:right;position:relative;width:20px;height:20px; z-index: 1000;"  src="../../assets/plus.png" onclick="changeImage1(<%=  item_thumbnail.id %>)" />
 	<ul>
   <li><a href="#">aaaaaa</a>
     <ul>
     	<% if stores %>
 	<% if stores.include? item_thumbnail %>
-      <li><%= link_to 'Remove From List', remove_from_list_path(params[:cur_list], item_thumbnail.id) %></li>
+      <li><%= link_to 'Remove From Current List', remove_from_list_path(params[:cur_list], item_thumbnail.id) %></li>
       <% else %>
-	<li><%= link_to 'Add to List', add_to_list_path(params[:cur_list], item_thumbnail.id) %></li>
+      
+	<li><%= link_to 'Add to Current List', add_to_list_path(params[:cur_list], item_thumbnail.id) %></li>
 	<% end %>
 	<% end %>
-      <li><a href="#">View Reviews</a></li>
-      <li><a href="#">Add to favoriate list</a></li>
-      <li><a href="#">BookMark</a></li
+ <li><a onclick="openwin()">Add to Other Lists</a></li>
+  <li><a onclick="changeImage1()">Add to Favoriate list</a></li>
+      <li><%= link_to 'View Review', show_store_path(item_thumbnail.id) %></li> 
+      <li><a onclick="changeImage2()">BookMark</a></li
       
     </ul>
   </li>
 </ul>
 <div>
 	<img id="img2" src="../../assets/plus.png" />
-	<img id="img3" onclick="changeImage2()" src="../../assets/plus.png" />
+	<img id="img3<%=  item_thumbnail.id %>" style="float:left;margin-left:-20px;width:20px; height:20px;   z-index: 1000;" onclick="changeImage2(<%=  item_thumbnail.id %>)" src="../../assets/plus.png" />
 <%= item_thumbnail.name %>
 </div>
 	

@@ -8,7 +8,7 @@ development:
   database: mydb
   pool: 5
   username : root
-  password : "222222"
+  password : jill
   timeout: 5000
 
 # Warning: The database defined as "test" will be erased and
