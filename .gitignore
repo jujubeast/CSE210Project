@@ -2,6 +2,8 @@
 ##################
 *.tmp
 tmp/*
+config/database.yml
+app/views/login/index.html.erb
 
 # Compiled source #
 ###################
