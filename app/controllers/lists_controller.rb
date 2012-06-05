@@ -11,18 +11,22 @@ class ListsController < ApplicationController
 	end
 
 	def create
-    	@list = List.new(params[:list])
-
+      @list = List.new(params[:list])
       respond_to do |format|
-     	if @list.save
-          @list_user = @list.list_users.create(:user_id => session[:user_id])
-        	format.html { redirect_to default_home_path(session[:user_id], @list.id), :notice => 'List was successfully created.' }
+        if @list.save
+          # get curent user
+          user_id = session[:user_id]
+          user_entity = UsersHelper::UserEntity.new
+          user_entity.find_by_id(user_id)
+          user_entity.add_new_list(@list)
+
+          format.html { redirect_to default_home_path(session[:user_id], @list.id), :notice => 'List was successfully created.' }
           format.json { render :json => @list, :status => :created, :location => @list }
-      	else
-        	#format.html { render :action => "new" }
-        	format.json { render :json => @list.errors, :status => :unprocessable_entity }
-      	end
-    	end
+        else
+          #format.html { render :action => "new" }
+          format.json { render :json => @list.errors, :status => :unprocessable_entity }
+        end
+      end
   	end
 
     def add
@@ -36,6 +40,7 @@ class ListsController < ApplicationController
     end
 
     def remove
+        # XXX ??? is this method not used?
         @list = List.find(params[:list_id])
 
         respond_to do |format|
@@ -47,21 +52,25 @@ class ListsController < ApplicationController
     end
 
     def destroy
-    @list = List.find(params[:id])
-    @list.destroy
-    default_list_id = ListUser.find_default_list(session[:user_id])
+      list_id = params[:id]
+      user_id = session[:user_id]
+      user_entity = UsersHelper::UserEntity.new
+      user_entity.find_by_id(user_id)
+      user_entity.delete_user_list(list_id)
+      
+      default_list_id = user_entity.find_user_default_list
+      #default_list_id = ListUser.find_default_list(session[:user_id])
 
-    respond_to do |format|
-      if default_list_id
-        format.html { redirect_to default_home_path(session[:user_id], default_list_id) }
-        format.json { head :no_content }
-      else
-        format.html { redirect_to home_path(session[:user_id]) }
-        format.json { head :no_content }
+      respond_to do |format|
+        if default_list_id
+          format.html { redirect_to default_home_path(session[:user_id], default_list_id) }
+          format.json { head :no_content }
+        else
+          format.html { redirect_to home_path(session[:user_id]) }
+          format.json { head :no_content }
+        end
       end
-
     end
-  end
 
   #display lists on store drop down menu
   def show_possible_lists

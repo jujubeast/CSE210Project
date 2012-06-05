@@ -1,7 +1,5 @@
 class ListUsersController < ApplicationController
 
-
-
 	def new
 		@list_user = ListUser.new
 		respond_to do |format|

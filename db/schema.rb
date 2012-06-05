@@ -44,7 +44,7 @@ ActiveRecord::Schema.define(:version => 20120511022350) do
 
   create_table "tags", :force => true do |t|
     t.string   "name",          :limit => 128, :null => false
-    t.integer  "user_id",       :null => false
+    t.integer "category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -82,9 +82,10 @@ ActiveRecord::Schema.define(:version => 20120511022350) do
     t.datetime "updated_at"
   end
 
-  create_table "stores_tags", :force => true do |t|
+  create_table "store_tag_users", :force => true do |t|
     t.integer  "store_id",   :null => false
     t.integer  "tag_id",     :null => false
+    t.integer  "user_id",     :null => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
