@@ -7,13 +7,74 @@
 
 <%= link_to 'Add Store', addstore_path, :current_list_id => params[:cur_list] %>
 <br/>
+<%= stylesheet_link_tag "default.css" %>
+<script LANGUAGE="Javascript">
+function createnewlist()
+{
+	
+	// var xmlHttpReq = false;
+    // var self = this;
+    // // Mozilla/Safari
+    // if (window.XMLHttpRequest) {
+        // self.xmlHttpReq = new XMLHttpRequest();
+    // }
+    // // IE
+    // else if (window.ActiveXObject) {
+        // self.xmlHttpReq = new ActiveXObject("Microsoft.XMLHTTP");
+    // }
+    // self.xmlHttpReq.open('POST', strURL, true);
+    // self.xmlHttpReq.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+    // self.xmlHttpReq.onreadystatechange = function() {
+        // if (self.xmlHttpReq.readyState == 4) {
+            // updatepage(self.xmlHttpReq.responseText);
+        // }
+    // }
+    // self.xmlHttpReq.send(getquerystring());
+	// $.getJSON('demoajax.js',function(json){
+// 					
+					// var str = 'Test with a select populated by json data:<br /><select name="myfield" id="myfield">';
+					// $.each(json,function(i,obj){
+						// str += '<option value="'+ obj.value +'">'+ obj.name +'</option>';
+					// });
+					// str += '</select>';
+// 					
+					// $.prompt(str,{
+						// callback: function(e,v,m,f){ //just print out the selection
+							// $.prompt('You chose value '+ f.myfield);
+						// }
+					// });
+// 					
+				// });
 
+// How could I get a list of object here through back end?	
+var txt = "<table> <tr> <td colspan='2' align='center'>Create a new list</td> </tr>"+
+"<tr> <td>List Name:</td><td><input type='text' /></td></tr>"+
+"<tr> <td>Privacy:</td><td>"+"<select>"+ "<option>Only to Owners</option>"+
+	"		<option>Shared with friends</option>"+
+	"		<option>Visible for all  </option>"+"</select></td>	"+" </tr>"+"<tr><td>Owner:</td><td>Justin</td></tr>"+" </table>";
+	//alert(txt);
+	//alert(txt);
+$.prompt(txt,{
+	callback: mycallbackform,
+	buttons: { OK:true, Cancel:false}
+});
+	//window.open("new.html.erb", "newwindow", "height=100, width=400, toolbar=no , menubar=no, scrollbars=no, resizable=no, location=no, status=no");
+}
+function mycallbackform(e,v,m,f){
+	//$.prompt('You chose value '+ f.myfield[0]);
+	alert(f.alertName);
+	// invode controller to pass list id here
+}
+</script>
 <div id="left_nav">
 
 	<div class="title">
 
 		<h2>My Lists</h2>
-		<span class='right_button'><%= link_to image_tag("plus.png", :border=>0, :size => "20x20", :alt => "Add List"), createlist_path %>
+		<span>
+			<img  onclick="createnewlist()" style="float:right;width:20px; height:20px;" src="../../assets/plus.png" />
+
+			
 			<br/>
 		</span>
 

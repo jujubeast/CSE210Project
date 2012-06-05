@@ -124,7 +124,7 @@ DEPENDENCIES
   json
   mini_magick
   mysql2
-  rails (~> 3.2.2)
+  rails (~> 3.2.3)
   sass-rails (~> 3.2.1)
   sqlite3
   uglifier (>= 1.0.3)
