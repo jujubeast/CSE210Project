@@ -101,10 +101,6 @@ class ListsController < ApplicationController
       @store_id = params[:store_id]
 
       render :partial => "lists/show_possible_lists"
-      #respond_to do |format|
-       # format.html {redirect_to home_path(session[:user_id])}
-        #format.js
-      #end
   end
 
   def show_curr_lists
@@ -113,10 +109,6 @@ class ListsController < ApplicationController
       @store_id = params[:store_id]
 
       render :partial => "lists/show_curr_lists" 
-      #respond_to do |format|
-       # format.html {redirect_to home_path(session[:user_id])}
-        #format.js
-      #end 
   end
 
   #return list of lists that this store belongs to, and owner of those lists
