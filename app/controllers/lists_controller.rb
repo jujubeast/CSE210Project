@@ -59,7 +59,7 @@ class ListsController < ApplicationController
     def destroy
       list_id = params[:id]
 
-      if List.check_deletable(list_id)
+      if ListLogic.check_deletable(list_id)
         user_id = session[:user_id]
         user_entity = UsersHelper::UserEntity.new
         user_entity.find_by_id(user_id)
@@ -86,26 +86,25 @@ class ListsController < ApplicationController
 
   #display lists on store drop down menu
   def show_possible_lists
-      @curr_lists = List.find_lists_by_curr_store(params[:store_id], session[:user_id])
+      @curr_lists = ListFinder.find_lists_by_curr_store(params[:store_id], session[:user_id])
 
       if(@curr_lists.empty?)
-          @not_on_lists = List.find_users_lists(session[:user_id])
+          @not_on_lists = ListFinder.find_users_lists(session[:user_id])
       else
           list_names = Array.new
           @curr_lists.each do |list|
             list_names.push(list.name)
           end
-          @not_on_lists = List.find_all_other_lists(list_names, session[:user_id])
+          @not_on_lists = ListFinder.find_all_other_lists(list_names, session[:user_id])
       end
 
       @store_id = params[:store_id]
-
       render :partial => "lists/show_possible_lists"
   end
 
   def show_curr_lists
-      @curr_lists = List.find_lists_by_curr_store(params[:store_id], session[:user_id])
 
+      @curr_lists = ListFinder.find_lists_by_curr_store(params[:store_id], session[:user_id])
       @store_id = params[:store_id]
 
       render :partial => "lists/show_curr_lists" 
@@ -114,8 +113,7 @@ class ListsController < ApplicationController
   #return list of lists that this store belongs to, and owner of those lists
   def show_curr_listers
 
-    @curr_lists = List.find_listers(params[:lists], params[:store_id])
-    
+    @curr_lists = ListFinder.find_listers(params[:lists], params[:store_id])
     render :partial => "lists/show_curr_listers"
   
   end
