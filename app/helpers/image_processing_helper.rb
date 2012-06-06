@@ -14,7 +14,7 @@ module ImageProcessingHelper
 
       @img = MiniMagick::Image.open(@img_tmp_file)
 
-      print @img + "\n"
+     # print @img + "\n"
 
       @img_width = @img['width']
       @img_height = @img['height']

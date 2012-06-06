@@ -24,9 +24,7 @@ module StoresHelper
       store_review = StoreReview.new
       Category.all.each do |c|
         store_review.add_category(c.category)
-        storetagusers = StoreTagUser.joins(:tag => :category) \
-          .select("name, count(*) as tag_num").where("category = ? and store_id = ?",c.category, store_id)
-          .group("tag_id,name").order("tag_num DESC")
+        storetagusers = StoreTagUser.joins(:tag => :category).select("name, count(*) as tag_num").where("category = ? and store_id = ?",c.category, store_id).group("tag_id,name").order("tag_num DESC")
         storetagusers.each do |s|
           store_review.add_tag(c.category, s.name)
         end

@@ -245,7 +245,11 @@ $(document).ready(function() {
 		</li>
 	</ul>
 	<div>
-		<img id="img2" src="../../assets/plus.png" />
+		<% if item_thumbnail.pic %>
+			<img id="img2" src=<%= item_thumbnail.pic %> />
+		<% else %>
+			<img id="img2" src="../../assets/plus.png" />
+		<% end %>
 		<img id="img3" src="../../assets/plus.png" />
 		<%= item_thumbnail.name %>
 	</div>
