@@ -32,9 +32,13 @@ module UsersHelper
     end
 
     def find_user_default_list
-      default_list_id =  @user.list_users[0].list.id
-      puts "default list id: " + default_list_id.to_s + "\n"  
-      return default_list_id    
+      if @user.list_users != nil and @user.list_users.size > 0
+        default_list_id =  @user.list_users[0].list.id
+        #puts "default list id: " + default_list_id.to_s + "\n"  
+        return default_list_id
+      else
+        return nil        
+      end  
     end
 
     def delete_user_list(list_id)

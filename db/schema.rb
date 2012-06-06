@@ -93,7 +93,7 @@ ActiveRecord::Schema.define(:version => 20120605231756) do
 
   create_table "tags", :force => true do |t|
     t.string   "name",        :limit => 128, :null => false
-    t.integer  "user_id",                    :null => false
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "category_id"

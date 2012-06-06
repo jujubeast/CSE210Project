@@ -50,7 +50,7 @@ class StoresController < ApplicationController
     store_entity.find_by_id(store_id)
 
     add_review_to_store(store_entity, user_id, "What we like", "like")
-    add_review_to_store(store_entity, user_id, "What we dislike:", "dislike")
+    add_review_to_store(store_entity, user_id, "What we dislike", "dislike")
     add_review_to_store(store_entity, user_id, "Environment", "env")
     add_review_to_store(store_entity, user_id, "Restaurant Type", "type")
     add_review_to_store(store_entity, user_id, "Restaurant Has", "has")
