@@ -11,13 +11,17 @@
 	   <div class='list'>
 		  <b><%= link_to list.name, default_home_path(user.id, list.id) %></b>
 		  <%= link_to "Edit", '#'%>
+		  <% if list.deletable == true %>
 		  <span class='right_button'><%= link_to image_tag("closev2.png", :border=>0, :size => "15x15", :alt => "Delete"), delete_list_path(list.id) %></span>
+		  <% end %>
 	   </div>
 	   <% else %>
 	   <div class='list selected'>
 	      <b><%= list.name %></b>
 		  <%= link_to "Edit", '#'%>
+		  <% if list.deletable == true %>
 		  <span class='right_button'><%= link_to image_tag("closev2.png", :border=>0, :size => "15x15", :alt => "Delete"), delete_list_path(list.id) %></span>
+		  <% end %>
 	   </div>
 	   <% end %>
 	<% end %>

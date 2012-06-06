@@ -24,6 +24,8 @@ class LoginController < ApplicationController
       registered_user.fb_id = user.identifier
       registered_user.picture_link = user.link #not sure about this
       registered_user.save
+
+      List.create_default_lists(registered_user.id)
       #@response = 'Congratulations! You are now a user of myHangoutss'
     end
     

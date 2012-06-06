@@ -12,6 +12,7 @@ class ListsController < ApplicationController
 
 	def create
       @list = List.new(params[:list])
+      @list.deletable = true
       respond_to do |format|
         if @list.save
           # get curent user
@@ -57,10 +58,13 @@ class ListsController < ApplicationController
 
     def destroy
       list_id = params[:id]
-      user_id = session[:user_id]
-      user_entity = UsersHelper::UserEntity.new
-      user_entity.find_by_id(user_id)
-      user_entity.delete_user_list(list_id)
+
+      if List.check_deletable(list_id)
+        user_id = session[:user_id]
+        user_entity = UsersHelper::UserEntity.new
+        user_entity.find_by_id(user_id)
+        user_entity.delete_user_list(list_id)
+      end
       
       # after delete, you need to reload the list so create
       # the new user which reload the list by default.
@@ -118,19 +122,10 @@ class ListsController < ApplicationController
   #return list of lists that this store belongs to, and owner of those lists
   def show_curr_listers
 
-    lists = params[:lists]
-
-    lists.each do |list|
-      print list
-    end
-
-    @curr_lists = List.find(:all, 
-                            :conditions => ["lists.id in (?) and list_stores.store_id=?", params[:lists], params[:store_id]],
-                            :joins => [:list_users, :list_stores],
-                            :select => "lists.name, lists.id")
-
+    @curr_lists = List.find_listers(params[:lists], params[:store_id])
+    
     render :partial => "lists/show_curr_listers"
-
+  
   end
 
 end

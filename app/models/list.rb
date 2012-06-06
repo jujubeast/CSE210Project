@@ -3,7 +3,7 @@ class List < ActiveRecord::Base
 	has_many :users, :through => :lists_users
 	has_many :list_stores, :dependent => :destroy
 	has_many :stores, :through => :lists_stores
-	attr_accessible :can_delete, :name
+	attr_accessible :deletable, :name
 
 	#finds all lists of the current user that the store designated by store_id is currently on
 	def self.find_lists_by_curr_store(store_id, user_id)
@@ -28,6 +28,50 @@ class List < ActiveRecord::Base
                         :conditions => ["list_users.user_id = ?", user_id],
                         :joins => [:list_users],
                         :select => "lists.name, lists.id")
+	end
+
+	def self.find_listers(lists, store_id)
+		results = List.find(:all, 
+                            :conditions => ["lists.id in (?) and list_stores.store_id=?", lists, store_id],
+                            :joins => [:list_users, :list_stores],
+                            :select => "lists.name, lists.id")
+	end
+
+	def self.create_default_lists(user_id)
+
+		been_to = List.new
+		been_to.name = "Places I've Been To"
+		been_to.deletable = false
+
+		want_to = List.new
+		want_to.name = "Places I Want To Go"
+		want_to.deletable = false
+
+		favorites = List.new
+		favorites.name = "Favorites"
+		favorites.deletable = false
+
+		user = User.find(user_id)
+
+		been_to_lu = ListUser.new
+		been_to_lu.list = been_to
+
+		want_to_lu = ListUser.new
+		want_to_lu.list = want_to
+
+		favorites_lu = ListUser.new
+		favorites_lu.list = favorites
+
+		user.list_users << been_to_lu
+		user.list_users << want_to_lu
+		user.list_users << favorites_lu
+
+	end
+
+	def self.check_deletable(list_id)
+		list = List.find(list_id)
+
+		list.deletable
 	end
 
 end
