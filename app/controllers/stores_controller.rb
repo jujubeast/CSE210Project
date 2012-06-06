@@ -10,15 +10,18 @@ class StoresController < ApplicationController
 
   def create
   	@store = Store.new(params[:store])
-    file_upload = params[:upload]
-    fileuploader = FileUploadHelper::ImageFileUploadHandler.new(file_upload)
-    fileuploader.save_to_disk
-    @disk_path = fileuploader.file_absolute_path
-    @tmp_disk_path = fileuploader.tmp_file_absolute_path
-    img_processing = ImageProcessingHelper::ImageProcessing.new(@tmp_disk_path, @disk_path)
-    img_processing.rescale_image_size
-    img_processing.save_back_image
-    @store.pic = fileuploader.file_web_path
+  	
+  	if (params[:upload] != nil and params[:upload].size > 0)
+      file_upload = params[:upload]
+      fileuploader = FileUploadHelper::ImageFileUploadHandler.new(file_upload)
+      fileuploader.save_to_disk
+      @disk_path = fileuploader.file_absolute_path
+      @tmp_disk_path = fileuploader.tmp_file_absolute_path
+      img_processing = ImageProcessingHelper::ImageProcessing.new(@tmp_disk_path, @disk_path)
+      img_processing.rescale_image_size
+      img_processing.save_back_image
+      @store.pic = fileuploader.file_web_path
+  	end
   	respond_to do |format|
   		if @store.save
   		  format.html {redirect_to show_store_path(@store), :notice => "Store successfully created"}
@@ -33,18 +36,6 @@ class StoresController < ApplicationController
     
     user_entity = UsersHelper::UserEntity.new
     @user = user_entity.find_by_id(session[:user_id])
-    
-    #@store = Store.find(params[:id])
-    #@user = User.find(session[:user_id])
-    #@highlights = {}
-    #Category.all.each do |c|
-    #  tags = Array.new
-    #  storetagusers = StoreTagUser.joins(:tag => :category).select("name, count(*) as tag_num").where("category = ? and store_id = ?",c.category, params[:id]).group("tag_id,name").order("tag_num DESC")
-    #  storetagusers.each do |s|
-    #    tags.append(s.name)
-    #  end 
-    #  @highlights[c.category] = tags
-    #end
   end
   
   def addreview
@@ -66,17 +57,6 @@ class StoresController < ApplicationController
     add_review_to_store(store_entity, user_id, "Good for", "good")
     add_review_to_store(store_entity, user_id, "What we like", "like")
 
-    #i = 1
-    #tag_name = "like#{i}"
-    #puts "index: "  + tag_name + "\n"
-    #while check_param_value_exists(tag_name) do
-    #  t = params[tag_name]
-    #  puts "Review: " + t + "\n"
-    #  store_entity.addreview(user_id, "What we like", t)
-    #  i += 1
-    #  tag_name = "like#{i}"
-    #end
-  
     respond_to do |format|
       if success
         format.html {redirect_to  show_store_path(store_id), :notice => "reviews successfully created"}
@@ -93,10 +73,8 @@ class StoresController < ApplicationController
   def add_review_to_store(store_entity, user_id, category_name, param_name_prefix)
     i = 1
     tag_name = param_name_prefix + "#{i}"
-    puts "index: "  + tag_name + "\n"
     while check_param_value_exists(tag_name) do
       t = params[tag_name]
-      puts "Review: " + t + "\n"
       store_entity.addreview(user_id, category_name, t)
       i += 1
       tag_name = param_name_prefix + "#{i}"
