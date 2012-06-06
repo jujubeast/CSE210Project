@@ -30,26 +30,24 @@ class ListsController < ApplicationController
   	end
 
     def add
-        puts "here\n"
-        puts "list_id: " + params[:list_id].to_s + "\n"
-        @list = List.find(params[:list_id])
-        puts "list_found_id: " + @list.id.to_s + "\n"
-        puts "list_found_name: " + @list.name + "\n"
-
+        #@list = List.find(params[:list_id])
+        list_id = params[:list_id]
+        list_entity = ListsHelper::ListsEntity.new(list_id)
         respond_to do |format|
-          puts "store_id: " + params[:store_id].to_s + "\n"
-          @list_store = @list.list_stores.create(:store_id => params[:store_id])
+          @list_store = list_entity.add_store_to_current_list(params[:store_id])
           
-          format.html { redirect_to default_home_path(session[:user_id], @list.id), :notice => 'List successfully edited'}
+          format.html { redirect_to default_home_path(session[:user_id], list_id), :notice => 'List successfully edited'}
           format.json { render :json => @list, :status => :edited, :location => @list}
         end
     end
 
     def remove
         # XXX ??? is this method not used?
-        @list = List.find(params[:list_id])
-
+        
+        @list = List.find()
         respond_to do |format|
+          list_entity.remove_store_from_current_list()
+
           @list_store = @list.list_stores.destroy()
           default_list_id = ListUser.find_default_list(session[:user_id])
           format.html { redirect_to default_home_path(session[:user_id], default_list_id), :notice => 'List successfully edited'}
@@ -64,6 +62,8 @@ class ListsController < ApplicationController
       user_entity.find_by_id(user_id)
       user_entity.delete_user_list(list_id)
       
+      # after delete, you need to reload the list so create
+      # the new user which reload the list by default.
       user_entity2 = UsersHelper::UserEntity.new
       user_entity2.find_by_id(user_id)
       default_list_id = user_entity2.find_user_default_list
@@ -71,11 +71,9 @@ class ListsController < ApplicationController
 
       respond_to do |format|
         if default_list_id
-          puts "here again\n"
           format.html { redirect_to default_home_path(session[:user_id], default_list_id) }
           format.json { head :no_content }
         else
-          puts "here alternative\n"
           format.html { redirect_to home_path(session[:user_id]) }
           format.json { head :no_content }
         end

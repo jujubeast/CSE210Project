@@ -102,10 +102,16 @@
 		<tr>
 			<td><%= category_name %> :</td>
 			<td>
-				<% @store_review.find_tags(category_name).each do |t| %>  
-				<%= t %>
-<% end 
-   end %>
+				<% tags_found = @store_review.find_tags(category_name)
+				   tags_found.each_with_index do |t, index|
+				   if index == tags_found.length - 1%>  
+				     <%= t%>
+			   <%  else %>
+				     <%= t%>, 
+			   
+               <% end
+                  end 
+        end %>
 			</td>
 		</tr>
 
