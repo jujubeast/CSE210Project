@@ -149,7 +149,7 @@ class SimpleSearchController < ApplicationController
   #Retrieves friend's lists when selected
   def get_list
     @friend = User.find(params[:friend_id].split(".")[1])
-    @list = List.find_users_lists(@friend.id)
+    @list = ListFinder.find_users_lists(@friend.id)
     render :partial=>"simple_search/list_selection", :collection => @list, :locals => { :friend => @friend }
   end
   
@@ -171,14 +171,18 @@ class SimpleSearchController < ApplicationController
     user = user.fetch
     friends_list = user.friends
     @friends = Array.new
+
+    user = UserFinder.find_by_user_id(session[:user_id])
+    @friends.push(user)
+
     
     friends_list.each do |friend|
       if User.exists?(:fb_id => friend.identifier)
-        user = User.where(:fb_id => friend.identifier).first
+        user = UserFinder.find_by_fb_id(friend.identifier)
         @friends.push(user)
       end
     end
-   
+    
     @friends
   end
 end

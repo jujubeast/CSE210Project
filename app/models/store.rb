@@ -5,6 +5,4 @@ class Store < ActiveRecord::Base
   	attr_accessible :been_to, :can_delete, :detail_info, :favorite, :image, :name, :pic,:street_1,:street_2,:city,:state,:zipcode,:telephone,:hours,:website
   	#finds stores given ARRAY of store ids
 
-    include StoreFinder
-    
 end

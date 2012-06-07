@@ -2,7 +2,7 @@ class ListsController < ApplicationController
   respond_to :js
 
 	def new
-		@list = List.new
+		@list = ListLogic.create_new_list(nil)
 
 		respond_to do |format|
   		format.html #new.html.erb
@@ -11,7 +11,7 @@ class ListsController < ApplicationController
 	end
 
 	def create
-      @list = List.new(params[:list])
+      @list = ListLogic.create_new_list(params[:list])
       @list.deletable = true
       respond_to do |format|
         if @list.save
@@ -38,20 +38,6 @@ class ListsController < ApplicationController
           @list_store = list_entity.add_store_to_current_list(params[:store_id])
           
           format.html { redirect_to default_home_path(session[:user_id], list_id), :notice => 'List successfully edited'}
-          format.json { render :json => @list, :status => :edited, :location => @list}
-        end
-    end
-
-    def remove
-        # XXX ??? is this method not used?
-        
-        @list = List.find()
-        respond_to do |format|
-          list_entity.remove_store_from_current_list()
-
-          @list_store = @list.list_stores.destroy()
-          default_list_id = ListUser.find_default_list(session[:user_id])
-          format.html { redirect_to default_home_path(session[:user_id], default_list_id), :notice => 'List successfully edited'}
           format.json { render :json => @list, :status => :edited, :location => @list}
         end
     end
