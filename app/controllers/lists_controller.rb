@@ -33,7 +33,7 @@ class ListsController < ApplicationController
     def add
         #@list = List.find(params[:list_id])
         list_id = params[:list_id]
-        list_entity = ListsEntity.new(list_id)
+        list_entity = ListEntity.new(list_id)
         respond_to do |format|
           @list_store = list_entity.add_store_to_current_list(params[:store_id])
           
