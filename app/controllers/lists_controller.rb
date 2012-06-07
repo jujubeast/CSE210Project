@@ -17,7 +17,7 @@ class ListsController < ApplicationController
         if @list.save
           # get curent user
           user_id = session[:user_id]
-          user_entity = UsersHelper::UserEntity.new
+          user_entity = UserEntity.new
           user_entity.find_by_id(user_id)
           user_entity.add_new_list(@list)
 
@@ -33,7 +33,7 @@ class ListsController < ApplicationController
     def add
         #@list = List.find(params[:list_id])
         list_id = params[:list_id]
-        list_entity = ListsHelper::ListsEntity.new(list_id)
+        list_entity = ListsEntity.new(list_id)
         respond_to do |format|
           @list_store = list_entity.add_store_to_current_list(params[:store_id])
           
@@ -47,14 +47,14 @@ class ListsController < ApplicationController
 
       if ListLogic.check_deletable(list_id)
         user_id = session[:user_id]
-        user_entity = UsersHelper::UserEntity.new
+        user_entity = UserEntity.new
         user_entity.find_by_id(user_id)
         user_entity.delete_user_list(list_id)
       end
       
       # after delete, you need to reload the list so create
       # the new user which reload the list by default.
-      user_entity2 = UsersHelper::UserEntity.new
+      user_entity2 = UserEntity.new
       user_entity2.find_by_id(user_id)
       default_list_id = user_entity2.find_user_default_list
       #default_list_id = ListUser.find_default_list(session[:user_id])

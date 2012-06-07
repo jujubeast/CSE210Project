@@ -13,11 +13,11 @@ class StoresController < ApplicationController
   	
   	if (params[:upload] != nil and params[:upload].size > 0)
       file_upload = params[:upload]
-      fileuploader = FileUploadHelper::ImageFileUploadHandler.new(file_upload)
+      fileuploader = FileUpload.new(file_upload)
       fileuploader.save_to_disk
       @disk_path = fileuploader.file_absolute_path
       @tmp_disk_path = fileuploader.tmp_file_absolute_path
-      img_processing = ImageProcessingHelper::ImageProcessing.new(@tmp_disk_path, @disk_path)
+      img_processing = ImageProcessing.new(@tmp_disk_path, @disk_path)
       img_processing.rescale_image_size
       img_processing.save_back_image
       @store.pic = fileuploader.file_web_path
@@ -30,11 +30,11 @@ class StoresController < ApplicationController
   end
 
   def show
-    store_entity = StoresHelper::StoreEntity.new
+    store_entity = StoreEntity.new
     @store = store_entity.find_by_id(params[:id])
     @store_review = store_entity.find_store_review
     
-    user_entity = UsersHelper::UserEntity.new
+    user_entity = UserEntity.new
     @user = user_entity.find_by_id(session[:user_id])
   end
   
@@ -43,10 +43,10 @@ class StoresController < ApplicationController
     user_id = session[:user_id]
     store_id = params[:store_id]
     
-    puts "user: " + user_id.to_s + "\n"
-    puts "store_id " + store_id.to_s + "\n"
+    #puts "user: " + user_id.to_s + "\n"
+    #puts "store_id " + store_id.to_s + "\n"
     
-    store_entity = StoresHelper::StoreEntity.new
+    store_entity = StoreEntity.new
     store_entity.find_by_id(store_id)
 
     add_review_to_store(store_entity, user_id, "What we like", "like")

@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
 
 	def create
 	  #puts "1. \n"
-	  user_entity = UsersHelper::UserEntity.new
+	  user_entity = UserEntity.new
 	  user = user_entity.authenticate_by_email( \
 	    params[:session][:email], \
 	    params[:session][:password] \

@@ -26,6 +26,8 @@ class UsersController < ApplicationController
   def show
     # XXX need to verify user_id is valid
     # XXX raise exception and catch, then display error page.
+    
+    # XXX This is only temporary until the team finds a solution on sharing
     current_user_id = session[:user_id]
     if (defined? current_user_id)
       if (current_user_id != params[:id])
@@ -33,25 +35,25 @@ class UsersController < ApplicationController
       end
     end
 
-    user_entity = UsersHelper::UserEntity.new
+    user_entity = UserEntity.new
     user_entity.find_by_id(params[:id])
     @user = user_entity.user
     @lists = user_entity.users_store_lists
 
     if params[:cur_list]
-      list_entity = ListsHelper::ListsEntity.new(params[:cur_list])
+      list_entity = ListEntity.new(params[:cur_list])
       @current_list = list_entity.current_list
       @stores = list_entity.associated_stores
       puts @stores
     else
       if @lists != nil and @lists.size > 0
-        list_entity = ListsHelper::ListsEntity.new(@lists[0].id)
+        list_entity = ListEntity.new(@lists[0].id)
         @current_list = list_entity.current_list
         @stores = list_entity.associated_stores
       end
     end
     
-    @available_stores = StoresHelper::StoreEntity.find_all
+    @available_stores = StoreEntity.find_all
     @available_stores.each do |store|
       print store.name + "\n"
     end
