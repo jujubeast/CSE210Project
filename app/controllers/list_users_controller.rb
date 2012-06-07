@@ -21,4 +21,8 @@ class ListUsersController < ApplicationController
     end
   end
   
+  def delete
+    #where did the delete method go?!
+  end
+  
 end

@@ -24,8 +24,8 @@ var advanced_search_div = '#advanced_search_bar';
 $(document).ready(function() {
 	
 	$('#tag_value').live('keypress', function(event){
-		event.preventDefault();
 		if(event.which == 13){
+			event.preventDefault();
 			$.ajax({
 				url : "/search/approve_tag",
 				success : function(html) {

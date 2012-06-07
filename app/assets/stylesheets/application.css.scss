@@ -181,9 +181,6 @@ div{
         color: white;
         text-decoration: none;
       }
-      a:hover{
-        
-      }
   }
 }
 
@@ -198,6 +195,12 @@ div{
     float: right;
     width: 58%;
     min-width: 550px;
+    
+    #advertisement_image{
+      max-width: 100%;
+      width: 100%;
+      height: 100%;
+    }
   }
   
   #user_block{
