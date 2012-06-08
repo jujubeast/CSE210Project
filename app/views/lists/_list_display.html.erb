@@ -5,23 +5,22 @@
 	</li>
 	<li class="divider"></li>
 	<% lists.each do |list| %>
-    	<% if list.id != current_list.id %>
-        	<li>
-        		<%= link_to list.name, default_home_path(user.id, list.id) %>
-        		<% if list.deletable == true %>
-        		<span class='right_button'><%= link_to image_tag("closev2.png", :border=>0, :size => "15x15", :alt => "Delete"), delete_list_path(list.id) %></span>
-        		<% end %>
-        	</li>
-    	<% else %>
-        	<li class='active'>
-        		<a href='#'><%= list.name %></a>
-        		<% if list.deletable == true %>
-        		<span class='right_button'><%= link_to image_tag("closev2.png", :border=>0, :size => "15x15", :alt => "Delete"), delete_list_path(list.id) %></span>
-        		<% end %>
-        	</li>
-    	<% end %>
+	<% if list.id != current_list.id %>
+	<li>
+		<%= link_to list.name, default_home_path(user.id, list.id) %>
+		<% if list.deletable == true %>
+		<span class='right_button'><%= link_to image_tag("closev2.png", :border=>0, :size => "15x15", :alt => "Delete"), delete_list_path(list.id) %></span>
+		<% end %>
+	</li>
+	<% else %>
+	<li class='active'>
+		<a href='#'><%= list.name %></a>
+		<% if list.deletable == true %>
+		<span class='right_button'><%= link_to image_tag("closev2.png", :border=>0, :size => "15x15", :alt => "Delete"), delete_list_path(list.id) %></span>
+		<% end %>
+	</li>
+	<% end %>
 	<li class="divider"></li>
 	<% end %>
 </ul>
-
 

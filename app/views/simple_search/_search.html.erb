@@ -1,6 +1,6 @@
 <div class='row'>
 	<%= form_tag("/search", :method => "search") do %>
-	<div class='span4 offset2'>
+	<div class='span4 offset1'>
 		<div class='basic_search'>
 			<%= text_field_tag :searchfor, nil, :id => 'search_bar', :class=>"search_query", :placeholder=>'Search' %>
 			<%= submit_tag "search", :id=>"search_icon", :class=>"btn"%>

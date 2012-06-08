@@ -1,3 +1,4 @@
+
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //
@@ -13,6 +14,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
+//= require bootstrap
+//= require bootstrap-modal
+//= require bootstrap-dropdown
 
 //The click toggle for requesting advanced search partial
 var display_advanced_search_bar = '#advanced_search_icon';
