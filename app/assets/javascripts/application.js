@@ -93,10 +93,10 @@ $(document).ready(
 						.remove();
 			};
 
-			$('#add_to_list').live('click', function() {
+			$('.add_to_list').live('click', function() {
 				var classes = $(this).attr('class').split(" ");
-				var store_id = classes[0].split(".")[1];
-				var list_id = classes[1].split(".")[1];
+				var store_id = classes[1].split(".")[1];
+				var list_id = classes[2].split(".")[1];
 				$.ajax({
 					url : "/showpossiblelists",
 					data : {
@@ -104,8 +104,8 @@ $(document).ready(
 						'list_id' : list_id
 					},
 					success : function(html) {
-						$("#modalinfo").append(html);
-						$('#myModal').modal('show');
+						$('#modal_div-'+store_id).append(html);
+						$('#modal-'+store_id).modal('show');
 					}
 				});
 			});
