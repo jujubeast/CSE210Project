@@ -4,7 +4,8 @@ class ListsController < ApplicationController
 	def new
 		list = ListLogic.create_new_list(nil)
     friends = FriendLogic.find_friends(session[:user_id])
-	  render :partial => "lists/new", :locals => {:friends => friends, :list => list}
+    user = User.find_by_id(session[:user_id])
+	  render :partial => "lists/new", :locals => {:friends => friends, :list => list, :user => user}
 	end
 
 	def create
@@ -18,7 +19,13 @@ class ListsController < ApplicationController
           user_entity.find_by_id(user_id)
           user_entity.add_new_list(@list, 0)
 
-
+          #set up permissions for friends of creating user
+          params.each do |parameter|
+            if parameter[0].starts_with? 'friend'
+                user_entity.find_by_id(parameter[0].split('.')[1])
+                user_entity.add_new_list(@list, 1)
+            end
+          end
 
           format.html { redirect_to default_home_path(session[:user_id], @list.id), :notice => 'List was successfully created.' }
           format.json { render :json => @list, :status => :created, :location => @list }
