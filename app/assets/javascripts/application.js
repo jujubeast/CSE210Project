@@ -124,4 +124,14 @@ $(document).ready(
 					}
 				});
 			});
+			
+			$("#create_list").click(function(event){
+				$.ajax({
+					url: "/createlist",
+					success : function(html) {
+						$("#modal_div_create_lists").append(html);
+						$('#modal_create_list').modal('show');
+					}
+				});	
+			});
 		});

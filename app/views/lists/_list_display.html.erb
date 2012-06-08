@@ -1,23 +1,33 @@
 <ul class='nav nav-list'>
 	<li class='nav-header'>
-		My Lists
-		<span class='right_button'><%= link_to image_tag("plus.png", :border=>0, :size => "20x20", :alt => "Add List"), createlist_path %> </span>
+		<h3>My Lists <span><button class='btn' id='create_list' style='float:right; margin-top:0;'>add</button></span></h3>
 	</li>
 	<% lists.each do |list| %>
+	<li class="divider"></li>
 	<% if list.id != current_list.id %>
-	<li>
-		<%= link_to list.name, default_home_path(user.id, list.id) %>
-		<% if list.deletable == true %>
-		<span class='right_button'><%= link_to image_tag("closev2.png", :border=>0, :size => "15x15", :alt => "Delete"), delete_list_path(list.id) %></span>
-		<% end %>
-	</li>
+	   <li>
 	<% else %>
-	<li class='active'>
-		<a href='#'><i class="icon-search"></i><%= list.name %></a>
+	   <li class='active'>
+    <% end%>
+        <span>
+		 <a href='<%=default_home_path(user.id, list.id)%>'>
+		<% if list.name == "Places I've Been To"%>
+		 <i class="icon-flag"></i> 
+		<% elsif list.name =="Places I Want To Go"%>
+		  <i class="icon-bookmark"></i>
+		<% elsif list.name =="Favorites"%>
+		  <i class="icon-star"></i>
+		<% else %>
+		 <i class="icon-list-alt"></i>
+		<% end %>
+		<%= list.name %></a>
 		<% if list.deletable == true %>
-		<span class='right_button'><%= link_to image_tag("closev2.png", :border=>0, :size => "15x15", :alt => "Delete"), delete_list_path(list.id) %></span>
+		<a href='<%= delete_list_path(list.id) %>' style="float:right;"><i class="icon-remove-sign" style='float:right;'></i></a>
+		<% else %>
+		<i class="icon-lock" style='float:right;'></i>
 		<% end %>
 	</li>
-	<% end %>
 	<% end %>
 </ul>
+
+<div id="modal_div_create_lists"></div>

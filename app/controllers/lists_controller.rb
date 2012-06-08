@@ -3,11 +3,7 @@ class ListsController < ApplicationController
 
 	def new
 		@list = ListLogic.create_new_list(nil)
-
-		respond_to do |format|
-  		format.html #new.html.erb
-  		format.json { render :json => @list}
-  	end
+	  render :partial => "lists/new"
 	end
 
 	def create
