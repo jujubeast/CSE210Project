@@ -1,5 +1,9 @@
 module ListLogic
 
+	def self.create_new_list(list_params)
+		list = List.new(list_params)
+	end
+
 	def self.create_default_lists(user_id)
 
 		been_to = List.new
