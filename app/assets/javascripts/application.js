@@ -109,4 +109,19 @@ $(document).ready(
 					}
 				});
 			});
+			
+			$('.remove_from_list').live('click', function() {
+				var classes = $(this).attr('class').split(" ");
+				var store_id = classes[1].split(".")[1];
+				$.ajax({
+					url : "/showcurrlists",
+					data : {
+						'store_id' : store_id
+					},
+					success : function(html) {
+						$('#modal_div-'+store_id).append(html);
+						$('#show_curr_list_modal-'+store_id).modal('show');
+					}
+				});
+			});
 		});

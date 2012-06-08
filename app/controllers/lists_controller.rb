@@ -99,7 +99,7 @@ class ListsController < ApplicationController
       @curr_lists = ListFinder.find_lists_by_curr_store(params[:store_id], session[:user_id])
       @store_id = params[:store_id]
 
-      render :partial => "lists/show_curr_lists" 
+    render :partial => "lists/show_curr_lists", :locals=>{:curr_lists => @curr_lists, :store_id =>@store_id}
   end
 
   #return list of lists that this store belongs to, and owner of those lists
