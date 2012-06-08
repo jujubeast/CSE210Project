@@ -5,16 +5,26 @@
 		</button>
 		<h3>Create New List</h3>
 	</div>
-	<%= form_for @list, :url => { :action => :create } do |f| %>
+	<%= form_for list, :url => { :action => :create } do |f| %>
+
 	<div class="modal-body">
 		<div class="field">
 			<%= f.label :name %>
 			<%= f.text_field :name %>
 		</div>
+
+		<div class="search_box">
+			<% friends.each do |friend| %>
+			     <label class='checkbox'> <%= check_box_tag 'friend.'+friend.id.to_s %><span><%= friend.first_name+' '+friend.last_name %></span></label>
+			<% end %>
+		</div>
 	</div>
+
 	<div class="modal-footer">
 		<a href="#" class="btn" data-dismiss="modal">Close</a>
-		<button type='submit' name='commit' class="btn btn-primary">Save changes</button>
+		<button type='submit' name='commit' class="btn btn-primary">
+			Save changes
+		</button>
 	</div>
 	<% end %>
 </div>
