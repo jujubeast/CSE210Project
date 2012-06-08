@@ -9,14 +9,18 @@
 
 	<div class="modal-body">
 		<div class="field">
-			<%= f.label :name %>
-			<%= f.text_field :name %>
+			<%= f.label :name%>
+			<%= f.text_field :name, :placeholder=>"Required"  %>
 		</div>
 
-		<div class="search_box">
+		<div class="control-group">
+		    <label class="control-label">Allow Permission to Edit</label>
+		    <div class="controls">
+                <label class='checkbox'><input type="checkbox" checked='checked' disabled="disabled"><span><%= user.first_name+' '+user.last_name %> (me) </span><i class='icon-lock'></i></label>
 			<% friends.each do |friend| %>
-			     <label class='checkbox'> <%= check_box_tag 'friend.'+friend.id.to_s %><span><%= friend.first_name+' '+friend.last_name %></span></label>
+			    <label class='checkbox'> <%= check_box_tag 'friend.'+friend.id.to_s %><span><%= friend.first_name+' '+friend.last_name %></span></label>
 			<% end %>
+			</div>
 		</div>
 	</div>
 
