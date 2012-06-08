@@ -167,20 +167,19 @@ class SimpleSearchController < ApplicationController
   end 
 
   def getFriendsList(access_token)
-    user = FbGraph::User.me(access_token)
-    user = user.fetch
-    friends_list = user.friends
+    #user = FbGraph::User.me(access_token)
+    #user = user.fetch
+    #friends_list = user.friends
+    #Changed to store friend relationships locally so advanced search bar works faster.
     @friends = Array.new
+    friends_list = FriendLogic.find_friends(session[:user_id])
+
 
     user = UserFinder.find_by_user_id(session[:user_id])
     @friends.push(user)
 
-    
     friends_list.each do |friend|
-      if User.exists?(:fb_id => friend.identifier)
-        user = UserFinder.find_by_fb_id(friend.identifier)
-        @friends.push(user)
-      end
+      @friends.push(friend)
     end
     
     @friends
