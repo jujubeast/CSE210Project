@@ -1,6 +1,3 @@
-<p id="notice">
-	<%= notice %>
-</p>
 <div id='top_nav' class='row'>
 	<div class='span4'>
 		<div id='basic_information' class='well'>
@@ -33,4 +30,8 @@
 	<%= render :partial => "stores/item_thumbnail", :collection => @available_stores, :locals => { :stores => @stores, :current_list => @current_list, :lists => nil } || 'No stores Available.' %>
 	<% end %>
 </div>
+
+<p id="notice">
+    <%= notice %>
+</p>
 
