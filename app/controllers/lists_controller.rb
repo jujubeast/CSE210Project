@@ -2,8 +2,9 @@ class ListsController < ApplicationController
   respond_to :js
 
 	def new
-		@list = ListLogic.create_new_list(nil)
-	  render :partial => "lists/new"
+		list = ListLogic.create_new_list(nil)
+    friends = FriendLogic.find_friends(session[:user_id])
+	  render :partial => "lists/new", :locals => {:friends => friends, :list => list}
 	end
 
 	def create
@@ -15,7 +16,9 @@ class ListsController < ApplicationController
           user_id = session[:user_id]
           user_entity = UserEntity.new
           user_entity.find_by_id(user_id)
-          user_entity.add_new_list(@list)
+          user_entity.add_new_list(@list, 0)
+
+
 
           format.html { redirect_to default_home_path(session[:user_id], @list.id), :notice => 'List was successfully created.' }
           format.json { render :json => @list, :status => :created, :location => @list }
