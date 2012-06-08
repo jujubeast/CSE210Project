@@ -13,7 +13,7 @@
 	<div class='search_box'>
 		<% if friends %>
 		<% friends.each do |friend| %>
-		<label class='friend_selection checkbox'> <%= check_box_tag 'friend.'+friend.id.to_s %><%= friend.first_name+' '+friend.last_name %> </label>
+		<label class='friend_selection checkbox'> <%= check_box_tag 'friend.'+friend.id.to_s %><span><%= friend.first_name+' '+friend.last_name %></span></label>
 		<% end %>
 		<% end %>
 	</div>

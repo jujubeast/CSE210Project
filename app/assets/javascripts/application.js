@@ -64,6 +64,14 @@ $(document).ready(
 						}
 
 					});
+			
+			$(".search_box :checkbox").live('click', function(event){
+				if($(this).is(":checked")){
+					$(this).parent().addClass("highlight");
+				}else{
+					$(this).parent().removeClass("highlight");
+				}
+			});
 
 			$("#friends_search .search_box input[type=checkbox]").live('click',
 					function() {

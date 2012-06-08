@@ -23,6 +23,10 @@ body {
 }
 
 
+.highlight {
+  background-color: orange;
+}
+
 /*_search.html.erb*/
 div.basic_search{
 	margin-top:10px;
@@ -45,6 +49,11 @@ div#advanced_search_icon{
 div.search_box{
 	height: 180px;
 	border: 1px solid white;
+	overflow:scroll;
+	
+	label {
+	  color:white;
+	}
 }
 
 div#tag_input{
@@ -54,6 +63,7 @@ div#tag_input{
 label.friend_selection, label.list_selection{
 	border-bottom: 1px solid darkGray;
 	padding: 10px 40px;
+	margin-bottom: 0px;
 }
 
 
@@ -74,6 +84,9 @@ div#top_nav{
 	margin-bottom: 30px;
 }
 
+div#advanced_search_bar{
+  clear:both;
+}
 
 /**/
 div.padding-top30{
