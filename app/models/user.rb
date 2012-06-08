@@ -11,4 +11,7 @@ class User < ActiveRecord::Base
   
   # map tag, user, and store relationship
   has_many :store_tag_users
+
+  #map friend to this user
+  has_many :friends
 end

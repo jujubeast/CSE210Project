@@ -1,0 +1,7 @@
+module SearchLogic
+	
+	def update_friends_table(friends_list)
+		
+	end
+	
+end

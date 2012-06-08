@@ -34,6 +34,15 @@ class LoginController < ApplicationController
     
     session[:user_id] = id
     session[:access_token] = params[:access_token]
+
+    friends_list = getFriendsList()
+
+    SearchLogic.update_friends_table(friends_list, id)
+
+    puts "FRIENDSSSSSSSSSERGHERD"
+    friends_list.each do |friend|
+      puts friend.identifier.to_s
+    end
     
     redirect_to('/users/' + id.to_s, :session => session)
   end
