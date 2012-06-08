@@ -13,11 +13,11 @@
 </div>
 
 <div id='body_wrapper' class='row'>
-	<div id="left_nav" class='well span2'>
+	<div id="left_nav" class='well span3' style='padding: 8px 0;'>
 		<%= render :partial => "lists/list_display", :locals => { :lists => @lists, :current_list => @current_list, :user => @user} %>
 	</div>
 
-	<div id ="main_nav" class='span9'>
+	<div id ="main_nav" class='span8'>
 		<% if @current_list %>
 		<div class='title'>
 			<h2><%= @current_list.name %></h2>

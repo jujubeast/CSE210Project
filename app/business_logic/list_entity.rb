@@ -8,11 +8,7 @@ class ListEntity
   end
   
   def add_store_to_current_list(store_id)
-    puts "+++++++"
-    puts @list.name
-    list_store = @list.list_stores.first_or_create(:store_id => store_id)
-    puts list_store.store.name
-    puts "++++++"
+    list_store = @list.list_stores.find_or_create_by_store_id_and_list_id(store_id, @list.id)
     return list_store
   end
 

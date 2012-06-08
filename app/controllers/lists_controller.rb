@@ -91,7 +91,7 @@ class ListsController < ApplicationController
       end
 
       @store_id = params[:store_id]
-      render :partial => "lists/show_possible_lists"
+    render :partial => "lists/show_possible_lists", :locals => {:store_id => @store_id}
   end
 
   def show_curr_lists
