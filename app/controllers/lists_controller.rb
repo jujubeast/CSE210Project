@@ -33,9 +33,15 @@ class ListsController < ApplicationController
     def add
         #@list = List.find(params[:list_id])
         list_id = params[:list_id]
+        store_id = params[:store_id]
         list_entity = ListEntity.new(list_id)
+        
         respond_to do |format|
-          @list_store = list_entity.add_store_to_current_list(params[:store_id])
+          @list_store = list_entity.add_store_to_current_list(store_id)
+          puts list_id
+          puts store_id
+          puts "#*********#"
+          puts @list_store.store.name
           
           format.html { redirect_to default_home_path(session[:user_id], list_id), :notice => 'List successfully edited'}
           format.json { render :json => @list, :status => :edited, :location => @list}

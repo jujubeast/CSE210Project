@@ -1,3 +1,23 @@
-<% @not_on_lists.each do |list| %>
-<%= link_to list.name,  add_to_list_path(list.id, @store_id) %><br/>
-<% end %>
+<div class="modal hide" id="myModal">
+	<div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal">
+			×
+		</button>
+		<h3>Select List</h3>
+	</div>
+	<div class="modal-body">
+	    <form>
+		<ul class="nav nav-list">
+			<% @not_on_lists.each do |list| %>
+			<li>
+				<%= link_to list.name,  add_to_list_path(list.id, @store_id) %>
+			</li>
+			<li class="divider"></li>
+			<% end %>
+		</ul>
+		</form>
+	</div>
+	<div class="modal-footer">
+		<a href="#" class="btn" data-dismiss="modal">Close</a>
+	</div>
+</div>

@@ -44,7 +44,6 @@ class UsersController < ApplicationController
       list_entity = ListEntity.new(params[:cur_list])
       @current_list = list_entity.current_list
       @stores = list_entity.associated_stores
-      puts @stores
     else
       if @lists != nil and @lists.size > 0
         list_entity = ListEntity.new(@lists[0].id)
@@ -53,11 +52,18 @@ class UsersController < ApplicationController
       end
     end
     
+    puts '##################'
+    puts @current_list.name
+    @stores.each do |store|
+      puts store.name
+    end
+    puts '##################'
+    
     @available_stores = StoreEntity.find_all
     @available_stores.each do |store|
       print store.name + "\n"
     end
-
+    
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @user }

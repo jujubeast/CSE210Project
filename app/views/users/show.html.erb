@@ -1,18 +1,23 @@
 <p id="notice">
 	<%= notice %>
 </p>
-<div id='top_nav'>
-	<%= render :partial => "users/basic_information", :locals => { :user => @user }%>
-	<div id='advertisement'>
-		<%= image_tag "ad.jpg", :id => 'advertisement_image'%>
+<div id='top_nav' class='row'>
+	<div class='span4'>
+		<div id='basic_information' class='well'>
+			<%= render :partial => "users/basic_information", :locals => { :user => @user }%>
+		</div>
+	</div>
+	<div id='advertisement' class='span8 '>
+		<img src="http://placekitten.com/800/200" alt="">
 	</div>
 </div>
 
-<div id='body_wrapper'>
-	<div id="left_nav">
+<div id='body_wrapper' class='row'>
+	<div id="left_nav" class='well span2'>
 		<%= render :partial => "lists/list_display", :locals => { :lists => @lists, :current_list => @current_list, :user => @user} %>
 	</div>
-	<div id ="main_nav">
+
+	<div id ="main_nav" class='span9'>
 		<% if @current_list %>
 		<div class='title'>
 			<h2><%= @current_list.name %></h2>

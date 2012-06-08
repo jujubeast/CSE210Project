@@ -17,70 +17,92 @@
 //The click toggle for requesting advanced search partial
 var display_advanced_search_bar = '#advanced_search_icon';
 
-//The div which contains the advanced search section
+// The div which contains the advanced search section
 var advanced_search_div = '#advanced_search_bar';
 
+$(document).ready(
+		function() {
 
-$(document).ready(function() {
-	
-	$('#tag_value').live('keypress', function(event){
-		if(event.which == 13){
-			event.preventDefault();
-			$.ajax({
-				url : "/search/approve_tag",
-				success : function(html) {
-					$('#approved_tags').append(html);
+			$('#tag_value').live('keypress', function(event) {
+				if (event.which == 13) {
+					event.preventDefault();
+					$.ajax({
+						url : "/search/approve_tag",
+						success : function(html) {
+							$('#approved_tags').append(html);
+						}
+					});
 				}
 			});
-		}
-	});
-	
-	$(display_advanced_search_bar).click(function(event) {
-		event.preventDefault(); // Prevent link from following its href
-		
-		if ($(advanced_search_div).hasClass('hidden')){
-			$.ajax({
-				url : "/search/advanced",
-				success : function(html) {
-					$(advanced_search_div).html(html);
-					$(advanced_search_div).slideDown();
-					$(advanced_search_div).removeClass('hidden');
-					$(display_advanced_search_bar+ " img").attr('src', '/assets/navigate_up.png');
-				}
+
+			$(display_advanced_search_bar).click(
+					function(event) {
+						event.preventDefault(); // Prevent link from following
+						// its href
+
+						if ($(advanced_search_div).hasClass('hidden')) {
+							$.ajax({
+								url : "/search/advanced",
+								success : function(html) {
+									$(advanced_search_div).html(html);
+									$(advanced_search_div).slideDown();
+									$(advanced_search_div)
+											.removeClass('hidden');
+									$(display_advanced_search_bar + " img")
+											.attr('src',
+													'/assets/navigate_up.png');
+								}
+							});
+						} else {
+							hide_div($(advanced_search_div));
+							$(display_advanced_search_bar + " img").attr('src',
+									'/assets/navigate_down.png');
+						}
+
+					});
+
+			$("#friends_search .search_box input[type=checkbox]").live('click',
+					function() {
+						var friend_id = $(this).attr('id');
+						if ($(this).attr('checked')) {
+							$.ajax({
+								url : "/search/get_list",
+								data : {
+									'friend_id' : friend_id
+								},
+								success : function(html) {
+									$("#list_search .search_box").append(html);
+								}
+							})
+						} else {
+							remove_lists(friend_id);
+						}
+					});
+
+			var hide_div = function(div) {
+				div.slideUp().addClass('hidden');
+			};
+
+			var remove_lists = function(friend_id) {
+				var friend = friend_id.split('.');
+				$(".list_selection\\." + friend[0] + '\\.' + friend[1])
+						.remove();
+			};
+
+			$('#add_to_list').live('click', function() {
+				var classes = $(this).attr('class').split(" ");
+				var store_id = classes[0].split(".")[1];
+				var list_id = classes[1].split(".")[1];
+				$.ajax({
+					url : "/showpossiblelists",
+					data : {
+						'store_id' : store_id,
+						'list_id' : list_id
+					},
+					success : function(html) {
+						$("#modalinfo").append(html);
+						$('#myModal').modal('show');
+					}
+				});
 			});
-		}else{
-			hide_div($(advanced_search_div));
-			$(display_advanced_search_bar+ " img").attr('src', '/assets/navigate_down.png');
-		}
-		
-	});
-
-	$("#friends_search .search_box input[type=checkbox]").live('click', function() {
-		var friend_id = $(this).attr('id');
-		if ($(this).attr('checked')) {
-			$.ajax({
-				url : "/search/get_list",
-				data : {
-					'friend_id' : friend_id
-				},
-				success : function(html) {
-					$("#list_search .search_box").append(html);
-				}
-			})
-		} else {
-			remove_lists(friend_id);
-		}
-	});
-	
-	var hide_div = function(div){
-		div.slideUp().addClass('hidden');
-	};
-	
-	var remove_lists = function(friend_id) {
-		var friend = friend_id.split('.');
-		$(".list_selection\\." + friend[0] + '\\.' + friend[1]).remove();
-	};
-	
-	
-
-});
+		});

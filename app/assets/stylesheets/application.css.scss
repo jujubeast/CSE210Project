@@ -1,331 +1,331 @@
-@import "compass";
-@import "home";
-@import "login";
-
-
-/*--- Vars --*/
-
-$border_color:  #686561;
-$block_background_color: #c1bebc;
-$title_underline_color: #686561;
-$font-size: 14px;
-
-/*--- MIXINS --*/
-@mixin rounded($radius: 10px) {
-  border-radius: $radius;
-  -moz-border-radius: $radius;
-  -webkit-border-radius: $radius;
-}
-
-/*--- CSS --*/
-
-html{
-	background-image: url("background.png");
-  font-family:"Helvetica", serif;
-  font-size: $font-size;
-}
-
-body{
-  margin: auto;
-  min-width: 1020px;
-  width:80%;
-}
-
-.hidden{
-  display: none;
-}
-
-div{
-  overflow: auto;
-}
-
-#search_wrapper{
-  margin: 0px auto;
-  width: 100%;
-  text-align: center;
-  margin-bottom: 20px;
-
-   /*---SIMPLE SEARCH INPUT BAR---*/
-  #search_bar {
-    width: 300px;
-    height: 20px;
-    @include rounded();
-    margin-bottom: 10px;
-  }
-  #search_icon{
-    position: absolute;
-  }
-  
-  #advanced_search_icon{
-    background-color: $block_background_color;
-    margin: 0px auto;
-    width: 200px;
-    padding: 5px;
-    @include rounded(4px);
-  }
-  
-  /*---DROP DOWN ADVANCED SEARCH BAR ---*/
-  #advanced_search_bar{
-    border: 1px solid $border_color;
-    background-image: url("background.png");
-    position: absolute;
-    width: 80%;
-    min-width: 1024px;
-    @include rounded();
-    
-    /*--- EACH INDIVIDUAL SEARCH BOX (TAGS/FRIENDS/LISTS) ---*/
-    #tags_search, #friends_search, #list_search{
-      // margin-top: 10px;
-      text-align: left;
-      width: 30.5%;
-      float:left;
-      vertical-align: middle;
-      margin-left: 2%;
-      margin-bottom:2%;
-      
-      #list_search{
-        margin-right: 2%;
-      }
-      
-      h3{
-        padding-left: 20px;
-      }
-      
-      .search_box {
-        border: 1px solid $border_color;
-        @include rounded();
-        height: 185px;
-      }
-    }
-    
-    #friends_search, #list_search {
-        .friend_selection, .list_selection {
-          display: block;
-          border: 1px solid $border_color;
-        }
-        
-        label {
-          float:left;
-          padding: 10px 25px;
-        }
-        input {
-          float: right;
-          display: block;
-          margin: 12px 25px;
-        } 
-      }
-    
-    #tags_search .search_box{
-      #tag_input {
-        height: 30px;
-        border: 1px solid $border_color;
-        padding-top: 10px;
-        label {
-          float: left;
-          width: 30%;
-          text-align: center;
-           // padding-right: 5%;
-        }
-        input {
-          width: 65%;
-        }
-     } 
-      .approved_tag {
-        display: block;
-        float: left;
-        background-color: $block_background_color;
-        @include rounded(5px);
-        margin: 5px;
-        
-        label {
-          float: left;
-          padding: 2px 10px;
-        }
-      }
-    }
-  }
-}
-
-#header{
-  clear: both;
-	padding: 20px;
-	
-	.title {
-		font-size: 42px;
-		text-align: center;
-	}	
-}
-
-#nav_bar{
-  //margin: 0px auto;
-  //text-align: center;
-  //font-size: $font-size+1;
-  float: right;
-  color: white;
-  ul {
-    list-style-type: none;
-    display: block;
-  }  
-  li {
-      float: right;
-      width: 100px;
-      text-align: center;
-      padding: 5px 10px;
-      margin: 0px 5px;
-      background-color: $title_underline_color;
-      
-      a:active {
-        color: yellow;
-      }
-      a:link, a:visited{
-        color: white;
-        text-decoration: none;
-      }
-  }
-}
-
-#top_nav{
-  margin: 20px 0px;
-  height: 202px;
-  
-  #advertisement{
-    @include rounded(10px);
-    border: 1px solid $border_color;
-    height: 200px;
-    float: right;
-    width: 58%;
-    min-width: 550px;
-    
-    #advertisement_image{
-      max-width: 100%;
-      width: 100%;
-      height: 100%;
-    }
-  }
-  
-  #user_block{
-    @include rounded(10px);
-    min-width: 390px;
-    height: 200px;
-    width: 40%;
-    border: 1px solid $border_color;
-    float:left;
-    display: table;
-    
-    #user_photo{
-      width: 150px;
-      height: 150px;
-      border: 1px solid black;
-      float:left;
-      margin: 24px;
-    }
-    
-    #user_info{
-      vertical-align: middle;
-      display: table-cell;
-    }
-  }
-}
-
-#body_wrapper {
-  clear: both;
-  width: 100%;
-  min-height:250px;
-  overflow: auto;
-  
-  
-  
-  #left_nav {
-    float: left;
-    width: 230px;
-    background-color: $block_background_color;
-    border: {
-      color: $border_color;
-      style: solid;
-      width: 1px;
-    }
-    .content {
-      .list {
-        padding: {
-          top: 15px;
-          bottom: 15px;
-          left: 10px;
-          right: 10px;
-        }
-      }
-      .selected {
-        background-color: yellow;
-      }
-    }
-  }
-
-  #main_nav {
-    margin: {
-      left: 250px;
-    }
-    min-width: 700px;
-    min-height: 250px;
-  }
-  
-  .title {
-    height: 25px;
-    padding: 10px;
-    h2 {
-      display: inline;
-    }
-    border-bottom: 1px solid $title_underline_color;
-  }
-}
-
-
-.item_thumbnail{
-	$width: 200px;
-	$height: 250px;
-	$margin: 20px;
-	
-	width: $width;
-	height: $height;
-	float: left;
-	margin: 10px;
-	
-	border: {
-		color:$border_color;
-		width: 1px;
-		style: solid;
-	}
-	text-align: center;
-	.img{
-		width: $width - $margin;
-		height: $width - $margin;
-		margin: ($margin)/2;
-		border: solid 1px $border_color;
-	}
-	
-	.been_to{
-	  
-	}
-	
-	.favorite{
-	  
-	}
-}
-
-
-#test{
-	float: left;
-	border: {
-		color:black;
-		width: 1px;
-		style: solid;
-	}
-}
-
-.right_button{
-  float: right;
-}
-
-.center {
-  width: 100%;
-}
-
-
+// @import "compass";
+// @import "home";
+// @import "login";
+// 
+// 
+// /*--- Vars --*/
+// 
+// $border_color:  #686561;
+// $block_background_color: #c1bebc;
+// $title_underline_color: #686561;
+// $font-size: 14px;
+// 
+// /*--- MIXINS --*/
+// @mixin rounded($radius: 10px) {
+  // border-radius: $radius;
+  // -moz-border-radius: $radius;
+  // -webkit-border-radius: $radius;
+// }
+// 
+// /*--- CSS --*/
+// 
+// html{
+	// background-image: url("background.png");
+  // font-family:"Helvetica", serif;
+  // font-size: $font-size;
+// }
+// 
+// body{
+  // margin: auto;
+  // min-width: 1020px;
+  // width:80%;
+// }
+// 
+// .hidden{
+  // display: none;
+// }
+// 
+// div{
+  // overflow: auto;
+// }
+// 
+// #search_wrapper{
+  // margin: 0px auto;
+  // width: 100%;
+  // text-align: center;
+  // margin-bottom: 20px;
+// 
+   // /*---SIMPLE SEARCH INPUT BAR---*/
+  // #search_bar {
+    // width: 300px;
+    // height: 20px;
+    // @include rounded();
+    // margin-bottom: 10px;
+  // }
+  // #search_icon{
+    // position: absolute;
+  // }
+//   
+  // #advanced_search_icon{
+    // background-color: $block_background_color;
+    // margin: 0px auto;
+    // width: 200px;
+    // padding: 5px;
+    // @include rounded(4px);
+  // }
+//   
+  // /*---DROP DOWN ADVANCED SEARCH BAR ---*/
+  // #advanced_search_bar{
+    // border: 1px solid $border_color;
+    // background-image: url("background.png");
+    // position: absolute;
+    // width: 80%;
+    // min-width: 1024px;
+    // @include rounded();
+//     
+    // /*--- EACH INDIVIDUAL SEARCH BOX (TAGS/FRIENDS/LISTS) ---*/
+    // #tags_search, #friends_search, #list_search{
+      // // margin-top: 10px;
+      // text-align: left;
+      // width: 30.5%;
+      // float:left;
+      // vertical-align: middle;
+      // margin-left: 2%;
+      // margin-bottom:2%;
+//       
+      // #list_search{
+        // margin-right: 2%;
+      // }
+//       
+      // h3{
+        // padding-left: 20px;
+      // }
+//       
+      // .search_box {
+        // border: 1px solid $border_color;
+        // @include rounded();
+        // height: 185px;
+      // }
+    // }
+//     
+    // #friends_search, #list_search {
+        // .friend_selection, .list_selection {
+          // display: block;
+          // border: 1px solid $border_color;
+        // }
+//         
+        // label {
+          // float:left;
+          // padding: 10px 25px;
+        // }
+        // input {
+          // float: right;
+          // display: block;
+          // margin: 12px 25px;
+        // } 
+      // }
+//     
+    // #tags_search .search_box{
+      // #tag_input {
+        // height: 30px;
+        // border: 1px solid $border_color;
+        // padding-top: 10px;
+        // label {
+          // float: left;
+          // width: 30%;
+          // text-align: center;
+           // // padding-right: 5%;
+        // }
+        // input {
+          // width: 65%;
+        // }
+     // } 
+      // .approved_tag {
+        // display: block;
+        // float: left;
+        // background-color: $block_background_color;
+        // @include rounded(5px);
+        // margin: 5px;
+//         
+        // label {
+          // float: left;
+          // padding: 2px 10px;
+        // }
+      // }
+    // }
+  // }
+// }
+// 
+// #header{
+  // clear: both;
+	// padding: 20px;
+// 	
+	// .title {
+		// font-size: 42px;
+		// text-align: center;
+	// }	
+// }
+// 
+// #nav_bar{
+  // //margin: 0px auto;
+  // //text-align: center;
+  // //font-size: $font-size+1;
+  // float: right;
+  // color: white;
+  // ul {
+    // list-style-type: none;
+    // display: block;
+  // }  
+  // li {
+      // float: right;
+      // width: 100px;
+      // text-align: center;
+      // padding: 5px 10px;
+      // margin: 0px 5px;
+      // background-color: $title_underline_color;
+//       
+      // a:active {
+        // color: yellow;
+      // }
+      // a:link, a:visited{
+        // color: white;
+        // text-decoration: none;
+      // }
+  // }
+// }
+// 
+// #top_nav{
+  // margin: 20px 0px;
+  // height: 202px;
+//   
+  // #advertisement{
+    // @include rounded(10px);
+    // border: 1px solid $border_color;
+    // height: 200px;
+    // float: right;
+    // width: 58%;
+    // min-width: 550px;
+//     
+    // #advertisement_image{
+      // max-width: 100%;
+      // width: 100%;
+      // height: 100%;
+    // }
+  // }
+//   
+  // #user_block{
+    // @include rounded(10px);
+    // min-width: 390px;
+    // height: 200px;
+    // width: 40%;
+    // border: 1px solid $border_color;
+    // float:left;
+    // display: table;
+//     
+    // #user_photo{
+      // width: 150px;
+      // height: 150px;
+      // border: 1px solid black;
+      // float:left;
+      // margin: 24px;
+    // }
+//     
+    // #user_info{
+      // vertical-align: middle;
+      // display: table-cell;
+    // }
+  // }
+// }
+// 
+// #body_wrapper {
+  // clear: both;
+  // width: 100%;
+  // min-height:250px;
+  // overflow: auto;
+//   
+//   
+//   
+  // #left_nav {
+    // float: left;
+    // width: 230px;
+    // background-color: $block_background_color;
+    // border: {
+      // color: $border_color;
+      // style: solid;
+      // width: 1px;
+    // }
+    // .content {
+      // .list {
+        // padding: {
+          // top: 15px;
+          // bottom: 15px;
+          // left: 10px;
+          // right: 10px;
+        // }
+      // }
+      // .selected {
+        // background-color: yellow;
+      // }
+    // }
+  // }
+// 
+  // #main_nav {
+    // margin: {
+      // left: 250px;
+    // }
+    // min-width: 700px;
+    // min-height: 250px;
+  // }
+//   
+  // .title {
+    // height: 25px;
+    // padding: 10px;
+    // h2 {
+      // display: inline;
+    // }
+    // border-bottom: 1px solid $title_underline_color;
+  // }
+// }
+// 
+// 
+// .item_thumbnail{
+	// $width: 200px;
+	// $height: 250px;
+	// $margin: 20px;
+// 	
+	// width: $width;
+	// height: $height;
+	// float: left;
+	// margin: 10px;
+// 	
+	// border: {
+		// color:$border_color;
+		// width: 1px;
+		// style: solid;
+	// }
+	// text-align: center;
+	// .img{
+		// width: $width - $margin;
+		// height: $width - $margin;
+		// margin: ($margin)/2;
+		// border: solid 1px $border_color;
+	// }
+// 	
+	// .been_to{
+// 	  
+	// }
+// 	
+	// .favorite{
+// 	  
+	// }
+// }
+// 
+// 
+// #test{
+	// float: left;
+	// border: {
+		// color:black;
+		// width: 1px;
+		// style: solid;
+	// }
+// }
+// 
+// .right_button{
+  // float: right;
+// }
+// 
+// .center {
+  // width: 100%;
+// }
+// 
+// 

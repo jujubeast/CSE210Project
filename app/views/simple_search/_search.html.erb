@@ -1,10 +1,14 @@
-<div id='search_wrapper'>
+<div class='row'>
 	<%= form_tag("/search", :method => "search") do %>
-	   <%= text_field_tag :searchfor, nil, :id => 'search_bar' %>
-	   <%= image_submit_tag "search_icon.png", :id=>'search_icon' %>
-	   <br />
-	   <div id='advanced_search_icon'>advanced search <%= image_tag "navigate_down.png", :height => '12', :width => '15' %></div>
-	   <div id='advanced_search_bar' class='hidden'></div>
-	   
+	<div class='span4 offset2'>
+		<div class='basic_search'>
+			<%= text_field_tag :searchfor, nil, :id => 'search_bar', :class=>"search_query", :placeholder=>'Search' %>
+			<%= submit_tag "search", :id=>"search_icon", :class=>"btn"%>
+		</div>
+		<div id='advanced_search_icon'>
+			advanced search <%= image_tag "navigate_down.png", :height => '12', :width => '15' %>
+		</div>
+	</div>
+	<div id='advanced_search_bar' class='hidden row'></div>
 	<% end %>
 </div>

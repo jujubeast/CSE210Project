@@ -1,4 +1,3 @@
-<div class='list_selection list_selection.friend.<%=friend.id%>'>
-    <%= label_tag list_selection.name+' ('+friend.first_name+')' %>
-    <%= check_box_tag 'list.'+list_selection.id.to_s %>
-</div>
+<label class='list_selection list_selection.friend.<%=friend.id%> checkbox'>
+    <%= check_box_tag 'list.'+list_selection.id.to_s %><%= list_selection.name+' ('+friend.first_name+')' %>
+</label>
