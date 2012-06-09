@@ -62,6 +62,7 @@ class ListsController < ApplicationController
         user_entity = UserEntity.new
         user_entity.find_by_id(user_id)
         user_entity.delete_user_list(list_id)
+
       end
       
       # after delete, you need to reload the list so create

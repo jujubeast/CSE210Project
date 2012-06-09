@@ -19,10 +19,10 @@ class UserEntity
     @user = User.find(:all, :conditions => ["fb_id=? and password=?", user_fb_id, password]).first
   end
   
-  def add_new_list(new_list)
+  def add_new_list(new_list, privilege)
     #puts " ***************** add_new_list\n"
     new_list_user = ListUser.new
-    new_list_user.privilege = 0
+    new_list_user.privilege = privilege
     new_list_user.list = new_list
     @user.list_users.push(new_list_user)
     @user.save
@@ -40,23 +40,11 @@ class UserEntity
   end
 
   def delete_user_list(list_id)
-    #puts " ***************** delete_list: " + list_id.to_s + "\n"
-    @user.list_users.each do
-      |list_user|
-      #puts " ***************** id: " + list_user.list.id.to_s + "\n"
-      if Integer(list_user.list.id) == Integer(list_id)
-        #puts " ***************** found\n "
-        list_user.list.list_stores.each do
-          |list_store|
-          list_store.delete
-        end
-        list_user.list.delete
-        list_user.delete
-        #puts " ***************** break\n "
-        break
-      end
-    end
-    #puts " ***************** done\n "
+    list = List.find(list_id)
+
+    #this will destroy all list_users and list_stores items associated with this list
+    #because of :dependent => :destroy in model associations
+    list.destroy
   end
   
   def users_store_lists

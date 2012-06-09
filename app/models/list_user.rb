@@ -1,5 +1,5 @@
 class ListUser < ActiveRecord::Base
-   attr_accessible :user_id, :list_id, :owner
+   attr_accessible :user_id, :list_id, :owner, :permission
    belongs_to :user
    belongs_to :list
 
