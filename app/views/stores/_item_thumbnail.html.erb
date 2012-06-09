@@ -5,9 +5,11 @@
 				<%= render :partial => "stores/thumbnail_dropdown", :locals => {:store => item_thumbnail, :current_list =>current_list}%>
 				<img src="http://placehold.it/200x200" alt="">
 				<h5><%= item_thumbnail.name%></h5>
-				<p>
-					Thumbnail caption right here...
-				</p>
+				<address>
+				    <%= item_thumbnail.street_1%><br/>
+				    <%= item_thumbnail.street_2 %><br/>
+				    <%= item_thumbnail.city %>, <%= item_thumbnail.state %>, <%= item_thumbnail.zipcode %>
+				</address>
 			</div>
 		</li>
 	</ul>

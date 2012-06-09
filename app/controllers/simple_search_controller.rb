@@ -157,6 +157,8 @@ class SimpleSearchController < ApplicationController
   def approve_tag
     #check to see if params[:tag_value] matches any tag that is in the database
     #if matches, return tag object.
+    puts "~~~~~~~~"
+    puts params[:tag_value]
     if Tag.exists?(:name => params[:tag_value])
       @tag = Tag.where(:name => params[:tag_value]).first
     else

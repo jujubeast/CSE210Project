@@ -32,6 +32,9 @@ $(document).ready(
 					event.preventDefault();
 					$.ajax({
 						url : "/search/approve_tag",
+						data: {
+							"tag_value" : $(this).val()
+								},
 						success : function(html) {
 							$('#approved_tags').append(html);
 						}
@@ -141,5 +144,10 @@ $(document).ready(
 						$('#modal_create_list').modal('show');
 					}
 				});	
+			});
+			
+			$(".tag_button").live("click", function(event){
+				event.preventDefault();
+				$(this).parent().remove();
 			});
 		});

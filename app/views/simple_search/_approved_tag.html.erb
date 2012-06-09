@@ -1,4 +1,10 @@
-<div class='approved_tag tag_selection.tag.<%=tag.id.to_s%>'>
- <%= label_tag tag.name %>
- <%= hidden_field_tag 'tag.'+tag.id.to_s, tag.id %>
+<% if tag %>
+<div class='approved_tag tag_selection.tag.<%= tag.id.to_s%>'>
+	<button class="btn btn-info tag_button"><%= tag.name %></button> 
+	<%= hidden_field_tag 'tag.'+tag.id.to_s, tag.id %>
 </div>
+<% else %>
+<div class='tag_error'>
+	error
+</div>
+<% end %>
