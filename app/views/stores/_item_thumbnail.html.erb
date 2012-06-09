@@ -4,11 +4,12 @@
 			<div class="thumbnail">
 				<%= render :partial => "stores/thumbnail_dropdown", :locals => {:store => item_thumbnail}%>
 				<img src="http://placehold.it/200x200" alt="">
-				<h5><%= item_thumbnail.name%></h5>
+				<h4><a href='/stores/<%= item_thumbnail.id %>'><span><%= item_thumbnail.name%></span></a></h4>
 				<address>
-				    <%= item_thumbnail.street_1%><br/>
-				    <%= item_thumbnail.street_2 %><br/>
-				    <%= item_thumbnail.city %>, <%= item_thumbnail.state %>, <%= item_thumbnail.zipcode %>
+				    <% if item_thumbnail.street_1 %><%= item_thumbnail.street_1%><br/><% end %>
+				    <% if item_thumbnail.street_2 != "" %><%= item_thumbnail.street_2 %><br/><% end %>
+				    <% if item_thumbnail.city!="" && item_thumbnail.state!=""%><%= item_thumbnail.city %>, <%= item_thumbnail.state %><%end%>
+				    <% if item_thumbnail.zipcode!=""%><%= item_thumbnail.zipcode %><% end%>
 				</address>
 			</div>
 		</li>
