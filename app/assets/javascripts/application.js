@@ -107,12 +107,10 @@ $(document).ready(
 			$('.add_to_list').live('click', function() {
 				var classes = $(this).attr('class').split(" ");
 				var store_id = classes[1].split(".")[1];
-				var list_id = classes[2].split(".")[1];
 				$.ajax({
 					url : "/showpossiblelists",
 					data : {
-						'store_id' : store_id,
-						'list_id' : list_id
+						'store_id' : store_id
 					},
 					success : function(html) {
 						$('#modal_div-'+store_id).append(html);
