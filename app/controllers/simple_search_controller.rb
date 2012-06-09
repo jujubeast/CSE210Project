@@ -95,7 +95,7 @@ class SimpleSearchController < ApplicationController
       #remove a store if there is no tag associated and
       #search_string is not found either in store_name or in store_description
       #if tag_lists is empty then show all stores from the selected lists.. no need to filter further
-      if !tag_lists.empty?
+      if (!tag_lists.empty?) || (tag_lists.empty? && !search_string.empty?)
         searchResult.each do |store|
             #print "Checking for store "+ store.store_id.to_s + "\n"
             flag = false
