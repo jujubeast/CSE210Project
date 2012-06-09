@@ -30,11 +30,17 @@ class SimpleSearchController < ApplicationController
       end
     end
 
-    search_lists.each do |list|
-      print "Looking at lists"
-      print "\n"
-      print list
-    end
+    #print "Looking at lists\n"
+    #search_lists.each do |list|
+    #  print list
+    #  print "\n"
+    #end
+    
+    #print "Looking at tags\n"
+    #tag_lists.each do |tag|
+    #  print tag
+    #  print "\n"
+    #end
 
     #search list now contains list of list ids and tag_ids to search over and search_string contains the search text
 
@@ -62,53 +68,63 @@ class SimpleSearchController < ApplicationController
       search_lists.each do |list|
         listresult = ListStore.find(:all, :conditions => {:list_id => list })
         listresult.each do |store|
-          searchResult.push(store)
+        existsInSearch = false
+          searchResult.each do |storeInSearch|
+            if storeInSearch.store_id == store.store_id
+              existsInSearch = true
+            end
+          end
+          if existsInSearch == false
+            searchResult.push(store)
+          end
         end
       end
 
       #remove duplicates
       searchResult = searchResult.uniq
 
-      #print "Printing searchResults : \n"
-      #searchResult.each do |st|
-      #    print st.store_id
-      #    print "\n"
-      #end
+      print "Printing searchResults : \n"
+      searchResult.each do |st|
+          print st.store_id
+          print "\n"
+      end
 
       deleteSearchResult = Array.new
 
       #for each store in searchResult,
       #remove a store if there is no tag associated and
       #search_string is not found either in store_name or in store_description
-      searchResult.each do |store|
-        #print "Checking for store "+ store.store_id.to_s + "\n"
-
-        flag = false
-
-        # flag = true if some (search) tag is associated with the store
-        tag_lists.each do |tag|
-          if  StoresTags.exists?(:store_id => store.store_id, :tag_id => tag)
-            #print "flag turned true for " + store.store_id.to_s + " and " + tag_id.to_s + "\n"
-            flag = true
-          end
-        end
-
-        if !search_string.empty?
-          # flag = true if the store exists on search result of simple search query on search_string
-          simpleSearchResult.each do |st|
-            if st.id == store.store_id
-              #print "flag turned true for " + store.store_id.to_s + " for simpleSearch \n"
-              flag = true
+      #if tag_lists is empty then show all stores from the selected lists.. no need to filter further
+      if !tag_lists.empty?
+        searchResult.each do |store|
+            #print "Checking for store "+ store.store_id.to_s + "\n"
+            flag = false
+    
+            # flag = true if some (search) tag is associated with the store
+            tag_lists.each do |tag|
+              if StoreTagUser.exists?(:store_id => store.store_id, :tag_id => tag)
+                #print "flag turned true for " + store.store_id.to_s + " and " + tag.to_s + "\n"
+                flag = true
+              end
+            end
+    
+            if !search_string.empty?
+              # flag = true if the store exists on search result of simple search query on search_string
+              simpleSearchResult.each do |st|
+                if st.id == store.store_id
+                  #print "flag turned true for " + store.store_id.to_s + " for simpleSearch \n"
+                  flag = true
+                end
+              end
+            end
+    
+            # if flag is still false remove store from searchResult
+            if flag == false
+              #print "deleting store with id = " + store.store_id.to_s + "\n"
+              deleteSearchResult.push(store)
             end
           end
         end
-
-        # if flag is still false remove store from searchResult
-        if flag == false
-          #print "deleting store with id = " + store.store_id.to_s + "\n"
-          deleteSearchResult.push(store)
-        end
-      end
 
       searchResult = searchResult - deleteSearchResult
 
@@ -155,8 +171,7 @@ class SimpleSearchController < ApplicationController
   def approve_tag
     #check to see if params[:tag_value] matches any tag that is in the database
     #if matches, return tag object.
-    puts "~~~~~~~~"
-    puts params[:tag_value]
+    #puts params[:tag_value]
     if Tag.exists?(:name => params[:tag_value])
       @tag = Tag.where(:name => params[:tag_value]).first
     else
