@@ -15,13 +15,17 @@
 body { 
   padding-top: 90px;
   padding-left: 20px;
+  background: url("/assets/background.png");
+}
+
+.container {
+  width: 960px;
 }
 /***/
 
 .border {
 	border: 1px solid black;
 }
-
 
 .highlight {
   background-color: orange;
@@ -48,7 +52,7 @@ div#advanced_search_icon{
 /*_advanced_search_bar.html.erb*/
 div.search_box{
 	height: 180px;
-	border: 1px solid white;
+	border: 1px solid gray;
 	overflow:scroll;
 	
 	label {
@@ -88,11 +92,37 @@ div#advanced_search_bar{
   clear:both;
 }
 
+div#main_nav{
+  margin-left:0px;
+  width: 720px;
+
+  .title{
+    padding-bottom:10px;
+    margin-bottom: 5px;
+    margin-left:20px;
+    border-bottom: 1px solid darkGray;
+    color: Gray;
+  }
+}
+
 /*_approved_tag.html.erb*/
 .approved_tag{
   float: left;
 }
 
+/*_item_thumbnail.html.erb*/
+.item_thumbnail{
+  .thumbnail{
+  background-color: white;
+  }
+}
+
+/*_list.display.html.erb*/
+#left_nav{
+  li > i, li>.icon-remove-sign{
+    margin-top: -20px;
+  }
+}
 
 /**/
 div.padding-top30{

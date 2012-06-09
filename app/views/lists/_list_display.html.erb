@@ -9,7 +9,6 @@
 	<% else %>
 	   <li class='active'>
     <% end%>
-        <span>
 		 <a href='<%=default_home_path(user.id, list.id)%>'>
 		<% if list.name == "Places I've Been To"%>
 		 <i class="icon-flag"></i> 
@@ -22,10 +21,11 @@
 		<% end %>
 		<%= list.name %></a>
 		<% if list.deletable == true %>
-		<a href='<%= delete_list_path(list.id) %>' style="float:right;"><i class="icon-remove-sign" style='float:right;'></i></a>
+		<a href='<%= delete_list_path(list.id) %>' style="float:right;"><i class="icon-remove-sign" style='float:right; margin-top:-22px;' alt="remove list"></i></a>
 		<% else %>
 		<i class="icon-lock" style='float:right;'></i>
 		<% end %>
+
 	</li>
 	<% end %>
 </ul>
