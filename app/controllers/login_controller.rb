@@ -11,27 +11,32 @@ class LoginController < ApplicationController
   end
   
   def login
-    user = FbGraph::User.me(params[:access_token])
-    user = user.fetch
+    fb_user = FbGraph::User.me(params[:access_token])
+    fb_user = fb_user.fetch
   
-    if User.exists?(:fb_id => user.identifier)
-      @response = user.identifier
-    else
+    if !User.exists?(:fb_id => fb_user.identifier)
       registered_user = User.new
-      registered_user.first_name = user.first_name
-      registered_user.last_name = user.last_name
-      registered_user.email = user.email
-      registered_user.fb_id = user.identifier
-      registered_user.picture_link = user.link #not sure about this
+      registered_user.fb_id = fb_user.identifier
       registered_user.save
-
+    
       ListLogic.create_default_lists(registered_user.id)
       #@response = 'Congratulations! You are now a user of myHangoutss'
     end
     
-    user = User.where(:fb_id => user.identifier).first
-    id = user.id
+    # the reason to put this outside of if is to update the fields each time a user logs in
+    user = User.where(:fb_id => fb_user.identifier).first
+    user.first_name = fb_user.first_name
+    user.last_name = fb_user.last_name
+    user.email = fb_user.email
+    user.fb_id = fb_user.identifier
+    user.picture_link = fb_user.picture(size = 'large') 
+    user.save
     
+    
+    #print '\n *********** Printing picture link : *********** \n'
+    #print user.picture_link
+    
+    id = user.id
     session[:user_id] = id
     session[:access_token] = params[:access_token]
 
@@ -39,10 +44,10 @@ class LoginController < ApplicationController
 
     SearchLogic.update_friends_table(friends_list, id)
 
-    puts "FRIENDSSSSSSSSSERGHERD"
-    friends_list.each do |friend|
-      puts friend.identifier.to_s
-    end
+   # puts "FRIENDSSSSSSSSSERGHERD"
+   # friends_list.each do |friend|
+   #   puts friend.identifier.to_s
+   # end
     
     redirect_to('/users/' + id.to_s, :session => session)
   end
