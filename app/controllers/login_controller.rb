@@ -23,17 +23,18 @@ class LoginController < ApplicationController
       #@response = 'Congratulations! You are now a user of myHangoutss'
     end
     
+    # the reason to put this outside of if is to update the fields each time a user logs in
     user = User.where(:fb_id => fb_user.identifier).first
     user.first_name = fb_user.first_name
     user.last_name = fb_user.last_name
     user.email = fb_user.email
     user.fb_id = fb_user.identifier
-    user.picture_link = fb_user.picture(size = 'large') #not sure about this
+    user.picture_link = fb_user.picture(size = 'large') 
     user.save
     
     
-    print '\n *********** Printing picture link : *********** \n'
-    print user.picture_link
+    #print '\n *********** Printing picture link : *********** \n'
+    #print user.picture_link
     
     id = user.id
     session[:user_id] = id
