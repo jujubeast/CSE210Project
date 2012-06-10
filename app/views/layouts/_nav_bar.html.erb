@@ -1,6 +1,6 @@
 <ul class ='nav pull-right'>
 	<li>
-		<%= link_to "my page",  :action => "show", :controller => 'users', :id => @user.id %>
+		<%= link_to "my page",  :action => "show", :controller => 'users', :id => session[:user_id] %>
 	</li>
 	<li class="divider-vertical"></li>
 	<li>

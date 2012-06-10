@@ -147,11 +147,28 @@ $(document).ready(
 					}
 				});	
 			});
+
+			$(".subscribe_list").click(function(event) {
+				var classes = $(this).attr('class').split(" ");
+				var list_id = classes[1].split(".")[1];
+
+				$.ajax({
+					url: "/sublist",
+					data : {
+						'list_id' : list_id
+					},
+					success : function(html) {
+					}
+				});
+
+			});
 			
 			$(".tag_button").live("click", function(event){
 				event.preventDefault();
 				$(this).parent().remove();
 			});
+
+
 			
 			$('.add-review').live('ajax:success', function(event, html) {    
 				$("#tags_and_reviews").replaceWith(html);
