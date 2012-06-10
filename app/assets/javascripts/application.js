@@ -24,6 +24,10 @@ var display_advanced_search_bar = '#advanced_search_icon';
 // The div which contains the advanced search section
 var advanced_search_div = '#advanced_search_bar';
 
+var App_ID = '119110981558914';
+
+var root_URL = "http://localhost:3000/";
+
 $(document).ready(
 		function() {
 
@@ -152,7 +156,7 @@ $(document).ready(
 							
 			window.fbAsyncInit = function() {
 				FB.init({
-					appId : '119110981558914',
+					appId : App_ID,
 					status : true,
 					cookie : true,
 					xfbml : true,
@@ -178,12 +182,12 @@ $(document).ready(
 
 				FB.getLoginStatus(function(response) {
 					if(response.status === 'connected' ) {
-						if(window.location == "http://localhost:3000/") {
+						if(window.location == root_URL) {
 							var access_token = FB.getAuthResponse()['accessToken'];
 							window.location = 'homepage/' + access_token;
 						}
-					} else if (window.location != "http://localhost:3000/") {
-						window.location = "http://localhost:3000/"
+					} else if (window.location != root_URL ) {
+						window.location = root_URL;
 					}
 				});
 
