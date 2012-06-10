@@ -186,6 +186,27 @@ div.padding-top30{
 	padding-top:30px;
 }
 
+/*stores/show.html.erb*/
+.display-table{
+  .display-row{
+    clear: both;
+    width: 100%;
+    padding: 20px 0px;
+    
+    .display-label{
+      float: left;
+      width: 150px;
+      text-align: right;
+      font-weight: bold;
+    }
+    .display-info{
+      float: left;
+      margin-left:20px;
+    }
+  }
+ 
+}
+
 
 /* Footer
 -------------------------------------------------- */
