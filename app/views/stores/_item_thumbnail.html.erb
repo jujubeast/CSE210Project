@@ -2,22 +2,39 @@
 	<ul class="thumbnails">
 		<li class="span3">
 			<div class="thumbnail">
+				<div class='bookmark'>
+					<% if default_lists[item_thumbnail.id][:want_to] %>
+					<%= image_tag "checkin.png", :class=>'bookmark-icon' %>
+					<% end %>
+				</div>
+				<div class="option-bar">
 				<%= render :partial => "stores/thumbnail_dropdown", :locals => {:store => item_thumbnail}%>
-
-                <img src="http://lorempixel.com/200/200/food/<%=item_thumbnail.id%>" /> 
-				<h4><a href='/stores/<%= item_thumbnail.id %>'><span><%= item_thumbnail.name%></span></a></h4>
-				<address>
-				    <% if item_thumbnail.street_1 %><%= item_thumbnail.street_1%><br/><% end %>
-				    <% if item_thumbnail.street_2 != "" %><%= item_thumbnail.street_2 %><br/><% end %>
-				    <% if item_thumbnail.city!="" && item_thumbnail.state!=""%><%= item_thumbnail.city %>, <%= item_thumbnail.state %> <%end%>
-				    <% if item_thumbnail.zipcode!=""%><%= item_thumbnail.zipcode %><% end%>
-				    <% if defined? user_id %>
-				    <br/>
-				    <% if default_lists[item_thumbnail.id][:favorite] %>Favorite!<% end %>
-				    <% if default_lists[item_thumbnail.id][:been_to] %><br/>Been to!<% end %>
-				    <% if default_lists[item_thumbnail.id][:want_to] %><br/>Want to!<% end %>
-				    <% end %>
-				</address>
+				</div>
+				<!--                 <img src="http://lorempixel.com/200/200/food/<%=item_thumbnail.id%>" />  -->
+				<img src="http://placekitten.com/200/200" />
+				<div class="thumbnail-content">
+					<div class='favorite'>
+						<% if default_lists[item_thumbnail.id][:favorite] %>
+						<%= image_tag "favorite-on.png", :class=>"favorite-icon"%>
+						<% else %>
+						<%= image_tag "favorite-off.png", :class=>"favorite-icon"%>
+						<% end %>
+					</div>
+					<h4><a href='/stores/<%= item_thumbnail.id %>'><span><%= item_thumbnail.name%></span></a></h4>
+					<address>
+						<% if item_thumbnail.street_1 %><%= item_thumbnail.street_1%>
+						<br/>
+						<% end %>
+						<% if item_thumbnail.street_2 != "" %><%= item_thumbnail.street_2 %>
+						<br/>
+						<% end %>
+						<% if item_thumbnail.city!="" && item_thumbnail.state!=""%><%= item_thumbnail.city %>, <%= item_thumbnail.state %> <%end%>
+						<% if item_thumbnail.zipcode!=""%><%= item_thumbnail.zipcode %><% end%>
+						<% if defined? user_id %>
+						<br/>
+						<% end %>
+					</address>
+				</div>
 			</div>
 		</li>
 	</ul>

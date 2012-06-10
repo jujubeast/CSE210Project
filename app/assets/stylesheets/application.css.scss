@@ -131,8 +131,38 @@ div#main_nav{
 
 /*_item_thumbnail.html.erb*/
 .item_thumbnail{
+  
   .thumbnail{
-  background-color: white;
+    background-color: white;
+    position: relative;
+   
+    .thumbnail-content{
+      margin:auto;
+      text-align: center;
+      h4{
+        padding-top: 8px;
+      }
+    }
+    
+    .option-bar{
+      padding-left: 5px;
+    }
+    
+    div.bookmark{
+        position: absolute;
+        right:10px;
+        top:-5px;
+        .bookmark-icon{
+        }
+    }
+    
+    div.favorite{
+      position: absolute;
+      .favorite-icon{
+        margin-left: 5px;
+        margin-top: 5px;
+      }
+    }
   }
 }
 
@@ -154,4 +184,17 @@ div#main_nav{
 /**/
 div.padding-top30{
 	padding-top:30px;
+}
+
+
+/* Footer
+-------------------------------------------------- */
+.footer {
+  margin-top: 45px;
+  padding: 35px 0 36px;
+  border-top: 1px solid #e5e5e5;
+}
+.footer p {
+  margin-bottom: 0;
+  color: #555;
 }
