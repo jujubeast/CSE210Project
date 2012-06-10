@@ -1,244 +1,51 @@
+<div class='span3 well'>
+	<img src="<%= @store.pic %>"/>
+	<img src="http://placekitten.com/200/200" />
+</div>
 
-<table width="100%">
-	<tr>
-		<th width="30%" align="left">Photos</th>
-		<th width="70%" align="left">basic Information</>
-	</tr>
-	<tr>
-		<td>
-			<table border="1" width="100%"></table>
-		</td>
-		<td>
-			<table border="1" width="100%"></table>
-		</td>
-	</tr>
+<div class="span8 well display-table">
+	<h2><%= @store.name%></h2>
+	<div class='display-row'>
+		<div class='display-label'>
+			Opening Time
+		</div>
+		<div class='display-info'>
+			<% if @store.hours!="" %><%= @store.hours %><% else %>None Listed<% end %>
+		</div>
+	</div>
+	<div class='display-row'>
+		<div class='display-label'>
+			Phone Number
+		</div>
+		<div class='display-info'>
+			<% if @store.telephone!="" %><%= @store.telephone %><% else %>None Listed<% end %>
+		</div>
+	</div>
+	<div class='display-row'>
+		<div class='display-label'>
+			Website
+		</div>
+		<div class='display-info'>
+			<% if @store.website!="" %><%= @store.website %><% else %>None Listed<% end %>
+		</div>
+	</div>
+	<div class='display-row'>
+		<div class='display-label'>
+			Address
+		</div>
+		<div class='display-info'>
+			<address>
+				<% if @store.street_1 %><%= @store.street_1%>
+				<br/>
+				<% end %>
+				<% if @store.street_2 != "" %><%= @store.street_2 %>
+				<br/>
+				<% end %>
+				<% if @store.city!="" && @store.state!=""%><%= @store.city %>, <%= @store.state %> <%end%>
+				<% if @store.zipcode!=""%><%= @store.zipcode %><% end%>
+			</address>
+		</div>
+	</div>
+</div>
 
-	<tr>
-		<td>
-			<table>
-				<tr>
-					<td width="100%" height="100px">
-					<img src="<%= @store.pic%>"/>
-						</td>
-				</tr>
-			</table>
-			
-			</td>
-		<td>
-			<table>
-				<tr>
-					<td>Restaurant Name:</td>
-					<td><%= @store.name %></td>
-
-				</tr>
-				<tr>
-					<td>Opening Time:</td>
-					<td><%= @store.hours %></td>
-
-				</tr>
-				<tr>
-					<td>Restaurant Street 1:</td>
-					<td><%= @store.street_1 %></td>
-
-				</tr>
-				<tr>
-					<td>Restaurant Street 2:</td>
-					<td><%= @store.street_2%></td>
-
-				</tr>
-				<tr>
-					<td>Restaurant City:</td>
-					<td><%= @store.city%></td>
-
-				</tr>
-				<tr>
-					<td>Restaurant State:</td>
-					<td><%= @store.state %></td>
-				</tr>
-				<tr>
-					<td>Zip Code:</td>
-					<td><%= @store.zipcode %></td>
-				</tr>
-				<tr>
-					<td>Phone Number:</td>
-					<td><%= @store.telephone %></td>
-				</tr>
-				<tr>
-					<td>Website:</td>
-					<td><a href="../../<%= @store.website %>"> <%= @store.website %> </a></td>
-				</tr>
-				<tr>
-
-					<td></td>
-				</tr>
-				</tr>
-			</table>
-		
-		</td>
-	</tr>
-	<tr>
-		<td></td><td></td>
-	</tr>
-	<tr>
-		<th></th>
-		<th  align="left">High Light Tags</th>
-		</tr>
-	<tr>
-		<td>
-			
-
-		</td>
-		<td>
-			<table border="1" width="100%"></table>
-		</td>
-		</tr>
-		<tr>
-			<td></td>
-<td>
-	<table>
-		<%  @store_review.all_categories.each do |category_name|%>
-		<tr>
-			<td><%= category_name %> :</td>
-			<td>
-				<% tags_found = @store_review.find_tags(category_name)
-				   tags_found.each_with_index do |t, index|
-				   if index == tags_found.length - 1%>  
-				     <%= t%>
-			   <%  else %>
-				     <%= t%>, 
-			   
-               <% end
-                  end 
-        end %>
-			</td>
-		</tr>
-
-	</table>
-</td>
-			</tr>
-			<tr>
-		<th></th>
-		<th  align="left">Add Reviews</th>
-		</tr>
-	<tr>
-		<td>
-			
-
-		</td>
-		<td>
-			<table border="1" width="100%"></table>
-		</td>
-		</tr>
-		<tr>
-			<td></td>
-<td>
-	<%
-#@reviews = {}
-
-#@reviews[:user_id] = 1
-#@reviews[:store_id] = 5
-#@highlights = {}
-#@highlights["like"] = ["kitty","pho"]
-#@highlights["dislike"] = ["chinese", "hamburger"]
-@counter1 = 3
-@counter2 = 3
-@counter3 = 3
-@counter4 = 3
-@counter5 = 3
-@counter6 = 3
-#@reviews[:highlights] = highlights 
-%>
-<script type="text/javascript">
-    /* delete row */
-    function addRow(categoryID) {
-    		var hideID = "hide"+categoryID;
-    		var temp = document.getElementById(hideID).value;
-    		temp++;
-    		document.getElementById(hideID).value = temp;
-    		var firstRow=document.getElementById("table2").rows[categoryID-1];
-			var x=firstRow.insertCell(temp);
-			var insertString = "aaa";
-			switch(categoryID){
-				case 1:insertString = "<td><input type='text' name='like" + temp +"' ></td>";break;
-				case 2:insertString = "<td><input type='text' name='dislike" + temp +"' ></td>";break;
-				case 3:insertString = "<td><input type='text' name='env" + temp +"' ></td>";break;
-				case 4:insertString = "<td><input type='text' name='type" + temp +"' ></td>";break;
-				case 5:insertString = "<td><input type='text' name='has" + temp +"' ></td>";break;
-				case 6:insertString = "<td><input type='text' name='good" + temp +"' ></td>";break;
-				default: break;
-			}
-			x.innerHTML=insertString;
-    		
-           
-        }
-    	
-
-</script>
-
-
-<%= form_tag("/reviews", :method => "get") do %>
-
-<table id="table2"><tr>
-	
-	<td>What we like:</td>
-	<td><input type='text' name="like1"></td>
-	<td><input type='text' name="like2"></td>
-	<td><input type='text' name="like3"></td>
-	<td><img onclick="addRow(1)" width="20" height="20" src="../assets/plus.png"  /></td>
-    <td><%= hidden_field_tag :hide1 , value = @counter1 %></td>
-	<td><%= hidden_field_tag :store_id , value = @store.id %></td>	
-	</tr>
-<tr>
-	
-	<td>What we dislike:</td>
-		<td><input type='text' name="dislike1"></td>
-		<td><input type='text' name="dislike2"></td>
-		<td><input type='text' name="dislike3"></td>
-	<td><img onclick="addRow(2)" width="20" height="20" alt="add" src="../assets/plus.png" /></td>	
-	<td><%= hidden_field_tag :hide2 , value = @counter2 %></td>	
-		</tr>
-		<tr >
-			
-			<td>Environment:</td>
-			<td><input type='text' name="env1"></td>	
-			<td><input type='text' name="env2"></td>	
-			<td><input type='text' name="env3"></td>		
-	<td><img onclick="addRow(3)" width="20" height="20" alt="add" src="../assets/plus.png" /></td>	
-	<td><%= hidden_field_tag :hide3, value = @counter3 %></td>	
-		</tr>
-		<tr >
-			<td>Restaurant Type:</td>
-			<td><input type='text' name="type1"></td>	
-				<td><input type='text' name="type2"></td>	
-					<td><input type='text' name="type3"></td>	
-	<td><img onclick="addRow(4)" width="20" height="20" alt="add" src="../assets/plus.png" /></td>	
-	<td><%= hidden_field_tag :hide4 , value = @counter4 %></td>
-		</tr>
-		<tr >
-			<td>Restaurant Has:</td>
-			<td><input type='text' name="has1"></td>	
-			<td><input type='text' name="has2"></td>	
-			<td><input type='text' name="has3"></td>	
-	<td><img onclick="addRow(5)" width="20" height="20" alt="add" src="../assets/plus.png" /></td>	
-	<td><%= hidden_field_tag :hide5 , value = @counter5 %></td>
-		</tr>
-
-		<tr >
-			<td>Good for:</td>
-			<td><input type='text' name="good1"></td>	
-			<td><input type='text' name="good2"></td>	
-			<td><input type='text' name="good3"></td>	
-	<td><img onclick="addRow(6)" width="20" height="20" alt="add" src="../assets/plus.png" /></td>
-	<td><%= hidden_field_tag :hide6 , value = @counter6 %></td>		
-		</tr>
-
-				<tr>	
-					<td><%= submit_tag("Submit") %></td>
-				
-				</tr>
-			</table>
-	
-<% end %>
-
-<%= #button_to "Submit", :method => :post, :controller => "stores", :action => "addreview", :highlights => @highlights, :store_id => 31, :user_id => 1
-%>
+<%= render :partial => "tags_and_reviews.html.erb", :locals=>{:store_user_review=>@store_user_review, :store_review =>@store_review, :store=>@store }%>
