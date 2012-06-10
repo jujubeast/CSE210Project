@@ -112,4 +112,17 @@ module ListFinder
         return list_object
     end
 
+
+    def self.findListPrivileges(user_id, lists)
+      list_privileges = Hash.new
+
+        lists.each do |list|
+            result = ListUser.find(:all, :conditions => ['list_users.user_id = ? and list_users.list_id = ?', user_id, list.id]).first()
+            list_privileges[list.id] = result.privilege
+        end
+
+        return list_privileges
+
+    end
+
 end
