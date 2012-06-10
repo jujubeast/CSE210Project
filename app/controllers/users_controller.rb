@@ -28,12 +28,12 @@ class UsersController < ApplicationController
     # XXX raise exception and catch, then display error page.
     
     # XXX This is only temporary until the team finds a solution on sharing
-    current_user_id = session[:user_id]
-    if (defined? current_user_id)
-      if (current_user_id != params[:id])
-        params[:id] = current_user_id
-      end
-    end
+    @current_user_id = session[:user_id]
+   # if (defined? current_user_id)
+    #  if (current_user_id != params[:id])
+     #   params[:id] = current_user_id
+     # end
+    #end
 
     user_entity = UserEntity.new
     user_entity.find_by_id(params[:id])
@@ -52,19 +52,11 @@ class UsersController < ApplicationController
       end
     end
     
-    puts '##################'
-    puts @current_list.name
-    @stores.each do |store|
-      puts store.name
-    end
-    puts '##################'
-    
     @available_stores = StoreEntity.find_all
-    @available_stores.each do |store|
-      print store.name + "\n"
-    end
 
     @default_list_state = ListFinder.findDefaultListHash(session[:user_id], @stores)
+
+    @friends_list = FriendLogic.find_friends(session[:user_id])
     
     respond_to do |format|
       format.html # show.html.erb

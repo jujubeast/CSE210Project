@@ -11,7 +11,8 @@
 
 <div id='body_wrapper' class='row'>
 	<div id="left_nav" class='span3 well' style='padding: 8px 0;'>
-		  <%= render :partial => "lists/list_display", :locals => { :lists => @lists, :current_list => @current_list, :user => @user} %>
+		  <%= render :partial => "lists/list_display", :locals => { :lists => @lists, :current_list => @current_list, :user => @user, :current_user_id => @current_user_id, :friends => @friends_list} %>
+		  <%= render :partial => "users/friends_display", :locals => { :friends => @friends_list, :user => @user } %>
 	</div>
 
 	<div id ="main_nav" class='span9'>

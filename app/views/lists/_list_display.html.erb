@@ -1,6 +1,16 @@
 <ul class='nav nav-list'>
 	<li class='nav-header'>
-		<h3>My Lists <span><button class='btn' id='create_list' style='float:right; margin-top:0;'>add</button></span></h3>
+		<h3>
+			<% if user.id != current_user_id %>
+				<% friends.each do |friend| %>
+					<% if friend.id == user.id %>
+						<%= friend.first_name %>'s Lists
+					<% end %>
+				<% end %>
+			<% else %>
+				My Lists
+			<% end %>
+		<span><button class='btn' id='create_list' style='float:right; margin-top:0;'>add</button></span></h3>
 	</li>
 	<% lists.each do |list| %>
 	<li class="divider"></li>
