@@ -119,10 +119,8 @@ class ListsController < ApplicationController
 
   def subscribe_list
     ListLogic.subscribe_list(session[:user_id], params[:list_id])
-    respond_to do |format|
-      format.html { redirect_to default_home_path(session[:user_id], params[:list_id]), :notice => 'List was successfully created.' }
-      format.json { render :json => @list, :status => :created, :location => @list }
-    end
+    puts "REDIRECTING TO HOME PAGE???"
+    redirect_to default_home_path(session[:user_id], params[:list_id])
   end
 
 end

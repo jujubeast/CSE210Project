@@ -48,7 +48,6 @@ module ListLogic
 		new_list_user = ListUser.new
 		new_list_user.list = the_list
 		new_list_user.privilege = 2
-
 		the_user.list_users << new_list_user
 	end
 

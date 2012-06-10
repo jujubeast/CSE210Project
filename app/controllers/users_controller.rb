@@ -69,6 +69,8 @@ class UsersController < ApplicationController
       end
     end
 
+    #array of current_user's subbed lists to disable sub button on display of other users pages
+    @curr_user_subbed_lists = ListFinder.findUserSubbedLists(session[:user_id])
 
     @available_stores = StoreEntity.find_all
     @default_list_state = ListFinder.findDefaultListHash(session[:user_id], @stores)

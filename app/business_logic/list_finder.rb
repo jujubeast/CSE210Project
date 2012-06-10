@@ -125,4 +125,16 @@ module ListFinder
 
     end
 
+    #find the subbed lists of the user given by user_id
+    def self.findUserSubbedLists(user_id)
+        lists = ListUser.find(:all, :conditions => ['list_users.user_id = ? and list_users.privilege = 2', user_id])
+        
+        results = Array.new
+        lists.each do |list|
+          results.push(list.list_id)
+        end
+
+        return results
+    end 
+
 end

@@ -37,7 +37,9 @@
 					<i class="icon-lock" style='float:right;'></i>
 				<% end %>
 			<% else %>
+				<% unless curr_user_subs.include? list.id %>
 				<span><button class='subscribe_list list.<%=list.id%>' style='float:right; margin-top:0;'>Sub</button></span>
+				<% end %>
 			<% end %>
 		</li>
 	<% end %>
@@ -59,7 +61,6 @@
 					<i class="icon-lock" style='float:right;'></i>
 				<% end %>
 			<% else %>
-				<span><button class='subscribe_list list.<%=list.id%>' style='float:right; margin-top:0;'>Sub</button></span>
 			<% end %>
 		</li>
 	<% end %>
@@ -81,7 +82,9 @@
 					<i class="icon-lock" style='float:right;'></i>
 				<% end %>
 			<% else %>
+				<% unless curr_user_subs.include? list.id %>
 				<span><button class='subscribe_list list.<%=list.id%>' style='float:right; margin-top:0;'>Sub</button></span>
+				<% end %>
 			<% end %>
 		</li>
 	<% end %>
