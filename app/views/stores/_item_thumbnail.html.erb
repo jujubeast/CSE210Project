@@ -7,7 +7,7 @@
 					<a href="<%= remove_from_list_path(default_lists[item_thumbnail.id][:want_to][:list_id], item_thumbnail.id) %>"> <%= image_tag "checkin.png", :class=>'bookmark-icon' %></a>
 					<% end %>
 				</div>
-				<div class="option-bar">
+				<div class="option-bar" >
 					<%= render :partial => "stores/thumbnail_dropdown", :locals => {:store => item_thumbnail}%>
 				</div>
 				<!--                 <img src="http://lorempixel.com/200/200/food/<%=item_thumbnail.id%>" />  -->
@@ -16,7 +16,8 @@
 					<div class='favorite'>
 						<% if default_lists[item_thumbnail.id][:favorite][:exists] %>
 						<a href="<%= remove_from_list_path(default_lists[item_thumbnail.id][:favorite][:list_id], item_thumbnail.id) %>"> <%= image_tag "favorite-on.png", :class=>"favorite-icon"%></a>
-						<%# else %> <a href="<%= add_to_list_path(default_lists[item_thumbnail.id][:favorite][:list_id], item_thumbnail.id) %>"> <%= image_tag "favorite-off.png", :class=>"favorite-icon"%> </a>
+						<% else %> 
+						<a href="<%= add_to_list_path(default_lists[item_thumbnail.id][:favorite][:list_id], item_thumbnail.id) %>"> <%= image_tag "favorite-off.png", :class=>"favorite-icon"%> </a>
 						<% end %>
 					</div>
 					<h4><a href='/stores/<%= item_thumbnail.id %>'><span><%= item_thumbnail.name%></span></a></h4>

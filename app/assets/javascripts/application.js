@@ -153,6 +153,9 @@ $(document).ready(
 				$(this).parent().remove();
 			});
 			
+			$('.add-review').live('ajax:success', function(event, html) {    
+				$("#tags_and_reviews").replaceWith(html);
+			});
 							
 			window.fbAsyncInit = function() {
 				FB.init({
@@ -197,6 +200,7 @@ $(document).ready(
 				//   window.location = 'homepage/' + access_token;
 				//});
 			}; 
+			
 			
 			( function(d) {
 					var js, id = 'facebook-jssdk';

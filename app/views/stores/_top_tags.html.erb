@@ -1,0 +1,18 @@
+<div id='top-review' class=' span8 well' style='float:right;'>
+	<h3 align="left">Top Tags</h3>
+	<div class='display-table'>
+		<%  store_review.all_categories.each do |category_name|%>
+    		<div class='display-row'>
+    			<div class='display-label'>
+    				<%= category_name %>
+    			</div>
+    			<div class='display-info'>
+    				<% tags_found = store_review.find_tags(category_name)
+    				tags_found.each_with_index do |t, index| %>
+    				<span class='btn btn-primary'><%= t %></span>
+    				<% end %>
+    			</div>
+    		</div>
+		<% end %>
+	</div>
+</div>
