@@ -21,6 +21,7 @@ module ListFinder
       user.list_users.each do |list_user|
         if list_user.list.name == name
           return list_user.list_id
+        end
       end
 
       return nil
@@ -57,18 +58,18 @@ module ListFinder
 
       	 lists = ListFinder.find_lists_by_curr_store(store_id, user_id)
 
-      	 results = {:favorite => ListFinder.in_favorites(lists), :been_to => ListFinder.in_been_to(lists), :want_to => ListFinder.in_want_to_go_to(lists)}
+      	 results = {:favorite => ListFinder.in_favorites(lists, user_id), :been_to => ListFinder.in_been_to(lists, user_id), :want_to => ListFinder.in_want_to_go_to(lists, user_id)}
 
    		   return results
 
 	     end
 
-    def self.in_favorites(lists)
+    def self.in_favorites(lists, user_id)
 
       list_name = "Favorites"
       list_object = Hash.new
       list_object[:exists] = false
-      list_object[:list_id] = find_users_list_by_name(list_name)
+      list_object[:list_id] = find_users_list_by_name(list_name, user_id)
 
       lists.each do |list|
           if list.name == list_name
@@ -79,12 +80,12 @@ module ListFinder
         return list_object
     end
 
-    def self.in_been_to(lists)
+    def self.in_been_to(lists, user_id)
 
       list_name = "Places I Have Been To"
       list_object = Hash.new
       list_object[:exists] = false
-      list_object[:list_id] = find_users_list_by_name(list_name)
+      list_object[:list_id] = find_users_list_by_name(list_name, user_id)
 
       lists.each do |list|
           if list.name == list_name
@@ -95,12 +96,12 @@ module ListFinder
         return list_object
     end
 
-    def self.in_want_to_go_to(lists)
+    def self.in_want_to_go_to(lists, user_id)
 
       list_name = "Places I Want To Go"
       list_object = Hash.new
       list_object[:exists] = false
-      list_object[:list_id] = find_users_list_by_name(list_name)
+      list_object[:list_id] = find_users_list_by_name(list_name, user_id)
 
       lists.each do |list|
           if list.name == list_name
