@@ -1,95 +1,135 @@
-<div>
-	<%= link_to 'Sign Out', signout_path %> 
-</div>
+<%= form_for @store, :url => { :action => :create },:html => {:multipart => true}, :html =>{:class=>"form-horizontal"}  do |f|%>
+<fieldset>
+	<div class='control-group span3 well'>
+		<img src="http://lorempixel.com/200/200/food/" />
+		<label for="upload_file" class="">Upload a Photo</label>
+		<div class="">
+			<%= file_field_tag(:upload, :accept => 'image/png,image/gif,image/jpeg', :class=>"input-file") %>
+		</div>
+	</div>
 
+	<div class="span8 well">
+		<div class='title' style='margin:20px 35px;'>
+			<h2>Add a Restaurant</h2>
+		</div>
+		<div class='control-group'>
+			<%= f.label :name, "Restaurant Name", :class=>"control-label" %>
+			<div class="controls">
+				<%= f.text_field :name %>
+			</div>
+		</div>
 
-<%= form_for @store, :url => { :action => :create },:html => {:multipart => true}  do |f|%>
-<table width="100%">
-	<tr>
-		<th width="30%" align="left">Photos</th>
-		<th width="70%" align="left">basic Information</>
-	</tr>
-	<tr>
-		<td>
-			<table border="1" width="100%"></table>
-		</td>
-		<td>
-			<table border="1" width="100%"></table>
-		</td>
-	</tr>
+		<div class='control-group'>
+			<%= f.label :hours, "Opening Time", :class=>"control-label" %>
+			<div class="controls">
+				<%= f.text_field :hours %>
+			</div>
+		</div>
 
-	<tr>
-		<td>
-			<table>
-				<tr>
-					<td width="100%" height="100px">
-						<%= image_tag("rails.png")
-# => <img alt="Rails" src="http://www.google.com/imgres?imgurl=http://www.takepart.com/sites/default/files/styles/tp_promo_feature_thumbnail/public/seaweed.jpg&imgrefurl=http://www.takepart.com/foodinc&h=222&w=298&sz=20&tbnid=ahU7p7l4smVbrM:&tbnh=92&tbnw=124&zoom=1&docid=71to5XWNETbiBM&itg=1&hl=en&sa=X&ei=ldKlT6bxD8raiQLVicnVAg&ved=0CHgQ9QEwAw&dur=123" />
-			%>
-						</td>
-				</tr>
-				<tr>
-					<td>
-						<p><label for="upload_file">Select File</label> : 
-						<%= file_field_tag(:upload, :accept => 'image/png,image/gif,image/jpeg') %></p>
-					</td>
-				</tr>
-				</table>
-			
-			</td>
-		<td>
-			<table>
-				<tr>
-					<td><%= f.label :name, "Restaurant Name:" %></td>
-					<td><%= f.text_field :name %></td>
+		<div class='control-group'>
+			<%= f.label(:street_1, "Street 1", :class=>"control-label") %>
+			<div class="controls">
+				<%= f.text_field(:street_1) %>
+			</div>
+		</div>
 
-				</tr>
-				<tr>
-					<td><%= f.label :hours, "Opening Time:" %></td>
-					<td><%= f.text_field :hours %></td>
+		<div class='control-group'>
+			<%= f.label(:street_2, "Street 2", :class=>"control-label") %>
+			<div class="controls">
+				<%= f.text_field(:street_2) %>
+			</div>
+		</div>
 
-				</tr>
-				<tr>
-					<td><%= f.label(:street_1, "Restaurant Street 1:") %></td>
-					<td><%= f.text_field(:street_1) %></td>
+		<div class='control-group'>
+			<%= f.label(:city, "City", :class=>"control-label") %>
+			<div class="controls">
+				<%= f.text_field(:city) %>
+			</div>
+		</div>
 
-				</tr>
-				<tr>
-					<td><%= f.label(:street_2, "Restaurant Street 2:") %></td>
-					<td><%= f.text_field(:street_2) %></td>
+		<div class='control-group'>
+			<%= f.label(:state, "State", :class=>"control-label") %>
+			<div class="controls">
+				<%= f.select(:state,
+        [["Alabama","Alabama"],
+          ["Alaska","Alaska"],
+          ["Arizona","Arizona"],
+          ["Arkansas","Arkansas"],
+          ["California","California"],
+          ["Colorado","Colorado"],
+          ["Connecticut","Connecticut"],
+          ["Delaware","Delaware"],
+          ["District Of Columbia"],
+          ["Florida","Florida"],
+          ["Georgia","Georgia"],
+          ["Hawaii","Hawaii"],
+          ["Idaho","Idaho"],
+          ["Illinois","Illinois"],
+          ["Indiana","Indiana"],
+          ["Iowa","Iowa"],
+          ["Kansas","Kansas"],
+          ["Kentucky","Kentucky"],
+          ["Louisiana","Louisiana"],
+          ["Maine","Maine"],
+          ["Maryland","Maryland"],
+          ["Massachusetts","Massachusetts"],
+          ["Michigan","Michigan"],
+          ["Minnesota","Minnesota"],
+          ["Mississippi","Mississippi"],
+          ["Missouri","Missouri"],
+          ["Montana","Montana"],
+          ["Nebraska","Nebraska"],
+          ["Nevada","Nevada"],
+          ["New Hampshire","New Hampshire"],
+          ["New Jersey","New Jersey"],
+          ["New Mexico","New Mexico"],
+          ["New York","New York"],
+          ["North Carolina","North Carolina"],
+          ["North Dakota","North Dakota"],
+          ["Ohio","Ohio"],
+          ["Oklahoma","Oklahoma"],
+          ["Oregon","Oregon"],
+          ["Pennsylvania","Pennsylvania"],
+          ["Rhode Island","Rhode Island"],
+          ["South Carolina","South Carolina"],
+          ["South Dakota","South Dakota"],
+          ["Tennessee","Tennessee"],
+          ["Texas","Texas"],
+          ["Utah","Utah"],
+          ["Vermont","Vermont"],
+          ["Virginia","Virginia"],
+          ["Washington","Washington"],
+          ["West Virginia","West Virginia"],
+          ["Wisconsin","Wisconsin"],
+          ["Wyoming","Wyoming"]]) %>
+			</div>
+		</div>
 
-				</tr>
-				<tr>
-					<td><%= f.label(:city, "Restaurant City:") %></td>
-					<td><%= f.text_field(:city) %></td>
+		<div class='control-group'>
+			<%= f.label(:zipcode, "Zip Code", :class=>"control-label") %>
+			<div class="controls">
+				<%= f.text_field(:zipcode, :size=>5, :class=>"span1") %>
+			</div>
+		</div>
 
-				</tr>
-				<tr>
-					<td><%= f.label(:state, "Restaurant State:") %></td>
-					<td><%= f.text_field(:state) %></td>
-				</tr>
-				<tr>
-					<td><%= f.label(:zipcode, "Zip Code:") %></td>
-					<td><%= f.text_field(:zipcode) %></td>
-				</tr>
-				<tr>
-					<td><%= f.label(:telephone, "Phone Number:") %></td>
-					<td><%= f.text_field(:telephone) %></td>
-				</tr>
-				<tr>
-					<td><%= f.label(:website, "Website:") %></td>
-					<td><%= f.text_field(:website) %></td>
-				</tr>
-				<tr>
+		<div class='control-group'>
+			<%= f.label(:telephone, "Phone Number", :class=>"control-label") %>
+			<div class="controls">
+				<%= f.telephone_field(:telephone) %>
+			</div>
+		</div>
 
-					<td></td>
+		<div class='control-group'>
+			<%= f.label(:website, "Website", :class=>"control-label") %>
+			<div class="controls">
+				<%= f.url_field(:website, :placeholder=>"http://") %>
+			</div>
+		</div>
+		<div class='form-actions'>
+			<%= f.submit("Submit", :class=>"btn btn-primary") %>
+		</div>
+	</div>
 
-					<td><%= f.submit("Submit") %></td>
-				</tr>
-				</tr>
-			</table>
-		</td>
-	</tr>
-</table>
+</fieldset>
 <% end %>
 

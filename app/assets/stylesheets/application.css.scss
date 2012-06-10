@@ -20,6 +20,7 @@ body {
 
 .container {
   width: 960px;
+  margin:top
 }
 /***/
 
@@ -31,7 +32,18 @@ body {
   background-color: orange;
 }
 
+.center {
+  margin-left:auto;
+  margin-right:auto;
+}
+
 /*_search.html.erb*/
+div.search_nav_bar{
+  form {
+    margin:0px;
+  }
+}
+
 div.basic_search{
 	margin-top:10px;
 	width: 300px;
@@ -49,6 +61,10 @@ div#advanced_search_icon{
 	padding-bottom:5px;
 }
 
+div#advanced_search_bar{
+  clear:both;
+}
+
 /*_advanced_search_bar.html.erb*/
 div.search_box{
 	height: 180px;
@@ -60,6 +76,10 @@ div.search_box{
 	}
 }
 
+div#tags_search, div#friends_search, div #list_search{
+  margin-bottom: 20px;
+}
+
 div#tag_input{
 	margin: 10px 10px;
 }
@@ -69,6 +89,7 @@ label.friend_selection, label.list_selection{
 	padding: 10px 40px;
 	margin-bottom: 0px;
 }
+
 
 
 /*user/show.html.erb*/
@@ -88,9 +109,7 @@ div#top_nav{
 	margin-bottom: 30px;
 }
 
-div#advanced_search_bar{
-  clear:both;
-}
+
 
 div#main_nav{
   margin-left:0px;
@@ -119,9 +138,17 @@ div#main_nav{
 
 /*_list.display.html.erb*/
 #left_nav{
-  li > i, li>.icon-remove-sign{
+  li > i{
     margin-top: -20px;
   }
+  // i.icon-remove-sign{
+    // margin-top:-20px;
+    // float: right;
+  // }
+  // a.icon-remove-href{
+    // float:right;
+    // // margin-top:-5px;
+  // }
 }
 
 /**/
