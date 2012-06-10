@@ -13,6 +13,9 @@ class StoresController < ApplicationController
   	
   	if (params[:upload] != nil and params[:upload].size > 0)
       file_upload = params[:upload]
+      
+      puts "==============="  
+      puts file_upload
       fileuploader = FileUpload.new(file_upload)
       fileuploader.save_to_disk
       @disk_path = fileuploader.file_absolute_path

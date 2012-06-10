@@ -63,6 +63,8 @@ class UsersController < ApplicationController
     @available_stores.each do |store|
       print store.name + "\n"
     end
+
+    @default_list_state = ListFinder.findDefaultListHash(session[:user_id], @stores)
     
     respond_to do |format|
       format.html # show.html.erb
