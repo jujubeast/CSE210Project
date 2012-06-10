@@ -149,6 +149,10 @@ class SimpleSearchController < ApplicationController
     #return searchResults
     @view_data = actualSearchResult
     @lists = search_lists
+    @user_id = session[:user_id]
+
+    @default_list_state = findDefaultListHash(@user_id, @view_data)
+
     render 'simple_search/search'
   end
 
@@ -197,5 +201,15 @@ class SimpleSearchController < ApplicationController
     end
 
     @friends
+  end
+
+  def findDefaultListHash(user_id, stores)
+    default_list_state = Hash.new
+
+    stores.each do |store|
+      default_list_state[store.id] = StoreFinder.in_default_lists(user_id, store.id)
+    end
+
+    return default_list_state
   end
 end

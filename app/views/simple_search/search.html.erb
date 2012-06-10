@@ -3,6 +3,6 @@
         <div class='title'>
             <h2>Search Results</h2>
         </div>
-        <%= render :partial => "stores/item_thumbnail", :collection => @view_data,  :locals => { :stores => @stores, :lists => @lists } || 'No stores in this list' %>
+        <%= render :partial => "stores/item_thumbnail", :collection => @view_data,  :locals => { :stores => @stores, :lists => @lists, :user_id => @user_id, :default_lists => @default_list_state } || 'No stores in this list' %>
     <% end %>
 </div>

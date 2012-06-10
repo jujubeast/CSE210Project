@@ -11,6 +11,12 @@
 				    <% if item_thumbnail.street_2 != "" %><%= item_thumbnail.street_2 %><br/><% end %>
 				    <% if item_thumbnail.city!="" && item_thumbnail.state!=""%><%= item_thumbnail.city %>, <%= item_thumbnail.state %> <%end%>
 				    <% if item_thumbnail.zipcode!=""%><%= item_thumbnail.zipcode %><% end%>
+				    <% if defined? user_id %>
+				    <br/>
+				    <% if default_lists[item_thumbnail.id][:favorite] %>Favorite!<% end %>
+				    <% if default_lists[item_thumbnail.id][:been_to] %><br/>Been to!<% end %>
+				    <% if default_lists[item_thumbnail.id][:want_to] %><br/>Want to!<% end %>
+				    <% end %>
 				</address>
 			</div>
 		</li>

@@ -20,4 +20,48 @@ module StoreFinder
       	stores = Store.where("name like ?  or detail_info like ?", search_string, search_string).select("id").all
     end
 
+    def self.in_favorites(lists)
+
+      lists.each do |list|
+        if list.name == 'Favorites'
+          return true
+        end
+      end
+
+      return false
+    end
+
+    def self.in_been_to(lists)
+
+      lists.each do |list|
+        if list.name == "Places I've Been To"
+          return true
+        end
+      end
+
+      return false
+    end
+
+    def self.in_want_to_go_to(lists)
+
+      lists.each do |list|
+        if list.name == "Places I Want To Go"
+          return true
+        end
+      end
+
+      return false
+    end
+
+
+    def self.in_default_lists(user_id, store_id)
+
+      lists = ListFinder.find_lists_by_curr_store(store_id, user_id)
+
+      results = {:favorite => in_favorites(lists), :been_to => in_been_to(lists), :want_to => in_want_to_go_to(lists)}
+
+      return results
+
+    end
+
 end
