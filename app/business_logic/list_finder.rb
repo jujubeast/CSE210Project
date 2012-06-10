@@ -55,33 +55,33 @@ module ListFinder
 
     	lists.each do |list|
         	if list.name == 'Favorites'
-          		return true
+          		return list
         	end
       	end
 
-      	return false
+      	return nil
     end
 
     def self.in_been_to(lists)
 
       lists.each do |list|
         if list.name == "Places I've Been To"
-          return true
+          return list
         end
       end
 
-      return false
+      return nil
     end
 
     def self.in_want_to_go_to(lists)
 
       lists.each do |list|
         if list.name == "Places I Want To Go"
-          return true
+          return list
         end
       end
 
-      return false
+      return nil
     end
 
 end
