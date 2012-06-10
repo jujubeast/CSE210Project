@@ -7,16 +7,39 @@
 					<a href="<%= remove_from_list_path(default_lists[item_thumbnail.id][:want_to][:list_id], item_thumbnail.id) %>"> <%= image_tag "checkin.png", :class=>'bookmark-icon' %></a>
 					<% end %>
 				</div>
-				<div class="option-bar">
+				<div class="option-bar" >
 					<%= render :partial => "stores/thumbnail_dropdown", :locals => {:store => item_thumbnail}%>
 				</div>
 				<!--                 <img src="http://lorempixel.com/200/200/food/<%=item_thumbnail.id%>" />  -->
 				<img src="http://placekitten.com/200/200" />
 				<div class="thumbnail-content">
 					<div class='favorite'>
-						<% if default_lists[item_thumbnail.id][:favorite][:exists] %>
-						<a href="<%= remove_from_list_path(default_lists[item_thumbnail.id][:favorite][:list_id], item_thumbnail.id) %>"> <%= image_tag "favorite-on.png", :class=>"favorite-icon"%></a>
-						<%# else %> <a href="<%= add_to_list_path(default_lists[item_thumbnail.id][:favorite][:list_id], item_thumbnail.id) %>"> <%= image_tag "favorite-off.png", :class=>"favorite-icon"%> </a>
+					    <% if current_list.id != default_lists[item_thumbnail.id][:favorite][:list_id]%>
+    						<% if default_lists[item_thumbnail.id][:favorite][:exists] %>
+    						<%= link_to(
+                                  image_tag("favorite-on.png", :class=>"favorite-icon"), 
+                                  remove_from_list_path(default_lists[item_thumbnail.id][:favorite][:list_id],item_thumbnail.id), 
+                                  :remote=>true,
+                                  :class => "favorite-on") %>
+    						<% else %> 
+    						<%= link_to(
+    						      image_tag("favorite-off.png", :class=>"favorite-icon"), 
+    						      add_to_list_path(default_lists[item_thumbnail.id][:favorite][:list_id],item_thumbnail.id), 
+    						      :remote=>true,
+    						      :class => "favorite-off") %>
+    						<% end %>
+						<% else %>
+                            <% if default_lists[item_thumbnail.id][:favorite][:exists] %>
+
+						      <%= link_to(image_tag("favorite-on.png", :class=>"favorite-icon"), 
+                                  remove_from_list_path(default_lists[item_thumbnail.id][:favorite][:list_id],item_thumbnail.id), 
+                                  :class => "favorite-on") %>
+                            <% else %> 
+                            <%= link_to(
+                                  image_tag("favorite-off.png", :class=>"favorite-icon"), 
+                                  add_to_list_path(default_lists[item_thumbnail.id][:favorite][:list_id],item_thumbnail.id), 
+                                  :class => "favorite-off") %>
+                            <% end %>
 						<% end %>
 					</div>
 					<h4><a href='/stores/<%= item_thumbnail.id %>'><span><%= item_thumbnail.name%></span></a></h4>

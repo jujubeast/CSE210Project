@@ -191,17 +191,22 @@ div.padding-top30{
   .display-row{
     clear: both;
     width: 100%;
-    padding: 20px 0px;
+    padding: 10px 0px;
+    // margin-bottom: 10px;
     
     .display-label{
       float: left;
-      width: 150px;
+      width: 140px;
+      padding-top: 5px;
       text-align: right;
-      font-weight: bold;
     }
     .display-info{
-      float: left;
-      margin-left:20px;
+      margin-left: 160px;
+      width:70%;
+      
+      span{
+        margin: 5px 0px;
+      }
     }
   }
  
