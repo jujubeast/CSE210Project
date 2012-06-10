@@ -168,8 +168,14 @@ $(document).ready(
 				$(this).parent().remove();
 			});
 
-
+			$(".favorite-off").bind("ajax:success", function(event){
+				$(this).children(".favorite-icon").replaceWith("<img src='/assets/favorite-on.png' class='favorite-icon'>");
+			});
 			
+			$(".favorite-on").bind("ajax:success", function(event){
+				$(this).children(".favorite-icon").replaceWith("<img src='/assets/favorite-off.png' class='favorite-icon'>");
+			});
+
 			$('.add-review').live('ajax:success', function(event, html) {    
 				$("#tags_and_reviews").replaceWith(html);
 			});
