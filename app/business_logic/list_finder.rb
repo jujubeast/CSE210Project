@@ -53,35 +53,47 @@ module ListFinder
 
     def self.in_favorites(lists)
 
+      list_object = Hash.new
+      list_object[:exists] = false
+
     	lists.each do |list|
         	if list.name == 'Favorites'
-          		return list
+          		list_object[:list_id] = list.id
+              list_object[:exists] = true
         	end
       	end
 
-      	return nil
+      	return list_object
     end
 
     def self.in_been_to(lists)
 
-      lists.each do |list|
-        if list.name == "Places I've Been To"
-          return list
-        end
-      end
+      list_object = Hash.new
+      list_object[:exists] = false
 
-      return nil
+      lists.each do |list|
+          if list.name == "Places I've Been Too"
+              list_object[:list_id] = list.id
+              list_object[:exists] = true
+          end
+        end
+
+        return list_object
     end
 
     def self.in_want_to_go_to(lists)
 
-      lists.each do |list|
-        if list.name == "Places I Want To Go"
-          return list
-        end
-      end
+      list_object = Hash.new
+      list_object[:exists] = false
 
-      return nil
+      lists.each do |list|
+          if list.name == "Places I Want To Go"
+              list_object[:list_id] = list.id
+              list_object[:exists] = true
+          end
+        end
+
+        return list_object
     end
 
 end
