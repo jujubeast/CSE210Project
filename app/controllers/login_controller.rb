@@ -17,6 +17,9 @@ class LoginController < ApplicationController
     if !User.exists?(:fb_id => fb_user.identifier)
       registered_user = User.new
       registered_user.fb_id = fb_user.identifier
+      registered_user.email = fb_user.email
+      registered_user.first_name = fb_user.first_name
+      registered_user.last_name = fb_user.last_name
       registered_user.save
     
       ListLogic.create_default_lists(registered_user.id)

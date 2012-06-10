@@ -31,5 +31,57 @@ module ListFinder
                             :select => "lists.name, lists.id")
 		end
 
+		def self.findDefaultListHash(user_id, stores)
+    		default_list_state = Hash.new
+
+    		stores.each do |store|
+      		default_list_state[store.id] = ListFinder.in_default_lists(user_id, store.id)
+    		end
+
+    		return default_list_state
+  		end
+
+	def self.in_default_lists(user_id, store_id)
+
+      	lists = ListFinder.find_lists_by_curr_store(store_id, user_id)
+
+      	results = {:favorite => ListFinder.in_favorites(lists), :been_to => ListFinder.in_been_to(lists), :want_to => ListFinder.in_want_to_go_to(lists)}
+
+   		return results
+
+	end
+
+    def self.in_favorites(lists)
+
+    	lists.each do |list|
+        	if list.name == 'Favorites'
+          		return true
+        	end
+      	end
+
+      	return false
+    end
+
+    def self.in_been_to(lists)
+
+      lists.each do |list|
+        if list.name == "Places I've Been To"
+          return true
+        end
+      end
+
+      return false
+    end
+
+    def self.in_want_to_go_to(lists)
+
+      lists.each do |list|
+        if list.name == "Places I Want To Go"
+          return true
+        end
+      end
+
+      return false
+    end
 
 end

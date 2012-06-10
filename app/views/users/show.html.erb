@@ -19,7 +19,7 @@
 		<div class='title'>
 			<h2><%= @current_list.name %></h2>
 		</div>
-		<%= render :partial => "stores/item_thumbnail", :collection => @stores, :locals => { :stores => @stores, :current_list => @current_list, :lists => nil} || "No stores in this list" %>
+		<%= render :partial => "stores/item_thumbnail", :collection => @stores, :locals => { :stores => @stores, :current_list => @current_list, :default_lists => @default_list_state, :lists => nil} || "No stores in this list" %>
 		<% end %>
 	</div>
 </div>
