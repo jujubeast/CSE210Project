@@ -111,10 +111,15 @@ class ListsController < ApplicationController
 
   #return list of lists that this store belongs to, and owner of those lists
   def show_curr_listers
-
+    print  "params[:lists] \n"
+    print params[:lists]
+    print "\n"
+    print "storeid : \n"
+    print params[:store_id]
+    print "\n"
     @curr_lists = ListFinder.find_listers(params[:lists], params[:store_id])
-    render :partial => "lists/show_curr_listers"
-  
+    render :partial => "lists/show_curr_listers", :locals => { :curr_lists => @curr_lists, :store_id => params[:store_id]}
+    
   end
 
 end

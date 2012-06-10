@@ -2,9 +2,9 @@
 	<ul class="thumbnails">
 		<li class="span3">
 			<div class="thumbnail">
-				<%= render :partial => "stores/thumbnail_dropdown", :locals => {:store => item_thumbnail}%>
-
-                <img src="http://lorempixel.com/200/200/food/<%=item_thumbnail.id%>" /> 
+				<%= render :partial => "stores/thumbnail_dropdown", :locals => {:store => item_thumbnail, :lists => lists }%>
+			
+                <img src="" /> 
 				<h4><a href='/stores/<%= item_thumbnail.id %>'><span><%= item_thumbnail.name%></span></a></h4>
 				<address>
 				    <% if item_thumbnail.street_1 %><%= item_thumbnail.street_1%><br/><% end %>

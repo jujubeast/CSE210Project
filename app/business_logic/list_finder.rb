@@ -25,10 +25,18 @@ module ListFinder
 
 		#returns list of lists that contain the store_id, given an array of lists to consider
 		def self.find_listers(lists, store_id)
-			results = List.find(:all, 
-                            :conditions => ["lists.id in (?) and list_stores.store_id=?", lists, store_id],
+			tempResults = List.find(:all, 
+                            :conditions => ["lists.id in (?) and list_stores.store_id = ? and list_users.list_id = lists.id", lists, store_id],
                             :joins => [:list_users, :list_stores],
-                            :select => "lists.name, lists.id")
+                            :select => "lists.name, list_users.user_id")
+      results = Array.new
+      
+      tempResults.each do |item|
+        userName = User.find(:all, :conditions => ["? = users.id",item.user_id], :select => "users.first_name").first
+        results.push([item.name,userName.first_name]) 
+      end
+
+      return results                            
 		end
 
 
