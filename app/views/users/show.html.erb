@@ -23,14 +23,6 @@
 		<% end %>
 	</div>
 </div>
-
-<div id='test'>
-	<h2>Available Stores (Simulated Search Results)</h2>
-	<% if @available_stores %>
-	<%= render :partial => "stores/item_thumbnail", :collection => @available_stores, :locals => { :stores => @stores, :current_list => @current_list, :lists => nil } || 'No stores Available.' %>
-	<% end %>
-</div>
-
 <p id="notice">
     <%= notice %>
 </p>
