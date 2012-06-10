@@ -11,8 +11,10 @@
 				    <% if item_thumbnail.street_2 != "" %><%= item_thumbnail.street_2 %><br/><% end %>
 				    <% if item_thumbnail.city!="" && item_thumbnail.state!=""%><%= item_thumbnail.city %>, <%= item_thumbnail.state %> <%end%>
 				    <% if item_thumbnail.zipcode!=""%><%= item_thumbnail.zipcode %><% end%>
-				    <% if defined? user_id %>
+				    <% if defined? default_lists %>
 				    <br/>
+				    <!-- These are booleans stored in the default_lists hash. First index is the store's id, and 
+				    then whichever list you want to check it's on.  Ex: default_lists[2][:been_to] will return true if Store with id = 2 is on Places I Have Been To, and false otherwise -->
 				    <% if default_lists[item_thumbnail.id][:favorite] %>Favorite!<% end %>
 				    <% if default_lists[item_thumbnail.id][:been_to] %><br/>Been to!<% end %>
 				    <% if default_lists[item_thumbnail.id][:want_to] %><br/>Want to!<% end %>
