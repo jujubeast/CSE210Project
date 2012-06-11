@@ -111,18 +111,27 @@ class ListsController < ApplicationController
 
   #return list of lists that this store belongs to, and owner of those lists
   def show_curr_listers
-
+    print  "params[:lists] \n"
+    print params[:lists]
+    print "\n"
+    print "storeid : \n"
+    print params[:store_id]
+    print "\n"
     @curr_lists = ListFinder.find_listers(params[:lists], params[:store_id])
-    render :partial => "lists/show_curr_listers"
-  
+    render :partial => "lists/show_curr_listers", :locals => { :curr_lists => @curr_lists, :store_id => params[:store_id]}
+    
   end
 
   def subscribe_list
     ListLogic.subscribe_list(session[:user_id], params[:list_id])
-    respond_to do |format|
-      format.html { redirect_to default_home_path(session[:user_id], params[:list_id]), :notice => 'List was successfully created.' }
-      format.json { render :json => @list, :status => :created, :location => @list }
-    end
+    #redirect to homepage? idk...
+  end
+
+  def unsubscribe_list
+    ListLogic.unsubscribe_list(session[:user_id], params[:list_id])
+
+   redirect_to home_path(session[:user_id])
+  
   end
 
 end

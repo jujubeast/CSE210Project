@@ -8,13 +8,13 @@
 					<% end %>
 				</div>
 				<div class="option-bar" >
-					<%= render :partial => "stores/thumbnail_dropdown", :locals => {:store => item_thumbnail}%>
+					<%= render :partial => "stores/thumbnail_dropdown", :locals => {:store => item_thumbnail, :lists => lists}%>
 				</div>
 				<!--                 <img src="http://lorempixel.com/200/200/food/<%=item_thumbnail.id%>" />  -->
 				<img src="http://placekitten.com/200/200" />
 				<div class="thumbnail-content">
 					<div class='favorite'>
-					    <% if current_list.id != default_lists[item_thumbnail.id][:favorite][:list_id]%>
+					    <% if defined?current_list and current_list.id != default_lists[item_thumbnail.id][:favorite][:list_id]%>
     						<% if default_lists[item_thumbnail.id][:favorite][:exists] %>
     						<%= link_to(
                                   image_tag("favorite-on.png", :class=>"favorite-icon"), 

@@ -28,7 +28,9 @@ App::Application.routes.draw do
   match "/signin", :to => "sessions#new"
   match "/signout", :to => "sessions#destroy"
   match "/createlist", :to => "lists#new"
+  match "/sublist", :to => "lists#subscribe_list"
   match "/deletelist/:id", :to => "lists#destroy", :as => :delete_list
+  match "/unsublist/:list_id", :to => "lists#unsubscribe_list", :as => :unsub_list
 
   match "/addtolist/:list_id/:store_id", :to => "lists#add", :as => :add_to_list
   match "/removefromlist/:list_id/:store_id", :to => "list_stores#destroy", :as => :remove_from_list
@@ -38,10 +40,11 @@ App::Application.routes.draw do
 
   match "/login", :to => "login#show"
   match "/homepage/:access_token", :to => "login#login"
-
   match "/showcurrlists", :to => "lists#show_curr_lists", :as => :show_curr_lists
   match "/showpossiblelists", :to => "lists#show_possible_lists", :as => :show_possible_lists
   match "/showcurrlisters", :to => "lists#show_curr_listers", :as => :show_curr_listers
+   
+>>>>>>> 132f17afacb78e17af224c3fc69e52e404cbd886
 
   match "/view-tags", :to => "stores#view_tags"
   match "/add-tags", :to => "stores#add_tags"
