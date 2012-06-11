@@ -138,6 +138,36 @@ $(document).ready(
 				});
 			});
 			
+			$('.add_tags').live('click', function() {
+				var classes = $(this).attr('class').split(" ");
+				var store_id = classes[1].split(".")[1];
+				$.ajax({
+					url : "/add-tags",
+					data : {
+						'store_id' : store_id
+					},
+					success : function(html) {
+						$('#modal_div-'+store_id).append(html);
+						$('#modal-'+store_id).modal('show');
+					}
+				});
+			});
+			
+			$('.view_tags').live('click', function() {
+				var classes = $(this).attr('class').split(" ");
+				var store_id = classes[1].split(".")[1];
+				$.ajax({
+					url : "/view-tags",
+					data : {
+						'store_id' : store_id
+					},
+					success : function(html) {
+						$('#modal_div-'+store_id).append(html);
+						$('#modal-'+store_id).modal('show');
+					}
+				});
+			});
+			
 			$("#create_list").click(function(event){
 				$.ajax({
 					url: "/createlist",
@@ -161,6 +191,13 @@ $(document).ready(
 					}
 				});
 
+			});
+			
+			$(".modal-footer a").live("click", function(event){
+				$(this).parents(".modal").remove();
+			});
+			$(".modal-header button").live("click", function(event){
+				$(this).parents(".modal").remove();
 			});
 			
 			$(".tag_button").live("click", function(event){

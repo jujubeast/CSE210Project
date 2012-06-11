@@ -46,9 +46,6 @@ class StoresController < ApplicationController
     user_id = session[:user_id]
     store_id = params[:store_id]
 
-    puts "user: " + user_id.to_s + "\n"
-    puts "store_id " + store_id.to_s + "\n"
-
     store_entity = StoreEntity.new
     @store = store_entity.find_by_id(store_id)
 
@@ -67,25 +64,61 @@ class StoresController < ApplicationController
     end
   end
 
-#  def removereview
-#    user_id = session[:user_id]
-#    store_id = params[:store_id]
-#    store_entity = StoreEntity.new
-#    @store = store_entity.find_by_id(store_id)
-#
-#    store_entity.addreview(user_id, params["category"], params['tag_value'])
-#
-#    @store_review = store_entity.find_store_review
-#    @store_user_review = store_entity.find_user_store_review(session[:user_id])
-#
-#    respond_to do |format|
-#      format.html {render :partial=>"tags_and_reviews.html.erb",
-#        :locals => {
-#          :store_user_review=>@store_user_review,
-#          :store_review =>@store_review,
-#          :store=>@store
-#        }}
-#    end
-#  end
+  def view_tags
+    user_id = session[:user_id]
+    store_entity = StoreEntity.new
+
+    @store = store_entity.find_by_id(params[:store_id])
+    @store_review = store_entity.find_store_review
+
+    user_entity = UserEntity.new
+    @user = user_entity.find_by_id(session[:user_id])
+    respond_to do |format|
+      format.html {render :partial=>"modal_top_tags.html.erb",
+        :locals => {
+          :store_review =>@store_review,
+          :store=>@store
+        }}
+    end
+  end
+
+  def add_tags
+    user_id = session[:user_id]
+    store_entity = StoreEntity.new
+
+    @store = store_entity.find_by_id(params[:store_id])
+    @store_user_review = store_entity.find_user_store_review(session[:user_id])
+
+    user_entity = UserEntity.new
+    @user = user_entity.find_by_id(session[:user_id])
+    respond_to do |format|
+      format.html {render :partial=>"modal_my_tags.html.erb",
+        :locals => {
+          :store_user_review=>@store_user_review,
+          :store=>@store
+        }}
+    end
+  end
+
+  #  def removereview
+  #    user_id = session[:user_id]
+  #    store_id = params[:store_id]
+  #    store_entity = StoreEntity.new
+  #    @store = store_entity.find_by_id(store_id)
+  #
+  #    store_entity.addreview(user_id, params["category"], params['tag_value'])
+  #
+  #    @store_review = store_entity.find_store_review
+  #    @store_user_review = store_entity.find_user_store_review(session[:user_id])
+  #
+  #    respond_to do |format|
+  #      format.html {render :partial=>"tags_and_reviews.html.erb",
+  #        :locals => {
+  #          :store_user_review=>@store_user_review,
+  #          :store_review =>@store_review,
+  #          :store=>@store
+  #        }}
+  #    end
+  #  end
 
 end

@@ -16,7 +16,7 @@
 	</div>
 
 	<div id ="main_nav" class='span9'>
-		<% if @current_list %>
+		<% if defined?@current_list %>
 		<div class='title'>
 			<h2><%= @current_list.name %></h2>
 		</div>

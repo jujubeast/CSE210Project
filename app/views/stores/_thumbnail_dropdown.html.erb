@@ -1,54 +1,55 @@
 <ul class="nav nav-pills">
 	<script>
-	$(".show_listers").live('click', function(e) {
-					var classes = $(this).attr('class').split(" ");
-					var store_id = classes[1].split(".")[1];
-					var list_data = [];
-					
-					<% if lists != nil %>
-						<% lists.each do |list| %>
-							list_data.push(<%= list %>)
-						<% end %>
-					<% end %>
-					$.ajax( {
-					url: "/showcurrlisters",
-					data: {
-						lists : list_data,
-						store_id: store_id
-					},
-					success : function(html) {
-						$('#modal_div-'+store_id).append(html);
-						$('#show_curr_listers_modal-'+store_id).modal('show');	
-					}
-				});
-			});
+		$(".show_listers").live('click', function(e) {
+var classes = $(this).attr('class').split(" ");
+var store_id = classes[1].split(".")[1];
+var list_data = [];
+
+<% if lists != nil %><% lists.each do |list| %>
+list_data.push(<%= list %>)<% end %><% end %>
+	$.ajax({
+		url : "/showcurrlisters",
+		data : {
+			lists : list_data,
+			store_id : store_id
+		},
+		success : function(html) {
+			$('#modal_div-' + store_id).append(html);
+			$('#show_curr_listers_modal-' + store_id).modal('show');
+		}
+	});
+	});
 	</script>
 	<li class="dropdown active">
-		<a class="dropdown-toggle" data-toggle="dropdown" data-target="<%=store.id%>"> Options <b class="caret"></b> </a>
+		<a class="dropdown-toggle" data-toggle="dropdown" data-target="<%= store.id%>"> Options <b class="caret"></b> </a>
 		<ul class="dropdown-menu">
 			<li>
-				<a href="#" class='add_to_list store.<%=store.id%>'>Add to List</a>
+				<a href="#" class='add_to_list store.<%= store.id%>'>Add to List</a>
 			</li>
 			<li>
-				<a href="#" class='remove_from_list store.<%=store.id%>'>Remove From List</a>
+				<a href="#" class='remove_from_list store.<%= store.id%>'>Remove From List</a>
 			</li>
 			<li class="divider"></li>
 			<li>
-				<a href= '#'>Add to Favorites</a>
+				<a href="/addtolist/1/<%= store.id%>/">I've been to this place</a>
+			</li>
+			<li class="divider"></li>
+			<li>
+				<a href="#" class="add_tags store.<%= store.id%>">Add Tags</a>
 			</li>
 			<li>
-				<a href="#">I've been to this place</a>
+				<a href="#" class="view_tags store.<%= store.id%>">View Top Tags</a>
 			</li>
 			<% if lists!= nil && !lists.empty? && store.id != nil%>
-			<li class="divider store.<%=store.id%>"></li>
+			<li class="divider store.<%= store.id%>"></li>
 			<div class = "show_listers store.<%= store.id%><%lists.each do |list| %>.<%= list %><% end %>">
-			<li>
-				<a href="#">View Listers</a>
-			</li>
+				<li>
+					<a href="#">View Listers</a>
+				</li>
 			</div>
 			<% end %>
 		</ul>
 	</li>
 </ul>
 
-<div id='modal_div-<%=store.id%>'></div>
+<div id='modal_div-<%= store.id%>'></div>

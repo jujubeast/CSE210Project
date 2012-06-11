@@ -1,5 +1,12 @@
 <div id="tags_and_reviews">
+	<div id='top-review' class=' span8 well' style='float:right;'>
+	    <h3 align="left">Top Tags</h3>
+		<%= render :partial => "top_tags.html.erb", :locals=>{:store_review =>store_review}%>
+	</div>
 
-<%= render :partial => "top_tags.html.erb", :locals=>{:store_review =>store_review}%>
-<%= render :partial => "my_tags.html.erb", :locals=>{:store_user_review=>store_user_review, :store=>store }%>
+	<div class="span8 well" style='float:right;'>
+	    <h3 align="left">My Tags</h3>
+		<%= render :partial => "my_tags.html.erb", :locals=>{:store_user_review=>store_user_review, :store=>store }%>
+	</div>
+
 </div>
