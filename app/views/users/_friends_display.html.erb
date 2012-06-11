@@ -1,0 +1,13 @@
+<ul class='nav nav-list'>
+	<li class='nav-header'>
+		<h3>My Friends</h3>
+	</li>
+	<% friends.each do |friend| %>
+	<li class="divider"></li>
+	   <li>
+		<%= link_to friend.first_name + " " + friend.last_name,  home_path(friend.id) %></a>
+	   </li>
+	<% end %>
+</ul>
+
+<div id="modal_div_create_lists"></div>

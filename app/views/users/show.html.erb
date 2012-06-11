@@ -11,7 +11,8 @@
 
 <div id='body_wrapper' class='row'>
 	<div id="left_nav" class='span3 well' style='padding: 8px 0;'>
-		  <%= render :partial => "lists/list_display", :locals => { :lists => @lists, :current_list => @current_list, :user => @user} %>
+		  <%= render :partial => "lists/list_display", :locals => { :users_lists => @users_lists, :group_lists => @group_lists, :subbed_lists => @subbed_lists, :curr_user_subs => @curr_user_subbed_lists, :current_list => @current_list, :user => @user, :current_user_id => @current_user_id, :friends => @friends_list, :privileges => @list_privileges} %>
+		  <%= render :partial => "users/friends_display", :locals => { :friends => @friends_list, :user => @user } %>
 	</div>
 
 	<div id ="main_nav" class='span9'>
@@ -19,18 +20,10 @@
 		<div class='title'>
 			<h2><%= @current_list.name %></h2>
 		</div>
-		<%= render :partial => "stores/item_thumbnail", :collection => @stores, :locals => { :stores => @stores, :current_list => @current_list, :lists => nil} || "No stores in this list" %>
+		<%= render :partial => "stores/item_thumbnail", :collection => @stores, :locals => { :stores => @stores, :current_list => @current_list, :default_lists => @default_list_state, :lists => nil} || "No stores in this list" %>
 		<% end %>
 	</div>
 </div>
-
-<div id='test'>
-	<h2>Available Stores (Simulated Search Results)</h2>
-	<% if @available_stores %>
-	<%= render :partial => "stores/item_thumbnail", :collection => @available_stores, :locals => { :stores => @stores, :current_list => @current_list, :lists => nil } || 'No stores Available.' %>
-	<% end %>
-</div>
-
 <p id="notice">
     <%= notice %>
 </p>

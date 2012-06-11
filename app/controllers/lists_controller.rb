@@ -122,4 +122,10 @@ class ListsController < ApplicationController
     
   end
 
+  def subscribe_list
+    ListLogic.subscribe_list(session[:user_id], params[:list_id])
+    puts "REDIRECTING TO HOME PAGE???"
+    redirect_to default_home_path(session[:user_id], params[:list_id])
+  end
+
 end

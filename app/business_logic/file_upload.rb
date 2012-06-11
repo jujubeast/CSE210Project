@@ -64,6 +64,7 @@ class FileUpload
   # this will validte the MIME type of the uploaded file
   # we only support JPEG, PNG, and GIF file.
   def validate
+    puts @uploaddata
     content_type = @uploaddata.content_type
     allowed_types = %w{image/jpeg image/png image/gif}
     if !allowed_types.include?(content_type.strip)

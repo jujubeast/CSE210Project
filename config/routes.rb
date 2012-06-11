@@ -27,6 +27,7 @@ App::Application.routes.draw do
   match "/signin", :to => "sessions#new"
   match "/signout", :to => "sessions#destroy"
   match "/createlist", :to => "lists#new"
+  match "/sublist", :to => "lists#subscribe_list"
   match "/deletelist/:id", :to => "lists#destroy", :as => :delete_list
 
   match "/addtolist/:list_id/:store_id", :to => "lists#add", :as => :add_to_list

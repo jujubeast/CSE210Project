@@ -2,22 +2,61 @@
 	<ul class="thumbnails">
 		<li class="span3">
 			<div class="thumbnail">
-				<%= render :partial => "stores/thumbnail_dropdown", :locals => {:store => item_thumbnail, :lists => lists }%>
-			
-                <img src="" /> 
-				<h4><a href='/stores/<%= item_thumbnail.id %>'><span><%= item_thumbnail.name%></span></a></h4>
-				<address>
-				    <% if item_thumbnail.street_1 %><%= item_thumbnail.street_1%><br/><% end %>
-				    <% if item_thumbnail.street_2 != "" %><%= item_thumbnail.street_2 %><br/><% end %>
-				    <% if item_thumbnail.city!="" && item_thumbnail.state!=""%><%= item_thumbnail.city %>, <%= item_thumbnail.state %> <%end%>
-				    <% if item_thumbnail.zipcode!=""%><%= item_thumbnail.zipcode %><% end%>
-				    <% if defined? user_id %>
-				    <br/>
-				    <% if default_lists[item_thumbnail.id][:favorite] %>Favorite!<% end %>
-				    <% if default_lists[item_thumbnail.id][:been_to] %><br/>Been to!<% end %>
-				    <% if default_lists[item_thumbnail.id][:want_to] %><br/>Want to!<% end %>
-				    <% end %>
-				</address>
+				<div class='bookmark'>
+					<% if default_lists[item_thumbnail.id][:want_to][:exists] %>
+					<a href="<%= remove_from_list_path(default_lists[item_thumbnail.id][:want_to][:list_id], item_thumbnail.id) %>"> <%= image_tag "checkin.png", :class=>'bookmark-icon' %></a>
+					<% end %>
+				</div>
+				<div class="option-bar" >
+					<%= render :partial => "stores/thumbnail_dropdown", :locals => {:store => item_thumbnail, :lists => lists}%>
+				</div>
+				<!--                 <img src="http://lorempixel.com/200/200/food/<%=item_thumbnail.id%>" />  -->
+				<img src="http://placekitten.com/200/200" />
+				<div class="thumbnail-content">
+					<div class='favorite'>
+					    <% if defined?current_list and current_list.id != default_lists[item_thumbnail.id][:favorite][:list_id]%>
+    						<% if default_lists[item_thumbnail.id][:favorite][:exists] %>
+    						<%= link_to(
+                                  image_tag("favorite-on.png", :class=>"favorite-icon"), 
+                                  remove_from_list_path(default_lists[item_thumbnail.id][:favorite][:list_id],item_thumbnail.id), 
+                                  :remote=>true,
+                                  :class => "favorite-on") %>
+    						<% else %> 
+    						<%= link_to(
+    						      image_tag("favorite-off.png", :class=>"favorite-icon"), 
+    						      add_to_list_path(default_lists[item_thumbnail.id][:favorite][:list_id],item_thumbnail.id), 
+    						      :remote=>true,
+    						      :class => "favorite-off") %>
+    						<% end %>
+						<% else %>
+                            <% if default_lists[item_thumbnail.id][:favorite][:exists] %>
+
+						      <%= link_to(image_tag("favorite-on.png", :class=>"favorite-icon"), 
+                                  remove_from_list_path(default_lists[item_thumbnail.id][:favorite][:list_id],item_thumbnail.id), 
+                                  :class => "favorite-on") %>
+                            <% else %> 
+                            <%= link_to(
+                                  image_tag("favorite-off.png", :class=>"favorite-icon"), 
+                                  add_to_list_path(default_lists[item_thumbnail.id][:favorite][:list_id],item_thumbnail.id), 
+                                  :class => "favorite-off") %>
+                            <% end %>
+						<% end %>
+					</div>
+					<h4><a href='/stores/<%= item_thumbnail.id %>'><span><%= item_thumbnail.name%></span></a></h4>
+					<address>
+						<% if item_thumbnail.street_1 %><%= item_thumbnail.street_1%>
+						<br/>
+						<% end %>
+						<% if item_thumbnail.street_2 != "" %><%= item_thumbnail.street_2 %>
+						<br/>
+						<% end %>
+						<% if item_thumbnail.city!="" && item_thumbnail.state!=""%><%= item_thumbnail.city %>, <%= item_thumbnail.state %> <%end%>
+						<% if item_thumbnail.zipcode!=""%><%= item_thumbnail.zipcode %><% end%>
+						<% if defined? user_id %>
+						<br/>
+						<% end %>
+					</address>
+				</div>
 			</div>
 		</li>
 	</ul>

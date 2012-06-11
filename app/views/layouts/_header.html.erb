@@ -1,5 +1,5 @@
 <div id="header">
-   <a href= <% if session[:user_id] != nil && @user != nil%> '/users/<%= @user.id %>/' <%else%> '/' <%end%> class='brand'><%= image_tag "logo_white.png", :height=>"40"%></a>
+   <a href= <% if session[:user_id] != nil && @user != nil%> '/users/<%= session[:user_id] %>/' <%else%> '/' <%end%> class='brand'><%= image_tag "logo_white.png", :height=>"40"%></a>
 </div>
 
 
