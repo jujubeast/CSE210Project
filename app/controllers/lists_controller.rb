@@ -131,7 +131,6 @@ class ListsController < ApplicationController
     ListLogic.unsubscribe_list(session[:user_id], params[:list_id])
 
    redirect_to home_path(session[:user_id])
-  
   end
 
 end

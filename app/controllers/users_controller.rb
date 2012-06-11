@@ -69,6 +69,8 @@ class UsersController < ApplicationController
       end
     end
 
+    @subbed_lists_owners = ListFinder.find_list_owners(@subbed_lists)
+
     #array of current_user's subbed lists to disable sub button on display of other users pages
     @curr_user_subbed_lists = ListFinder.findUserSubbedLists(session[:user_id])
 

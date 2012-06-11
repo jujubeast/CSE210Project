@@ -145,4 +145,16 @@ module ListFinder
         return results
     end 
 
+    def self.find_list_owners(lists)
+      results = Hash.new
+      lists.each do |list|
+        list_user = ListUser.where(:list_id => list.id, :privilege => 0).first
+        user_name = User.find(list_user.user_id)
+        results[list.id] = user_name.first_name
+      end
+
+      return results
+
+    end
+
 end

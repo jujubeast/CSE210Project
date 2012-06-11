@@ -74,7 +74,7 @@
 		<% end %>
 			<a href='<%=default_home_path(user.id, list.id)%>'>
 			<i class="icon-list-alt"></i>
-			<%= list.name %></a>
+			<%= list.name + " (" + sub_owners[list.id].to_s + ")" %></a>
 			<% if user.id == current_user_id %>
 					<a href='<%= unsub_list_path(list.id) %>' style="float:right;"><i class="icon-remove-sign" 	style='float:right; margin-top:-22px;' alt="remove list"></i></a>
 			<% else %>
