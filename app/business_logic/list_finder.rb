@@ -3,14 +3,14 @@ module ListFinder
 		#returns array of list objects representing lists that currently contain store denoted by store_id
 		def self.find_lists_by_curr_store(store_id, user_id)
 		 	t_curr_list_names = List.find(:all, 
-                                  :conditions => ["list_users.user_id = ? and list_stores.store_id=?", user_id, store_id],
+                                  :conditions => ["list_users.user_id = ? and list_stores.store_id=? and list_users.privilege IN (?)", user_id, store_id, [0, 1]],
                                   :joins => [:list_users, :list_stores],
                                   :select => "lists.name, lists.id")
 		end
 		#finds all lists belonging to the current user that are not a part of curr_lists, an array of list names
 		def self.find_all_other_lists(curr_lists, user_id)
 			list_names = List.find(:all,
-                               :conditions => ["lists.name NOT IN (?) and list_users.user_id = ?", curr_lists, user_id], 
+                               :conditions => ["lists.name NOT IN (?) and list_users.user_id = ? and list_users.privilege IN (?)", curr_lists, user_id, [0, 1]], 
                                :joins => [:list_users],
                                :select => "lists.name, lists.id")
 		end
