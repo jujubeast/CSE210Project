@@ -29,6 +29,7 @@ App::Application.routes.draw do
   match "/createlist", :to => "lists#new"
   match "/sublist", :to => "lists#subscribe_list"
   match "/deletelist/:id", :to => "lists#destroy", :as => :delete_list
+  match "/unsublist/:list_id", :to => "lists#unsubscribe_list", :as => :unsub_list
 
   match "/addtolist/:list_id/:store_id", :to => "lists#add", :as => :add_to_list
   match "/removefromlist/:list_id/:store_id", :to => "list_stores#destroy", :as => :remove_from_list
