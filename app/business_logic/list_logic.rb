@@ -51,5 +51,10 @@ module ListLogic
 		the_user.list_users << new_list_user
 	end
 
+	def self.unsubscribe_list(user_id, list_id)
+		list_user = ListUser.where(:user_id => user_id, :list_id => list_id).first
+		list_user.destroy
+	end
+
 
 end

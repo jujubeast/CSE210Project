@@ -76,11 +76,7 @@
 			<i class="icon-list-alt"></i>
 			<%= list.name %></a>
 			<% if user.id == current_user_id %>
-				<% if list.deletable == true %>
-					<a href='<%= delete_list_path(list.id) %>' style="float:right;"><i class="icon-remove-sign" 	style='float:right; margin-top:-22px;' alt="remove list"></i></a>
-				<% else %>
-					<i class="icon-lock" style='float:right;'></i>
-				<% end %>
+					<a href='<%= unsub_list_path(list.id) %>' style="float:right;"><i class="icon-remove-sign" 	style='float:right; margin-top:-22px;' alt="remove list"></i></a>
 			<% else %>
 				<% unless curr_user_subs.include? list.id %>
 				<span><button class='subscribe_list list.<%=list.id%>' style='float:right; margin-top:0;'>Sub</button></span>
