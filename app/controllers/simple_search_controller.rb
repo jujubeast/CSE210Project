@@ -150,6 +150,8 @@ class SimpleSearchController < ApplicationController
     @view_data = actualSearchResult
     @lists = search_lists
     @user_id = session[:user_id]
+    @user = User.find(:all, 
+                       :conditions => {:id => session[:user_id]} ).first
 
     @default_list_state = ListFinder.findDefaultListHash(@user_id, @view_data)
 
