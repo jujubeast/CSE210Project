@@ -44,8 +44,6 @@ App::Application.routes.draw do
   match "/showpossiblelists", :to => "lists#show_possible_lists", :as => :show_possible_lists
   match "/showcurrlisters", :to => "lists#show_curr_listers", :as => :show_curr_listers
    
->>>>>>> 132f17afacb78e17af224c3fc69e52e404cbd886
-
   match "/view-tags", :to => "stores#view_tags"
   match "/add-tags", :to => "stores#add_tags"
   
