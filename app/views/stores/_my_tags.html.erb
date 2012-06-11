@@ -1,28 +1,25 @@
-<div class="span8 well" style='float:right;'>
-	<h3 align="left">My Tags</h3>
-	<div class='display-table'>
-		<%  store_user_review.all_categories.each do |category_name|%>
-		<div class='display-row'>
-			<div class='display-label'>
-				<%= category_name %>
-			</div>
-			<div class='display-info'>
-				<% tags_found = store_user_review.find_tags(category_name) %>
-				<% tags_found.each_with_index do |t, index| %>
-				<span class='btn btn-primary'><%= t %></span>
-				<% end %>
-
-				<%= form_tag("/add_review", :method => "get", :class=>"add-review well form-inline", :remote=>"true") do %>
-				<input type="text" name="tag_value" placeholder="tag name">
-				<input type="hidden" name="category" value="<%= category_name%>" >
-				<input type="hidden" name="store_id" value="<%= store.id %>" >
-				<button type="submit" class="btn">
-					Add Tag
-				</button>
-				<% end %>
-			</div>
+<div class='display-table'>
+	<%  store_user_review.all_categories.each do |category_name|%>
+	<div class='display-row'>
+		<div class='display-label'>
+			<%= category_name %>
 		</div>
-		<% end %>
+		<div class='display-info'>
+			<% tags_found = store_user_review.find_tags(category_name) %>
+			<% tags_found.each_with_index do |t, index| %>
+			<span class='btn btn-primary'><%= t %></span>
+			<% end %>
 
+			<%= form_tag("/add_review", :method => "get", :class=>"add-review well form-inline", :remote=>"true") do %>
+			<input type="text" name="tag_value" placeholder="tag name">
+			<input type="hidden" name="category" value="<%= category_name%>" >
+			<input type="hidden" name="store_id" value="<%= store.id %>" >
+			<button type="submit" class="btn">
+				Add Tag
+			</button>
+			<% end %>
+		</div>
 	</div>
+	<% end %>
+
 </div>
