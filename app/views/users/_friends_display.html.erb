@@ -1,12 +1,13 @@
 <ul class='nav nav-list'>
+	<li class='divider'></li>
 	<li class='nav-header'>
 		<h3>My Friends</h3>
 	</li>
 	<% friends.each do |friend| %>
-	<li class="divider"></li>
-	   <li>
+	<li>
 		<%= link_to friend.first_name + " " + friend.last_name,  home_path(friend.id) %></a>
-	   </li>
+	</li>
+	<li class='divider'></li>
 	<% end %>
 </ul>
 

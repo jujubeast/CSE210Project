@@ -1,89 +1,85 @@
 <ul class='nav nav-list'>
 	<li class='nav-header'>
-		<h3>
-			<% if user.id != current_user_id %>
-				<% friends.each do |friend| %>
-					<% if friend.id == user.id %>
-						<%= friend.first_name %>'s Lists
-					<% end %>
-				<% end %>
-			<% else %>
-				My Lists
-			<% end %>
-		<span><button class='btn' id='create_list' style='float:right; margin-top:0;'>Add</button></span></h3>
+		<h3> <% if user.id != current_user_id %>
+		<% friends.each do |friend| %>
+		<% if friend.id == user.id %>
+		<%= friend.first_name %>'s Lists
+		<% end %>
+		<% end %>
+		<% else %>
+		My Lists
+		<% end %> <span>
+			<button class='btn' id='create_list' style='float:right; margin-top:0;'>
+				Add
+			</button></span></h3>
 	</li>
 	<% users_lists.each do |list| %>
-		<li class="divider"></li>
-		<% if list.id != current_list.id %>
-	   	<li>
-		<% else %>
-	   	<li class='active'>
+	   <li class="divider"></li>
+    	<% if list.id != current_list.id %>
+    	   <li>
+        <% else %>
+    	   <li class='active'>
     	<% end%>
-		 	<a href='<%=default_home_path(user.id, list.id)%>'>
-			<% if list.name == "Places I've Been To"%>
-		 	<i class="icon-flag"></i> 
-			<% elsif list.name =="Places I Want To Go"%>
-		  	<i class="icon-bookmark"></i>
-			<% elsif list.name =="Favorites"%>
-		  	<i class="icon-star"></i>
-			<% else %>
-		 	<i class="icon-list-alt"></i>
-			<% end %>
-			<%= list.name %></a>
-			<% if user.id == current_user_id%>
-				<% if list.deletable == true %>
-					<a href='<%= delete_list_path(list.id) %>' style="float:right;"><i class="icon-remove-sign" 	style='float:right; margin-top:-22px;' alt="remove list"></i></a>
-				<% else %>
-					<i class="icon-lock" style='float:right;'></i>
-				<% end %>
-			<% else %>
-				<% unless curr_user_subs.include? list.id %>
-				<span><button class='subscribe_list list.<%=list.id%>' style='float:right; margin-top:0;'>Sub</button></span>
-				<% end %>
-			<% end %>
-		</li>
+		<a href='<%= default_home_path(user.id, list.id)%>'> <% if list.name == "Places I've Been To"%> <i class="icon-flag"></i> <% elsif list.name =="Places I Want To Go"%> <i class="icon-bookmark"></i> <% elsif list.name =="Favorites"%> <i class="icon-star"></i> <% else %> <i class="icon-list-alt"></i> <% end %>
+		<%= list.name %></a>
+		<% if user.id == current_user_id%>
+    		<% if list.deletable == true %>
+    		<a href='<%= delete_list_path(list.id) %>' style="float:right;"><i class="icon-remove-sign" 	style='float:right; margin-top:-22px;' alt="remove list"></i></a>
+    		<% else %>
+    		<i class="icon-lock" style='float:right;'></i>
+    		<% end %>
+		<% else %>
+    		<% unless curr_user_subs.include? list.id %>
+    		  <i class='subscribe_list list.<%= list.id%> icon-share' style='float:right;'></i>
+            <% end %>
+	    <% end %>
+	   </li>
 	<% end %>
+	
 	<li class='divider'></li>
-	<li class='nav-header' ><h3>Group Lists</h3></li>
+	<li class='nav-header' >
+		<h3>Group Lists</h3>
+	</li>
 	<% group_lists.each do |list| %>
-		<% if list.id != current_list.id %>
-			<li>
-		<% else %>
-			<li class='active'>
-		<% end %>
-			<a href='<%=default_home_path(user.id, list.id)%>'>
-			<i class="icon-list-alt"></i>
-			<%= list.name %></a>
-			<% if user.id == current_user_id %>
-				<% if list.deletable == true %>
-					<a href='<%= delete_list_path(list.id) %>' style="float:right;"><i class="icon-remove-sign" 	style='float:right; margin-top:-22px;' alt="remove list"></i></a>
-				<% else %>
-					<i class="icon-lock" style='float:right;'></i>
-				<% end %>
-			<% else %>
-			<% end %>
-		</li>
+    	<% if list.id != current_list.id %>
+    	   <li>
+        <% else %>
+    	   <li class='active'>
+        <% end %>
+    		<a href='<%= default_home_path(user.id, list.id)%>'> <i class="icon-list-alt"></i> <%= list.name %></a>
+        		<% if user.id == current_user_id %>
+        		  <% if list.deletable == true %>
+        		      <a href='<%= delete_list_path(list.id) %>' style="float:right;"><i class="icon-remove-sign" 	style='float:right; margin-top:-22px;' alt="remove list"></i></a>
+        		  <% else %>
+        		      <i class="icon-lock" style='float:right;'></i>
+        		  <% end %>
+    		    <% end %>
+    	   </li>
 	<% end %>
+
 	<li class='divider'></li>
-	<li class='nav-header'><h3>Subscribed Lists</h3></li>
-	<% subbed_lists.each do |list| %>
+	<li class='nav-header'>
+		<h3>Subscribed Lists</h3>
+		<% subbed_lists.each do |list| %>
 		<% if list.id != current_list.id %>
-			<li>
+	<li>
 		<% else %>
-			<li class='active'>
+	<li class='active'>
 		<% end %>
-			<a href='<%=default_home_path(user.id, list.id)%>'>
-			<i class="icon-list-alt"></i>
-			<%= list.name + " (" + sub_owners[list.id].to_s + ")" %></a>
-			<% if user.id == current_user_id %>
-					<a href='<%= unsub_list_path(list.id) %>' style="float:right;"><i class="icon-remove-sign" 	style='float:right; margin-top:-22px;' alt="remove list"></i></a>
-			<% else %>
-				<% unless curr_user_subs.include? list.id %>
-				<span><button class='subscribe_list list.<%=list.id%>' style='float:right; margin-top:0;'>Sub</button></span>
-				<% end %>
-			<% end %>
-		</li>
+		<a href='<%= default_home_path(user.id, list.id)%>'> <i class="icon-list-alt"></i> <%= list.name + " (" + sub_owners[list.id].to_s + ")" %></a>
+		<% if user.id == current_user_id %>
+		<a href='<%= unsub_list_path(list.id) %>' style="float:right;"><i class="icon-remove-sign" 	style='float:right; margin-top:-22px;' alt="remove list"></i></a>
+		<% else %>
+		<% unless curr_user_subs.include? list.id %>
+		<span>
+			<button class='subscribe_list list.<%= list.id%>' style='float:right; margin-top:0;'>
+				Sub
+			</button></span>
+		<% end %>
+		<% end %>
+	</li>
 	<% end %>
+	</li>
 </ul>
 
 <div id="modal_div_create_lists"></div>
