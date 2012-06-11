@@ -119,8 +119,14 @@ class ListsController < ApplicationController
 
   def subscribe_list
     ListLogic.subscribe_list(session[:user_id], params[:list_id])
-    puts "REDIRECTING TO HOME PAGE???"
-    redirect_to default_home_path(session[:user_id], params[:list_id])
+    #redirect to homepage? idk...
+  end
+
+  def unsubscribe_list
+    ListLogic.unsubscribe_list(session[:user_id], params[:list_id])
+
+   redirect_to home_path(session[:user_id])
+  
   end
 
 end
