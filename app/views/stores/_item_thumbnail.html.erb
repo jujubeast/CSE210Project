@@ -11,7 +11,7 @@
 					<%= render :partial => "stores/thumbnail_dropdown", :locals => {:store => item_thumbnail, :lists => lists}%>
 				</div>
 				<!--                 <img src="http://lorempixel.com/200/200/food/<%=item_thumbnail.id%>" />  -->
-				<img src="http://placekitten.com/200/200" />
+				<img src=<%= item_thumbnail.pic %> />
 				<div class="thumbnail-content">
 					<div class='favorite'>
 					    <% if defined?current_list and current_list.id != default_lists[item_thumbnail.id][:favorite][:list_id]%>
